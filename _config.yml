@@ -1,4 +1,4 @@
-remote_theme: MicrosoftLearning/Jekyll-Theme
+# remote_theme: MicrosoftLearning/Jekyll-Theme  # vendored lokalt pga SSL, se _layouts/
 exclude:
   - readme.md
   - .github/
@@ -7,11 +7,22 @@ header_pages:
 author: Microsoft Learning
 twitter_username: mslearning
 github_username:  MicrosoftLearning
+title: MD-102T00-Microsoft-365-Endpoint-Administrator
+# För GitHub Pages (Project site): https://nowaxial.github.io/MD-102T00-Microsoft-365-Endpoint-Administrator/
+url: "https://nowaxial.github.io"
+baseurl: "/MD-102T00-Microsoft-365-Endpoint-Administrator"
 plugins:
   - jekyll-sitemap
   - jekyll-mentions
   - jemoji
+defaults:
+  - scope:
+      path: "Instructions"
+    values:
+      layout: "page"
 markdown: kramdown
 kramdown:
    syntax_highlighter_opts:
       disable : true
+   input: GFM
+   html_to_native: true
