@@ -30,7 +30,7 @@ Contoso Corporation is currently managing users in both AD DS and Entra ID as se
 
 4. In the left navigation pane, under **Entra ID**, select **Entra Connect**.
 
-5. On the **Microsoft Entra Connect | Get started** pane, select the **Manage** tab.
+5. On the **Microsoft Entra Connect \| Get started** pane, select the **Manage** tab.
 
 6. In the **Manage your infrastructure** page, select **Download Connect Sync Agent**.
 
