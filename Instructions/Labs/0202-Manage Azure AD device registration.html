@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>
+        Practice Lab 0202: Manage Entra ID device registration | 
+        MD-102T00-Microsoft-365-Endpoint-Administrator
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/css/style.css?v=">
+</head>
+<body data-spy="scroll" data-target="#linksMenu">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gray">
+        <div class="container d-flex justify-content-between">
+            <!-- <img src="https://github.com/MicrosoftLearning/Jekyll-Theme/raw/master/assets/microsoft-gray.png" alt="Microsoft logo" style="width:100px;height:21px;"/>-->
+            <span class="my-1 title text-black">MD-102T00-Microsoft-365-Endpoint-Administrator</span>
+            <span class="ml-2">
+                <a href="/MD-102T00-Microsoft-365-Endpoint-Administrator/" class="d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+                    </svg>
+                    &nbsp;Home
+                </a>
+            </span>
+        </div>
+        <!--
+        <div class="container d-flex justify-content-between">
+            <a class="my-1 title text-azure text-uppercase" href="">
+                MD-102T00-Microsoft-365-Endpoint-Administrator
+            </a>
+            <a href="" target="_blank" class="btn btn-sm btn-outline-secondary text-light">
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <span class="ml-2">GitHub</span>
+            </a>
+        </div>
+        -->
+    </nav>
+    <hr color-"gray"/>
+    <div class="container">
+        <main class="row extra-padding">
+            <aside class="col-sm-2">       
+                <nav id="linksMenu" class="toc sticky-top">
+                    <ul class="nav navbar-nav flex-column">
+                    </ul>
+                </nav>         
+            </aside>
+            <hr class="" />
+            <article class="col-sm-10 mb-5">
+                <h1 id="practice-lab-0202-manage-entra-id-device-registration">Practice Lab 0202: Manage Entra ID device registration</h1>
+
+<h2 id="summary">Summary</h2>
+
+<p>In this lab, you will perform Entra registration using a Windows device.</p>
+
+<h2 id="exercise-1-configuring-entra-device-registration">Exercise 1: Configuring Entra device registration</h2>
+
+<h3 id="scenario">Scenario</h3>
+
+<p>Several users have asked to use their personal iOS, Android, and Windows devices to access Contoso cloud resources. Since Contoso does not own the Windows devices, you do not want to have the users perform an Entra join (only WIndows devices can be Entra joined). Instead, you need to ensure that users are able to register their devices with Entra, which still allows you to apply company policy to apps as needed, and still permit users to access Contoso resources. You will test out Entra device registration using a Windows 11 device.</p>
+
+<h3 id="task-1-configure-entra-id-device-registration">Task 1: Configure Entra ID device registration</h3>
+
+<ol>
+  <li>
+    <p>On <strong>SEA-SVR1</strong>, if necessary, sign in as <strong>Contoso\Administrator</strong> with the password of <strong>Pa55w.rd</strong> and close <strong>Server Manager</strong>.</p>
+  </li>
+  <li>
+    <p>On the taskbar select <strong>Microsoft Edge</strong>, in the address bar type <strong>https://entra.microsoft.com</strong>, and then press <strong>Enter</strong>.</p>
+  </li>
+  <li>
+    <p>Sign in as user <code>Admin@yourtenant.onmicrosoft.com</code>, and use the tenant Admin password. If the <strong>Stay signed in?</strong> prompt appears, select <strong>No</strong>.</p>
+
+    <blockquote>
+      <p>The Microsoft Entra admin center opens.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>In the Microsoft Entra admin center, in the navigation pane, select <strong>Devices</strong>, and then select <strong>All devices</strong>.</p>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **Devices</td>
+          <td>All devices** page, select <strong>Device settings</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **Devices</td>
+          <td>Device settings** page, in the details pane, verify that <strong>Users may register their devices with Microsoft Entra</strong> is set to <strong>All</strong> and is greyed out.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <blockquote>
+      <p>This option is greyed out and set to <strong>All</strong> by default when Microsoft Intune is enable in the tenant. This ensures that all users are able to register Windows 10 or newer personal, iOS, Android, and macOS devices with Entra.</p>
+    </blockquote>
+  </li>
+</ol>
+
+<h3 id="task-2-perform-entra-registration">Task 2: Perform Entra registration</h3>
+
+<ol>
+  <li>
+    <p>Switch to <strong>SEA-WS1</strong> and sign in as <strong>Admin</strong> with the password of <strong>Pa55w.rd</strong>.</p>
+  </li>
+  <li>
+    <p>On the taskbar, select <strong>Start</strong> and then select <strong>Settings</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Settings</strong> window, select <strong>Accounts</strong>.</p>
+  </li>
+  <li>
+    <p>On the Accounts page, select <strong>Access work or school</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Access work or school</strong> page, select <strong>Connect</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Microsoft account</strong> window, in the Email address box, enter <strong><code>JoniS@yourtenant.onmicrosoft.com</code></strong> and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Enter password</strong> page, enter the user password you used in earlier tasks and then select <strong>Sign in</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>You’re all set!</strong> page, select <strong>Done</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Access work or school</strong> page, verify that Joni’s Work or school account is displayed.</p>
+  </li>
+  <li>
+    <p>Close the <strong>Settings</strong> page.</p>
+  </li>
+</ol>
+
+<h3 id="task-3-validate-entra-registration">Task 3: Validate Entra registration</h3>
+
+<ol>
+  <li>
+    <p>On SEA-WS1, right-click <strong>Start</strong>, and then select <strong>Windows Terminal (Admin)</strong>. At the User Account Control, select <strong>Yes</strong>.</p>
+  </li>
+  <li>
+    <p>In the PowerShell console, type the following and press <strong>Enter</strong>:</p>
+
+    <pre><code class="language-powershell">dsregcmd /status
+</code></pre>
+  </li>
+  <li>
+    <p>In the output under <strong>User State</strong>, verify that <strong>WorkplaceJoined : YES</strong> is displayed. This indicates that the user has performed a device registration in Azure AD.</p>
+  </li>
+  <li>
+    <p>Close PowerShell and then sign out of SEA-WS1.</p>
+  </li>
+  <li>
+    <p>Switch to <strong>SEA-SVR1</strong>.</p>
+  </li>
+  <li>
+    <p>In Microsoft Edge, in the Microsoft Entra admin center, expand <strong>Entra ID</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Devices</strong>, then select <strong>All devices</strong>. In the Devices pane, notice that SEA-WS1 is listed.</p>
+  </li>
+  <li>
+    <p>Verify that the <strong>Join Type</strong> is listed as <strong>Microsoft Entra registered</strong> and that the owner is <strong>Joni Sherman</strong>.</p>
+
+    <blockquote>
+      <p>Notice that the device is Microsoft Entra registered, NOT Microsoft Entra joined. Entra registered devices are typically devices that cannot be Entra joined, or devices that are personally owned by the user. Registering a device will provide access to cloud-based resources.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Close Microsoft Edge.</p>
+  </li>
+</ol>
+
+<h3 id="task-4-sign-in-to-windows-and-disconnect-from-the-organization">Task 4: Sign in to Windows and disconnect from the organization</h3>
+
+<ol>
+  <li>
+    <p>Switch to <strong>SEA-WS1</strong> and notice that unlike Entra Joined or Entra Hybrid Joined devices, an Entra registered device only allows local accounts to be selected.</p>
+  </li>
+  <li>
+    <p>On SEA-WS1, sign in as <strong>Admin</strong> with the password of <strong>Pa55w.rd</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Start</strong> and then select <strong>Settings</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Settings</strong> window, select <strong>Accounts</strong>.</p>
+  </li>
+  <li>
+    <p>On the Accounts page, select <strong>Access work or school</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Access work or school</strong> page, select the <strong>JoniS</strong> Work or School account.</p>
+  </li>
+  <li>
+    <p>Next to Disconnect this account, select <strong>Disconnect</strong> and then select <strong>Yes</strong>.</p>
+
+    <blockquote>
+      <p>Notice that you do not have to restart to disconnect a registered device from Entra ID.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>To prepare for the next lab, select <strong>Start</strong>, then select the <strong>Power</strong> icon, and then select <strong>Restart</strong>.</p>
+  </li>
+</ol>
+
+<p><strong>Results</strong>: After completing this exercise, you will have configured Entra device registration.</p>
+
+<p><strong>END OF LAB</strong></p>
+
+            </article>
+        </main>
+    </div>
+    <footer class="fixed-bottom d-print-none">
+        <nav class="navbar navbar-light bg-light d-flex justify-content-around">
+            <span class="navbar-text">
+                &copy; 2025 Microsoft &nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=521839">Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=2259814">Consumer Health Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkID=206977">Terms of Use </a>&nbsp;|&nbsp;
+                  <a href="https://www.microsoft.com/trademarks">Trademarks </a>&nbsp;|&nbsp;
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <a href="" target="_blank" class="ml-2">
+                    Source
+                </a>
+            </span>
+        </nav>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/js/script.js?v="></script>
+</body>
+
+
+</html>

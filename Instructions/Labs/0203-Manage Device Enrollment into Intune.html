@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>
+        Practice Lab 0203: Manage Device Enrollment into Intune | 
+        MD-102T00-Microsoft-365-Endpoint-Administrator
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/css/style.css?v=">
+</head>
+<body data-spy="scroll" data-target="#linksMenu">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gray">
+        <div class="container d-flex justify-content-between">
+            <!-- <img src="https://github.com/MicrosoftLearning/Jekyll-Theme/raw/master/assets/microsoft-gray.png" alt="Microsoft logo" style="width:100px;height:21px;"/>-->
+            <span class="my-1 title text-black">MD-102T00-Microsoft-365-Endpoint-Administrator</span>
+            <span class="ml-2">
+                <a href="/MD-102T00-Microsoft-365-Endpoint-Administrator/" class="d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+                    </svg>
+                    &nbsp;Home
+                </a>
+            </span>
+        </div>
+        <!--
+        <div class="container d-flex justify-content-between">
+            <a class="my-1 title text-azure text-uppercase" href="">
+                MD-102T00-Microsoft-365-Endpoint-Administrator
+            </a>
+            <a href="" target="_blank" class="btn btn-sm btn-outline-secondary text-light">
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <span class="ml-2">GitHub</span>
+            </a>
+        </div>
+        -->
+    </nav>
+    <hr color-"gray"/>
+    <div class="container">
+        <main class="row extra-padding">
+            <aside class="col-sm-2">       
+                <nav id="linksMenu" class="toc sticky-top">
+                    <ul class="nav navbar-nav flex-column">
+                    </ul>
+                </nav>         
+            </aside>
+            <hr class="" />
+            <article class="col-sm-10 mb-5">
+                <h1 id="practice-lab-0203-manage-device-enrollment-into-intune">Practice Lab 0203: Manage Device Enrollment into Intune</h1>
+
+<h2 id="summary">Summary</h2>
+
+<p>In this lab, you prepare for device management using Microsoft Intune by reviewing and assigning licenses, configuring Windows automatic enrollment, and configuring enrollment restrictions.</p>
+
+<h3 id="prerequisites">Prerequisites</h3>
+
+<p>The following lab(s) must be completed before this lab:</p>
+
+<ul>
+  <li>
+    <p>0101-Managing Identities in Entra ID</p>
+  </li>
+  <li>
+    <p>0102-Synchronizing identities by using Entra Connect</p>
+
+    <blockquote>
+      <p>Note: You will also need a mobile phone that can receive text messages used to secure Windows Hello sign in authentication to Entra ID.</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h3 id="scenario">Scenario</h3>
+
+<p>You need to prepare for device management using Microsoft Intune. First of all, you need to ensure that users are assigned appropriate licenses for device management. As a verification test, you will assign Aaron Nicholls the required licenses. You also need to ensure that any Windows device that is joined or registered to Entra ID will automatically be enrolled into Intune. You have also been asked to ensure that members of the Sales group are restricted from enrolling personal Android devices into Intune and that the Enrollment Device Limit is increased to 10 devices. Finally, you need to configure Allan Deyoung as a Device enrollment manager to allow him to enroll 1000 devices.</p>
+
+<h3 id="task-1-review-and-assign-licenses-for-device-management">Task 1: Review and assign licenses for device management</h3>
+
+<ol>
+  <li>
+    <p>On <strong>SEA-SVR1</strong>, if necessary, sign in as <strong>Contoso\Administrator</strong> with the password of <strong>Pa55w.rd</strong> and close <strong>Server Manager</strong>.</p>
+  </li>
+  <li>
+    <p>On the taskbar select <strong>Microsoft Edge</strong>, in the address bar type <strong>https://admin.microsoft.com</strong>, and then press <strong>Enter</strong>.</p>
+  </li>
+  <li>
+    <p>Sign in as user <code>Admin@yourtenant.onmicrosoft.com</code>, and use the tenant Admin password. If the <strong>Stay signed in?</strong> prompt appears, select <strong>No</strong>.</p>
+
+    <blockquote>
+      <p>The Microsoft 365 admin center opens.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>In the Microsoft 365 admin center navigation pane, select <strong>Users</strong> &gt; <strong>Active users</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Aaron Nicholls</strong> (select the name, not the checkbox).</p>
+  </li>
+  <li>
+    <p>Select the <strong>Licenses and apps</strong> tab.</p>
+  </li>
+  <li>
+    <p>If the <strong>Select location</strong> field is not populated, select the a location from the drop-down list.</p>
+  </li>
+  <li>
+    <p>Select the check boxes next to <strong>Enterprise Mobility + Security E5</strong> and <strong>Office 365 E5 (no Teams)</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Save Changes</strong>.</p>
+  </li>
+  <li>
+    <p>Once the changes have been saved, close the <strong>Microsoft 365 admin center</strong> tab in Edge.</p>
+  </li>
+</ol>
+
+<h3 id="task-2-enable-windows-automatic-enrollment-into-microsoft-intune">Task 2: Enable Windows Automatic Enrollment into Microsoft Intune</h3>
+
+<ol>
+  <li>
+    <p>In <strong>SEA-SVR1</strong>, open a new tab in <strong>Microsoft Edge</strong>, and then in the address bar type <strong>https://intune.microsoft.com</strong>, and then press <strong>Enter</strong>.</p>
+
+    <blockquote>
+      <p>The Microsoft Intune admin center opens.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>In the Microsoft Intune admin center, select <strong>Devices</strong>.</p>
+  </li>
+  <li>
+    <p>On the Devices pane, under the <strong>Device onboarding</strong> section, select <strong>Enrollment</strong>.</p>
+  </li>
+  <li>
+    <p>In the Enroll devices pane, ensure <strong>Windows</strong> is selected.</p>
+  </li>
+  <li>
+    <p>In the <strong>Enrollment options</strong> section, select <strong>Automatic Enrollment</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>MDM user scope</strong> row, select <strong>All</strong> and then select <strong>Save</strong>.</p>
+
+    <p><em><strong>Note</strong>: By performing this step, you enabled automatic enrollment into Intune for any User that performs an Entra join or Entra registration from a Windows device.</em></p>
+  </li>
+</ol>
+
+<h3 id="task-3-configure-enrollment-restrictions">Task 3: Configure Enrollment Restrictions</h3>
+
+<ol>
+  <li>
+    <p>In the Microsoft Intune admin center, select <strong>Devices</strong>.</p>
+  </li>
+  <li>
+    <p>On the Devices pane, under the <strong>Device onboarding</strong> section, select <strong>Enrollment</strong>.</p>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **Devices</td>
+          <td>Enrollment** page, in the <strong>Enrollment options</strong> section, note that you can create enrollment device limit and platform restrictions.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>Select <strong>Device platform restriction</strong>.</p>
+
+    <blockquote>
+      <p>Notice that there is a Default device type restriction that is assigned to <strong>All Users</strong>. This default restriction allows all device types.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>In the details pane, select the <strong>Android restrictions</strong> tab, and then select <strong>+ Create restriction</strong>.</p>
+  </li>
+  <li>
+    <p>On the Create restriction page, in the Name box enter <strong>Android Personal Device Restriction</strong>. Select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the Platform settings page, under <strong>Personally owned</strong>, select <strong>Block</strong> for the following device types:</p>
+
+    <ul>
+      <li>Android Enterprise (work profile)</li>
+      <li>Android device administrator</li>
+    </ul>
+  </li>
+  <li>
+    <p>On the Platform settings page, select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the Scope tags page, select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the Assignments page, under Included groups, select <strong>Add groups</strong>.</p>
+  </li>
+  <li>
+    <p>Search for and Select <strong>Sales</strong> and then click <strong>Select</strong> and then click <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Review + create</strong> page, select <strong>Create</strong>.</p>
+
+    <blockquote>
+      <p>Notice the Android Personal Device Restriction assigned with a priority of 1.</p>
+    </blockquote>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>In the navigation breadcrumbs, select **Devices</td>
+          <td>Enrollment**.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>In the <strong>Enrollment options</strong> section, select <strong>Device limit restriction</strong>.</p>
+
+    <blockquote>
+      <p>Notice that there is a Default device limit restriction that is assigned to <strong>All Users</strong>. This default restriction sets a device enrollment limit to 5 devices per user.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>In the details pane, select <strong>+ Create restriction</strong>.</p>
+  </li>
+  <li>
+    <p>On the Create restriction page, in the Name box enter <strong>Sales Device Enrollment Limit</strong>. Select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the Device limit page, select <strong>10</strong> and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the Scope tags page, select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the Assignments page, under Included groups, select <strong>Add groups</strong>.</p>
+  </li>
+  <li>
+    <p>Search for and Select <strong>Sales</strong> and then click <strong>Select</strong> and then click <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Review + create</strong> page, select <strong>Create</strong>.</p>
+
+    <blockquote>
+      <p>Notice the Sales Device Enrollment Limit, configured with a Device limit of 10 and assigned with a priority of 1.</p>
+    </blockquote>
+  </li>
+</ol>
+
+<h3 id="task-4-configure-a-device-enrollment-manager">Task 4: Configure a Device enrollment manager</h3>
+
+<ol>
+  <li>
+    <p>In the Microsoft Intune admin center, select <strong>Devices</strong>.</p>
+  </li>
+  <li>
+    <p>On the Devices pane, select <strong>Enrollment</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Enroll devices</strong> pane, select <strong>Device enrollment managers</strong>.</p>
+
+    <blockquote>
+      <p>Notice that, by default, there are no Device enrollment managers configured.</p>
+    </blockquote>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **Devices</td>
+          <td>Device enrollment managers** page, select <strong>+ Add</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>In the <strong>Add user</strong> page, under User name, enter <code>AllanD@yourtenant.onmicrosoft.com</code> and then select <strong>Add</strong>.</p>
+
+    <blockquote>
+      <p>Allan is now allowed to enroll up to 1000 devices.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>In the Microsoft Intune admin center, in the navigation pane, select <strong>Home</strong>.</p>
+  </li>
+  <li>Close Microsoft Edge.</li>
+</ol>
+
+<p><strong>Results</strong>: After completing this exercise, you will have successfully reviewed and assigned licenses, configured Windows automatic enrollment, enabled and assigned enrollment restrictions, and configured a Device enrollment manager.</p>
+
+<p><strong>END OF LAB</strong></p>
+
+            </article>
+        </main>
+    </div>
+    <footer class="fixed-bottom d-print-none">
+        <nav class="navbar navbar-light bg-light d-flex justify-content-around">
+            <span class="navbar-text">
+                &copy; 2025 Microsoft &nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=521839">Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=2259814">Consumer Health Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkID=206977">Terms of Use </a>&nbsp;|&nbsp;
+                  <a href="https://www.microsoft.com/trademarks">Trademarks </a>&nbsp;|&nbsp;
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <a href="" target="_blank" class="ml-2">
+                    Source
+                </a>
+            </span>
+        </nav>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/js/script.js?v="></script>
+</body>
+
+
+</html>

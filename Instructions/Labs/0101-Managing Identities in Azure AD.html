@@ -1,0 +1,779 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>
+        Practice Lab 0101: Managing Identities in Entra ID | 
+        MD-102T00-Microsoft-365-Endpoint-Administrator
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/css/style.css?v=">
+</head>
+<body data-spy="scroll" data-target="#linksMenu">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gray">
+        <div class="container d-flex justify-content-between">
+            <!-- <img src="https://github.com/MicrosoftLearning/Jekyll-Theme/raw/master/assets/microsoft-gray.png" alt="Microsoft logo" style="width:100px;height:21px;"/>-->
+            <span class="my-1 title text-black">MD-102T00-Microsoft-365-Endpoint-Administrator</span>
+            <span class="ml-2">
+                <a href="/MD-102T00-Microsoft-365-Endpoint-Administrator/" class="d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+                    </svg>
+                    &nbsp;Home
+                </a>
+            </span>
+        </div>
+        <!--
+        <div class="container d-flex justify-content-between">
+            <a class="my-1 title text-azure text-uppercase" href="">
+                MD-102T00-Microsoft-365-Endpoint-Administrator
+            </a>
+            <a href="" target="_blank" class="btn btn-sm btn-outline-secondary text-light">
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <span class="ml-2">GitHub</span>
+            </a>
+        </div>
+        -->
+    </nav>
+    <hr color-"gray"/>
+    <div class="container">
+        <main class="row extra-padding">
+            <aside class="col-sm-2">       
+                <nav id="linksMenu" class="toc sticky-top">
+                    <ul class="nav navbar-nav flex-column">
+                    </ul>
+                </nav>         
+            </aside>
+            <hr class="" />
+            <article class="col-sm-10 mb-5">
+                <h1 id="practice-lab-0101-managing-identities-in-entra-id">Practice Lab 0101: Managing Identities in Entra ID</h1>
+
+<h2 id="wwl-tenants---terms-of-use">WWL Tenants - Terms of Use</h2>
+
+<p>If you are being provided with a tenant as a part of an instructor-led training delivery, please note that the tenant is made available for the purpose of supporting the hands-on labs in the instructor-led training.</p>
+
+<p>Tenants should not be shared or used for purposes outside of hands-on labs. The tenant used in this course is a trial tenant and cannot be used or accessed after the class is over and are not eligible for extension.</p>
+
+<p>Tenants must not be converted to a paid subscription. Tenants obtained as a part of this course remain the property of Microsoft Corporation and we reserve the right to obtain access and repossess at any time.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>In this lab, you will use the Entra admin center to create and modify users, assign administrative roles, create and modify groups, and manage license assignments in Entra ID.</p>
+
+<h2 id="exercise-1-creating-users-in-entra-id">Exercise 1: Creating users in Entra ID</h2>
+
+<h3 id="scenario">Scenario</h3>
+
+<p>You need to create user accounts in Azure AD for new employees that will start next week. New users are listed in the following table:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>User Name</th>
+      <th>Password</th>
+      <th>Job title</th>
+      <th>Department</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Edmund Reeve</td>
+      <td><code>ereeve@yourtenant.onmicrosoft.com</code></td>
+      <td>Pa55-w.rd!</td>
+      <td>HR Rep</td>
+      <td>HR</td>
+    </tr>
+    <tr>
+      <td>Miranda Snider</td>
+      <td><code>msnider@yourtenant.onmicrosoft.com</code></td>
+      <td>Pa55-w.rd!</td>
+      <td>Helpdesk Manager</td>
+      <td>Operations</td>
+    </tr>
+    <tr>
+      <td>Cody Godinez</td>
+      <td><code>cgodinez@yourtenant.onmicrosoft.com</code></td>
+      <td>Pa55-w.rd!</td>
+      <td>Sales Rep</td>
+      <td>Sales</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><em>Note: For location use either your local region or United States.</em></p>
+
+<p>You’ve also been told that several more employees will be hired over the next couple of months. You’ve decided that scripting would be a far more efficient method of adding a large number of new users. You’ve decided to create a PowerShell script and test it out when you create Cody Godinez’s account.</p>
+
+<h3 id="task-1-create-users-by-using-the-microsoft-entra-admin-center">Task 1: Create users by using the Microsoft Entra admin center</h3>
+
+<ol>
+  <li>
+    <p>On <strong>SEA-SVR1</strong>, sign in as <strong>Contoso\Administrator</strong> with the password of <strong>Pa55w.rd</strong>.</p>
+  </li>
+  <li>
+    <p>Close <strong>Server Manager</strong>.</p>
+  </li>
+  <li>
+    <p>On the taskbar, select <strong>Microsoft Edge</strong>.</p>
+  </li>
+  <li>
+    <p>In the address bar, enter <strong>https://entra.microsoft.com</strong>.</p>
+  </li>
+  <li>
+    <p>At the Sign-in prompt, enter <strong>admin@yourtenant.onmicrosoft.com</strong> and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>At the Enter password page, enter the password for the Admin account and then select <strong>Sign in</strong>.</p>
+
+    <blockquote>
+      <p>Note: Check with your instructor on the password to use for signing in with the Admin account.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>At the Edge Save password prompt, select <strong>Save &amp; Turn on</strong>.</p>
+  </li>
+  <li>
+    <p>At the Stay signed in prompt, select <strong>Yes</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Let’s keep your account secure</strong> dialog, select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Install Microsoft Authenticator</strong> dialog, select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>set up your account in app</strong> page, select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>Using the Authenticator app on your mobile device, scan the QR code and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Let’s try it out</strong> dialog, take note of the code, enter that in to your Authenticator app.</p>
+  </li>
+  <li>
+    <p>On the <strong>Authenticator Added</strong> dialog, select <strong>Done</strong>.</p>
+  </li>
+  <li>
+    <p>In the Microsoft Entra admin center, in the navigation pane, select <strong>Users</strong>.</p>
+
+    <blockquote>
+      <p>Take note of the users that already exist as members of the Microsoft Entra ID. The <strong>On-premises sync enabled</strong> column states <strong>No</strong> for all current users. This indicates that each user was created directly in Microsoft Entra ID and not synchronized from an on-premises directory service.</p>
+    </blockquote>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **Users</td>
+          <td>All users** page, select <strong>New user</strong> then select <strong>Create new user</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>On the <strong>Create new user</strong> page, enter the following:</p>
+
+    <ul>
+      <li>User Principal Name: <strong>ereeve</strong></li>
+      <li>Display Name: <strong>Edmund Reeve</strong></li>
+    </ul>
+  </li>
+  <li>
+    <p>Uncheck <strong>Auto-generated password</strong></p>
+  </li>
+  <li>
+    <p>Next to <strong>Password</strong>, enter <strong>Pa55-w.rd!</strong>.</p>
+
+    <blockquote>
+      <p>Note: If you receive an error message stating that this password in weak or commonly used, enter the student password found under the <strong>Resources</strong> tab of this lab profile. Alternatively, you can enter a complex password of your choice.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Select <strong>Next: Properties</strong> located at the bottom of the page.</p>
+  </li>
+  <li>
+    <p>Next to <strong>First name</strong>, enter <strong>Edmund</strong>.</p>
+  </li>
+  <li>
+    <p>Next to <strong>Last name</strong>, enter <strong>Reeve</strong>.</p>
+  </li>
+  <li>
+    <p>Next to <strong>User type</strong>, make note that <strong>Member</strong> is selected.</p>
+
+    <blockquote>
+      <p>Note: The <strong>Member</strong> user type is the default user type. This user type is used for most users in an organization.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Next to <strong>Job title</strong>, enter <strong>HR Rep</strong>.</p>
+  </li>
+  <li>
+    <p>Next to <strong>Department</strong>, enter <strong>HR</strong>.</p>
+  </li>
+  <li>
+    <p>Next to <strong>Usage location</strong>, select <strong>United States</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Next: Assignments</strong> located at the bottom of the page.</p>
+  </li>
+  <li>
+    <p>On the <strong>Assignments</strong> page, note that no assignments are selected.</p>
+
+    <blockquote>
+      <p>By default, no groups are assigned to the user. This is because the user is not a member of any groups until you assign them.</p>
+    </blockquote>
+  </li>
+  <li>Select <strong>Next: Review + create</strong> located at the bottom of the page.
+    <blockquote>
+      <p>Review the information on this page to ensure that it is correct.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Select <strong>Create</strong>.</p>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **Users</td>
+          <td>All users** page, select <strong>New user</strong> then select <strong>Create new user</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>On the <strong>Create new user</strong> page, enter the following:</p>
+
+    <ul>
+      <li>User Principal Name: <strong>msnider</strong></li>
+      <li>Display Name: <strong>Miranda Snider</strong></li>
+    </ul>
+  </li>
+  <li>
+    <p>Uncheck <strong>Auto-generated password</strong></p>
+  </li>
+  <li>
+    <p>Next to <strong>Password</strong>, enter <strong>Pa55-w.rd!</strong>.</p>
+
+    <blockquote>
+      <p>Note: If you receive an error message stating that this password in weak or commonly used, enter the student password found under the <strong>Resources</strong> tab of this lab profile. Alternatively, you can enter a complex password of your choice.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Select <strong>Next: Properties</strong> located at the bottom of the page.</p>
+  </li>
+  <li>
+    <p>Next to <strong>First name</strong>, enter <strong>Miranda</strong>.</p>
+  </li>
+  <li>
+    <p>Next to <strong>Last name</strong>, enter <strong>Snider</strong>.</p>
+  </li>
+  <li>
+    <p>Next to <strong>User type</strong>, make note that <strong>Member</strong> is selected.</p>
+  </li>
+  <li>
+    <p>Next to <strong>Job title</strong>, enter <strong>Helpdesk Manager</strong>.</p>
+  </li>
+  <li>
+    <p>Next to <strong>Department</strong>, enter <strong>Operations</strong>.</p>
+  </li>
+  <li>
+    <p>Next to <strong>Usage location</strong>, select <strong>United States</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Next: Assignments</strong> located at the bottom of the page.</p>
+  </li>
+  <li>
+    <p>On the <strong>Assignments</strong> page, note that no assignments are selected.</p>
+  </li>
+  <li>
+    <p>Select <strong>Next: Review + create</strong> located at the bottom of the page.</p>
+  </li>
+  <li>Select <strong>Create</strong>.</li>
+</ol>
+
+<h3 id="task-2-create-users-by-using-powershell">Task 2: Create users by using PowerShell</h3>
+
+<h1 id="steps-to-install-powershell-754-on-sea-svr1">Steps to install PowerShell 7.5.4 on SEA-SVR1</h1>
+
+<ol>
+  <li>
+    <p>On <strong>SEA-SVR1</strong>, in <strong>Microsoft Edge</strong>, open a new tab.</p>
+  </li>
+  <li>
+    <p>In the address bar, enter <strong>https://github.com/PowerShell/PowerShell/releases/download/v7.5.4/PowerShell-7.5.4-win-x64.msi</strong></p>
+  </li>
+  <li>
+    <p>On the taskbar, select <strong>File Explorer</strong>, then navigate to your <strong>Downloads</strong> folder.</p>
+  </li>
+  <li>
+    <p>Double-click <strong>PowerShell-7.5.4-win-x64.msi</strong> to launch the setup wizard.</p>
+
+    <ul>
+      <li>Select <strong>Next</strong></li>
+      <li>Leave the <strong>Destination Folder</strong> as is, then select <strong>Next</strong></li>
+      <li>Leave the <strong>Optional Actions</strong> as is, then select <strong>Next</strong></li>
+      <li>Leave the checkboxes blank under <em>Use Microsoft Update to help keep your computer secure and up to date</em>, then select <strong>Next</strong></li>
+      <li>Select <strong>Install</strong></li>
+    </ul>
+  </li>
+  <li>
+    <p>On the <strong>Installation completed successfully</strong> window, check <strong>Launch PowerShell</strong>, then select <strong>Finish</strong>.</p>
+
+    <blockquote>
+      <p><strong>Note:</strong> If the installer closed without launching PowerShell, click the <strong>Windows Search</strong> bar, type <strong>pwsh</strong>, right-click <strong>PowerShell 7</strong>, and select <strong>Run as administrator</strong>.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>In the <strong>PowerShell 7</strong> window, type the following command, and then press <strong>Enter</strong>. If prompted, enter <strong>Y</strong> at the NuGet and repository messages:</p>
+
+    <pre><code class="language-powershell"> Install-Module Microsoft.Graph -Scope CurrentUser
+</code></pre>
+  </li>
+  <li>
+    <p>In the <strong>PowerShell 7</strong> window, type the following command, and then press <strong>Enter</strong>:</p>
+
+    <pre><code class="language-powershell"> Connect-MgGraph -scopes "user.readwrite.all, group.readwrite.all"
+</code></pre>
+  </li>
+  <li>
+    <p>When prompted in the <strong>Let’s get you signed in</strong> window, select <strong>Work or School account</strong> and then select <strong>Continue</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Sign in</strong> dialog box, sign in as <strong><code>admin@yourtenant.onmicrosoft.com</code></strong> with the administrative password, and then select <strong>Sign in</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Permissions Requested</strong> prompt that appears, check <strong>Consent on behalf of your organization</strong> and then select <strong>Accept</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Sign in to all apps, websites, and services on this device?</strong> select, <strong>No, this app only</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>PowerShell 7</strong> window, type the following code to create a new profile object, and then press <strong>enter</strong>. Replace <strong>Pa55w.rd</strong> with a complex password of your choice:</p>
+
+    <pre><code class="language-powershell">$PWProfile = @{
+    Password = "Pa55w.rd";
+    ForceChangePasswordNextSignIn = $false
+}
+</code></pre>
+  </li>
+  <li>
+    <p>Next, type the following code to create a new user, and then press <strong>Enter</strong>. Ensure “yourtenant” matches your assigned tenant name:</p>
+
+    <pre><code class="language-powershell">New-MgUser `
+    -DisplayName "Cody Godinez" `
+    -GivenName "Cody" -Surname "Godinez" `
+    -MailNickname "cgodinez" `
+    -UsageLocation "US" `
+    -UserPrincipalName "cgodinez@yourtenant.onmicrosoft.com" `
+    -PasswordProfile $PWProfile -AccountEnabled `
+    -Department "Sales" -JobTitle "Sales Rep"
+</code></pre>
+  </li>
+  <li>
+    <p>To confirm that the user <strong>Cody Godinez</strong> was created, In the <strong>PowerShell 7</strong> window, type the following command and then press <strong>Enter</strong>:</p>
+
+    <pre><code class="language-powershell">Get-MgUser
+</code></pre>
+  </li>
+</ol>
+
+<blockquote>
+  <p>Verify that the list of users from your tenant is displayed.</p>
+</blockquote>
+
+<p><strong>Results</strong>: After completing this exercise, you will have successfully created new user accounts in Entra ID.</p>
+
+<h2 id="exercise-2-assigning-administrative-roles-in-entra-id">Exercise 2: Assigning Administrative Roles in Entra ID</h2>
+
+<h3 id="scenario-1">Scenario</h3>
+
+<p>You need to review and modify the current administrative roles for your tenant.</p>
+
+<p>You have been provided a list of users should have administrative roles assigned as indicated in the following table.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Must be able to:</th>
+      <th>Administrative Role needed:</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Allan Deyoung</td>
+      <td>Manage the tenant</td>
+      <td>Global administrator</td>
+    </tr>
+    <tr>
+      <td>Edmund Reeve</td>
+      <td>Manage users, group, and password resets</td>
+      <td>User administrator</td>
+    </tr>
+    <tr>
+      <td>Miranda Snider</td>
+      <td>Manage password resets</td>
+      <td>Helpdesk administrator</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="task-1-review-and-assign-administrative-roles">Task 1: Review and Assign Administrative Roles</h3>
+
+<ol>
+  <li>
+    <p>On SEA-SVR1, switch to Microsoft Edge.</p>
+  </li>
+  <li>
+    <p>In the Microsoft Entra admin center, in the Navigation pane, select <strong>Roles &amp; admins</strong>.</p>
+
+    <blockquote>
+      <p>Note that you can scroll down the list or use the search box to find the <strong>Role</strong> you are looking for.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Using the search box, search for <strong>Global administrator</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Global administrator</strong> (select the name, not the checkbox).</p>
+  </li>
+  <li>
+    <p>In the <strong>Global administrator</strong> pane, select <strong>+ Add assignments</strong>.</p>
+  </li>
+  <li>
+    <p>Under <strong>Select members</strong>, select <strong>No member selected</strong>, then search for and select <strong>Allan Deyoung</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Select</strong>, then select <strong>Next</strong>, and finally select <strong>Assign</strong>.</p>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>In the navigation breadcrumbs, select **Roles &amp; administrators</td>
+          <td>All roles**.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>Using the search box, search for <strong>User administrator</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>User administrator</strong> (select the name, not the checkbox).</p>
+  </li>
+  <li>
+    <p>In the <strong>User administrator</strong> pane, select <strong>+ Add assignments</strong>.</p>
+  </li>
+  <li>
+    <p>Under <strong>Select members</strong>, select <strong>No member selected</strong>, then search for and select <strong>Edmund Reeve</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Select</strong>, then select <strong>Next</strong>, and finally select <strong>Assign</strong>.</p>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>In the navigation breadcrumbs, select **Roles &amp; administrators</td>
+          <td>All roles**.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>Using the search box, search for <strong>Helpdesk administrator</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Helpdesk administrator</strong> (select the name, not the checkbox).</p>
+  </li>
+  <li>
+    <p>In the <strong>Helpdesk administrator</strong> pane, select <strong>+ Add assignments</strong></p>
+  </li>
+  <li>
+    <p>Under <strong>Select members</strong>, select <strong>No member selected</strong>, then search for and select <strong>Miranda Snider</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Select</strong>, then select <strong>Next</strong>, and finally select <strong>Assign</strong>.</p>
+  </li>
+  <li>In the navigation pane, select <strong>Home</strong>.</li>
+</ol>
+
+<p><strong>Results</strong>: After completing this exercise, you should have successfully assigned administrative roles to users.</p>
+
+<h2 id="exercise-3-creating-and-managing-groups-and-validating-license-assignment">Exercise 3: Creating and managing groups and validating license assignment</h2>
+
+<h3 id="scenario-2">Scenario</h3>
+
+<p>You need to add the three new users to a Security group and assign licenses as indicated in the following table.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Member of:</th>
+      <th>License to assign</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Edmund Reeve</td>
+      <td>Contoso_Managers</td>
+      <td>Office 365 E5, Enterprise Mobility + Security E5 via group membership</td>
+    </tr>
+    <tr>
+      <td>Miranda Snider</td>
+      <td>Contoso_Managers</td>
+      <td>Office 365 E5, Enterprise Mobility + Security E5 via group membership</td>
+    </tr>
+    <tr>
+      <td>Cody Godinez</td>
+      <td>Contoso_Sales</td>
+      <td>Office 365 E5, Enterprise Mobility + Security E5 via group membership direct assignment</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>You also been asked to modify the Company branding for the sign-in page.</p>
+
+<h3 id="task-1-create-groups-by-using-the-microsoft-entra-admin-center">Task 1: Create groups by using the Microsoft Entra admin center</h3>
+
+<ol>
+  <li>
+    <p>On <strong>SEA-SVR1</strong>, in the Microsoft Entra admin center, in the navigation pane, select <strong>Groups</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>New group</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>New Group</strong> page, enter the following:</p>
+
+    <ul>
+      <li>Group type: <strong>Security</strong></li>
+      <li>Group name: <strong>Contoso_Managers</strong></li>
+      <li>Membership type: <strong>Assigned</strong></li>
+    </ul>
+  </li>
+  <li>
+    <p>Under Members, select <strong>No members selected</strong>.</p>
+  </li>
+  <li>
+    <p>In the Add members page add <strong>Edmund Reeve</strong>, <strong>Miranda Snider</strong>, and then click <strong>Select</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Create</strong>.</p>
+  </li>
+</ol>
+
+<h3 id="task-2-create-groups-by-using-powershell">Task 2: Create groups by using PowerShell</h3>
+
+<ol>
+  <li>
+    <p>On SEA-SVR1, switch to PowerShell 7.</p>
+  </li>
+  <li>
+    <p>In the <strong>PowerShell 7</strong> window, type the following code to create a new group, and then press <strong>Enter</strong>:</p>
+
+    <pre><code class="language-powershell"> New-MgGroup -DisplayName "Contoso_Sales" -Description "Contoso Sales team users" -MailEnabled:$false -Mailnickname "Contoso_Sales" -SecurityEnabled
+</code></pre>
+  </li>
+  <li>
+    <p>In the <strong>PowerShell 7</strong> window, type the following command, and then press <strong>Enter</strong>:</p>
+
+    <pre><code class="language-powershell"> Get-MgGroup
+</code></pre>
+  </li>
+  <li>
+    <p>Verify that you get the list of groups in your tenant, including the Contoso_Sales group you just created.</p>
+  </li>
+  <li>
+    <p>In the <strong>PowerShell 7</strong> window, type the following code to define a variable as the Contoso_Sales group, and then press <strong>Enter</strong>:</p>
+
+    <pre><code class="language-powershell"> $group = Get-MgGroup | Where-Object {$_.DisplayName -eq "Contoso_Sales"}
+</code></pre>
+  </li>
+  <li>
+    <p>In the <strong>PowerShell 7</strong> window, type the following code to define another variable as the user, and then press <strong>Enter</strong>:</p>
+
+    <pre><code class="language-powershell"> $user = Get-MgUser | Where-Object {$_.DisplayName -eq "Cody Godinez"}
+</code></pre>
+  </li>
+  <li>
+    <p>In the <strong>PowerShell 7</strong> window, type the following code to add Cody to Contoso_Sales using set variables, and then press <strong>Enter</strong>:</p>
+
+    <pre><code class="language-powershell"> New-MgGroupMember -GroupId $group.Id -DirectoryObjectId $user.Id
+</code></pre>
+  </li>
+  <li>
+    <p>In the <strong>PowerShell 7</strong> window, type the following code, and then press <strong>Enter</strong>:</p>
+
+    <pre><code class="language-powershell"> Get-MgGroupMember -GroupId $group.Id | FL
+</code></pre>
+  </li>
+  <li>
+    <p>Verify that you see <strong>Cody Godinez</strong> as value in <strong>AdditionalProperties</strong>.</p>
+  </li>
+  <li>
+    <p>Close PowerShell 7.</p>
+  </li>
+</ol>
+
+<h3 id="task-3-review-licenses-and-modify-company-branding">Task 3: Review licenses and modify company branding</h3>
+
+<ol>
+  <li>
+    <p>In the Microsoft Entra admin center, in the navigation pane, select <strong>Billing</strong> &gt; <strong>Licenses</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Licenses</strong> page, in the center navigation pane, under <strong>Manage</strong>, select <strong>All products</strong>.</p>
+
+    <blockquote>
+      <p>Take note of the current licenses available and assigned for <strong>Enterprise Mobility + Security E5</strong> and <strong>Office 365 E5</strong>.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>In the Microsoft Entra admin center, in the Navigation pane,under <strong>Entra ID</strong>, select <strong>Custom branding</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Company Branding</strong> page, under <strong>Default sign-in experience</strong>, select <strong>Customize</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Customize default sign-in experience</strong> page, navigate to the <strong>Sign-in form</strong> tab and configure the following settings:</p>
+
+    <ul>
+      <li>Sign-in page text: <strong>Contoso Corp. Sign-in Page</strong></li>
+    </ul>
+  </li>
+  <li>
+    <p>Select <strong>Review + Create</strong>, review the settings and then select <strong>Create</strong>.</p>
+  </li>
+  <li>
+    <p>In the Microsoft Entra admin center, in the Navigation pane, select <strong>Users</strong>.</p>
+  </li>
+  <li>
+    <p>In the user list, select <strong>Cody Godinez</strong> (select the name, not the checkbox).</p>
+  </li>
+  <li>
+    <p>In the Cody Godinez Profile page, in the center navigation menu, select <strong>Licenses</strong>.</p>
+
+    <blockquote>
+      <p>Notice that Cody does not have any current license assignments. And that licensing must now be performed in the 365 Admin center.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Open a new tab in <strong>Microsoft Edge</strong>, in the address bar, enter <strong>https://admin.microsoft.com</strong>.</p>
+  </li>
+  <li>
+    <p>In the navigation pane on the left, select <strong>Users</strong> &gt; <strong>Active users</strong>.</p>
+  </li>
+  <li>
+    <p>In the user list, select <strong>Cody Godinez</strong> (select the name, not the checkbox).</p>
+  </li>
+  <li>
+    <p>Select the <strong>Licenses and apps</strong> tab.</p>
+  </li>
+  <li>
+    <p>Select the check boxes next to <strong>Enterprise Mobility + Security E5</strong> and <strong>Office 365 E5 (no Teams)</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Save changes</strong>.</p>
+  </li>
+  <li>
+    <p>Once the changes have been saved, select the <strong>X</strong> in the upper-right corner to close the <strong>Cody Godinez</strong> pane.</p>
+  </li>
+  <li>
+    <p>In the Microsoft 365 admin center, in the Navigation pane, select <strong>Billing</strong> &gt; <strong>Licenses</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Subscriptions</strong> list, select <strong>Enterprise Mobility + Security E5</strong>.</p>
+  </li>
+  <li>
+    <p>Select the <strong>Groups</strong> tab, and then select <strong>+ Assign licenses</strong>.</p>
+  </li>
+  <li>
+    <p>Navigate into the <strong>Enter a group name</strong> textbox, and select the <strong>Contoso_Managers</strong> group.</p>
+  </li>
+  <li>
+    <p>Select <strong>Assign Licenses</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>You assigned licenses to Contoso_Managers</strong> pane, select the <strong>X</strong> in the upper-right corner to close it.</p>
+  </li>
+  <li>
+    <p>In the upper-left corner of the <strong>Enterprise Mobility + Security E5</strong> page, select the <strong>Back to licenses</strong> link.</p>
+  </li>
+  <li>
+    <p>In the <strong>Subscriptions</strong> list, select <strong>Office 365 E5 (no Teams)</strong>.</p>
+  </li>
+  <li>
+    <p>Select the <strong>Groups</strong> tab, and then select <strong>+ Assign licenses</strong>.</p>
+  </li>
+  <li>
+    <p>Navigate into the <strong>Enter a group name</strong> textbox, and select the <strong>Contoso_Managers</strong> group.</p>
+  </li>
+  <li>
+    <p>Select <strong>Assign Licenses</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>You assigned licenses to Contoso_Managers</strong> pane, select the <strong>X</strong> in the upper-right corner to close it.</p>
+  </li>
+  <li>
+    <p>In the Microsoft 365 admin center, in the Navigation pane, select <strong>Billing</strong> &gt; <strong>Licenses</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Subscriptions</strong> list, select <strong>Office 365 E5 (no Teams)</strong>.</p>
+  </li>
+</ol>
+
+<blockquote>
+  <p>Take note of the users that are assigned the Office 365 E5 license. Edmund and Miranda both receive their license assignment from their membership in the Contoso_Managers group. You can select the <strong>Groups</strong> tab see if the licenses assigned correctly. It may take 3-5 minutes for the licenses to reprocess.</p>
+</blockquote>
+
+<ol>
+  <li>Close Microsoft Edge.</li>
+</ol>
+
+<p><strong>Results</strong>: After completing this exercise, you should have successfully created and managed groups, modified company branding, and assigned licenses.</p>
+
+<p><strong>END OF LAB</strong></p>
+
+            </article>
+        </main>
+    </div>
+    <footer class="fixed-bottom d-print-none">
+        <nav class="navbar navbar-light bg-light d-flex justify-content-around">
+            <span class="navbar-text">
+                &copy; 2025 Microsoft &nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=521839">Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=2259814">Consumer Health Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkID=206977">Terms of Use </a>&nbsp;|&nbsp;
+                  <a href="https://www.microsoft.com/trademarks">Trademarks </a>&nbsp;|&nbsp;
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <a href="" target="_blank" class="ml-2">
+                    Source
+                </a>
+            </span>
+        </nav>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/js/script.js?v="></script>
+</body>
+
+
+</html>

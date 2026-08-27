@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>
+        Practice Lab 0503: Configuring and validating device compliance | 
+        MD-102T00-Microsoft-365-Endpoint-Administrator
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/css/style.css?v=">
+</head>
+<body data-spy="scroll" data-target="#linksMenu">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gray">
+        <div class="container d-flex justify-content-between">
+            <!-- <img src="https://github.com/MicrosoftLearning/Jekyll-Theme/raw/master/assets/microsoft-gray.png" alt="Microsoft logo" style="width:100px;height:21px;"/>-->
+            <span class="my-1 title text-black">MD-102T00-Microsoft-365-Endpoint-Administrator</span>
+            <span class="ml-2">
+                <a href="/MD-102T00-Microsoft-365-Endpoint-Administrator/" class="d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+                    </svg>
+                    &nbsp;Home
+                </a>
+            </span>
+        </div>
+        <!--
+        <div class="container d-flex justify-content-between">
+            <a class="my-1 title text-azure text-uppercase" href="">
+                MD-102T00-Microsoft-365-Endpoint-Administrator
+            </a>
+            <a href="" target="_blank" class="btn btn-sm btn-outline-secondary text-light">
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <span class="ml-2">GitHub</span>
+            </a>
+        </div>
+        -->
+    </nav>
+    <hr color-"gray"/>
+    <div class="container">
+        <main class="row extra-padding">
+            <aside class="col-sm-2">       
+                <nav id="linksMenu" class="toc sticky-top">
+                    <ul class="nav navbar-nav flex-column">
+                    </ul>
+                </nav>         
+            </aside>
+            <hr class="" />
+            <article class="col-sm-10 mb-5">
+                <h1 id="practice-lab-0503-configuring-and-validating-device-compliance">Practice Lab 0503: Configuring and validating device compliance</h1>
+
+<h2 id="summary">Summary</h2>
+
+<p>In this lab, you validate device compliance by configuring a compliance policy and associated conditional access rule used to determine the status of a managed device.</p>
+
+<h3 id="prerequisites">Prerequisites</h3>
+
+<p>The following lab(s) must be completed before this lab:</p>
+
+<ul>
+  <li>
+    <p>0101-Managing Identities in Entra ID</p>
+  </li>
+  <li>
+    <p>0102-Synchronizing identities by using Entra Connect</p>
+  </li>
+  <li>
+    <p>0203-Manage Device Enrollment into Intune</p>
+  </li>
+  <li>
+    <p>0204-Enrolling devices into Intune</p>
+  </li>
+  <li>
+    <p>0301-Creating and Deploying Configuration Profiles</p>
+
+    <blockquote>
+      <p>Note: You will also need a mobile phone that can receive text messages used to secure Windows Hello sign in authentication to Entra ID.</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h2 id="exercise-1-configuring-compliance-policies">Exercise 1: Configuring compliance policies</h2>
+
+<h3 id="scenario">Scenario</h3>
+
+<p>Contoso would like to ensure that Windows devices that are enrolled in Intune meet a minimum configuration specification. The following are specifications are required:</p>
+
+<ul>
+  <li>Minimum Windows operating system version: 10.0.19041.329</li>
+  <li>Microsoft Defender Antimalware required</li>
+</ul>
+
+<p>If a device meets these requirements, it will be marked as compliant. If the device does not meet these requirements, the device should be marked as non-compliant.</p>
+
+<h3 id="task-1-create-and-assign-a-compliance-policy">Task 1: Create and assign a compliance policy</h3>
+
+<ol>
+  <li>
+    <p>Sign in to <strong>SEA-SVR1</strong> as <strong>Contoso\Administrator</strong> with the password <strong>Pa55w.rd</strong> and close <strong>Server Manager</strong>.</p>
+  </li>
+  <li>
+    <p>On the taskbar, select <strong>Microsoft Edge</strong>.</p>
+  </li>
+  <li>
+    <p>In Microsoft Edge, type <strong>https://intune.microsoft.com</strong> in the  address bar, and then press <strong>Enter</strong>.</p>
+  </li>
+  <li>
+    <p>Sign in as as <strong><code>admin@yourtenant.onmicrosoft.com</code></strong> with the default tenant password.</p>
+  </li>
+  <li>
+    <p>From the navigation pane select <strong>Devices</strong>, then select <strong>Compliance</strong>.</p>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **Devices</td>
+          <td>Compliance** blade, in the details pane select <strong>+ Create policy</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>On the <strong>Create a policy</strong> blade, provide the following value and select <strong>Create</strong>:</p>
+
+    <ul>
+      <li>Platform: <strong>Windows 10 and later</strong></li>
+      <li>Profile type: <strong>Windows 10/11 compliance policy</strong></li>
+    </ul>
+  </li>
+  <li>
+    <p>On the <strong>Basics</strong> tab, provide the following value and select <strong>Next</strong>:</p>
+
+    <ul>
+      <li>Name: <strong>Compliance1</strong></li>
+    </ul>
+  </li>
+  <li>
+    <p>On the <strong>Compliance settings</strong> tab, expand <strong>Device Health</strong> and review the available settings.</p>
+  </li>
+  <li>
+    <p>On the <strong>Compliance settings</strong> tab, expand <strong>Device Properties</strong>. In the <strong>Minimum OS version</strong>
+field, type <strong>10.0.19041.329</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Compliance settings</strong> tab, expand <strong>System Security</strong>. Set the <strong>Microsoft Defender Antimalware</strong> setting to <strong>Require</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Next</strong>. On the <strong>Actions for noncompliance</strong> tab, note the action to <strong>Mark device noncompliant</strong> default setting is <strong>immediately</strong>.</p>
+
+    <blockquote>
+      <p>Review how you can configure the number of days after which the device is marked as noncompliant, and configuration additional actions.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Select <strong>Next</strong>. On the <strong>Assignments</strong> tab, under <strong>Included groups</strong> select <strong>Add groups</strong>. Select <strong>Windows Devices</strong>, choose <strong>Select</strong>, and then select <strong>Next</strong>.</p>
+
+    <p><em>Note: The <strong>Windows Devices</strong> group was created in Lab 0301: Creating and Deploying Configuration Profiles.</em></p>
+  </li>
+  <li>
+    <p>On the <strong>Review + create</strong> tab, review the settings and then select <strong>Create</strong>.</p>
+  </li>
+  <li>
+    <p>In the navigation menu, select <strong>Devices</strong> and then in the Devices navigation pane, select <strong>Compliance</strong>.</p>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **Devices</td>
+          <td>Compliance** blade, select the <strong>Compliance settings</strong> tab.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>On the <strong>Compliance settings</strong> page, ensure <strong>30</strong> is visible in the <strong>Compliance status validity period</strong>. If it is not, enter that value.</p>
+  </li>
+  <li>
+    <p>On the <strong>Compliance settings</strong> page, toggle <strong>Mark devices with no compliance policy assigned as</strong> so it reads <strong>Not compliant</strong> and then select <strong>Save</strong>.</p>
+
+    <blockquote>
+      <p>This setting will ensure that any device that does not have a compliance policy assigned will be set to <strong>Not compliant</strong>.</p>
+    </blockquote>
+  </li>
+</ol>
+
+<p><strong>Results</strong>: After completing this exercise, you will have successfully configured a compliance policy.</p>
+
+<h2 id="exercise-2-creating-a-conditional-access-policy-to-enforce-compliance">Exercise 2: Creating a conditional access policy to enforce compliance</h2>
+
+<h3 id="scenario-1">Scenario</h3>
+
+<p>When a user uses a device that is marked as non-compliant, they should not be able to access their e-mail. You’ve been asked to configure a conditional access policy that enforces this rule, and verify it functions as expected. In some cases, the user may experience a loop where they are prompted to sign in repeatedly.</p>
+
+<h3 id="task-1-create-a-conditional-access-policy">Task 1: Create a conditional access policy</h3>
+
+<ol>
+  <li>
+    <p>On <strong>SEA-SVR1</strong>, in the <strong>Intune admin center</strong> select <strong>Devices</strong>, then select <strong>Conditional access</strong>.</p>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **Conditional Access</td>
+          <td>Overview** blade, select <strong>Policies</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **Conditional Access</td>
+          <td>Policies** blade, select <strong>+ New policy</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>On the <strong>New</strong> blade, in the <strong>Name</strong> text box, type <strong>Conditional1</strong> and then select <strong>0 users or agents (Preview) selected</strong>.</p>
+  </li>
+  <li>
+    <p>Under <strong>Include</strong>, select the <strong>All users</strong> radio button.</p>
+  </li>
+  <li>
+    <p>In the <strong>Target resources</strong> section, select <strong>No target resources selected</strong>.</p>
+  </li>
+  <li>
+    <p>Under <strong>Include</strong> choose the <strong>Select resources</strong> radio button, under the <strong>Select specific resources</strong> heading, select <strong>None</strong></p>
+  </li>
+  <li>
+    <p>In the <strong>Resources</strong> page, enter <strong>Office 365</strong> in the search box, and then select the checkbox next for <strong>Office 365 Exchange Online</strong>, and then click <strong>Select</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Conditions</strong> section, select <strong>0 conditions selected</strong>.</p>
+  </li>
+  <li>
+    <p>In the list of conditions, under <strong>Device platforms</strong>, select <strong>Not configured</strong>. In the <strong>Configure</strong> section select <strong>Yes</strong>, choose the <strong>Select device platforms</strong> radio button, select the <strong>Windows</strong> check box, and then select <strong>Done</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Grant</strong> section, select <strong>0 controls selected</strong>. Select the <strong>Require device to be marked as compliant</strong> check box, and then click <strong>Select</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>New</strong> blade, select <strong>On</strong> for the <strong>Enable policy</strong> option and then select <strong>Create</strong>.</p>
+  </li>
+  <li>Close Microsoft Edge.</li>
+</ol>
+
+<h3 id="task-2-verify-that-the-conditional-access-policy-is-working">Task 2: Verify that the conditional access policy is working</h3>
+
+<ol>
+  <li>
+    <p>Switch to <strong>SEA-WS3</strong> and sign in as <strong>Admin</strong> with the password of <strong>Pa55w.rd</strong>.</p>
+  </li>
+  <li>
+    <p>On <strong>SEA-WS3</strong>, on the taskbar, select <strong>Microsoft Edge</strong>.</p>
+  </li>
+  <li>
+    <p>In Microsoft Edge, type <strong>outlook.office.com</strong> and then press Enter.</p>
+  </li>
+  <li>
+    <p>On the pick an account dialog box, select <strong><code>Aaron@yourtenant.onmicrosoft.com</code></strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Enter password</strong> page, enter <strong>Pa55w.rd1234!</strong> and select <strong>Sign in</strong>.</p>
+
+    <blockquote>
+      <p><strong>Note</strong> If the Microsoft Edge Save password prompt appears, select <strong>Update</strong>.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>You should receive a message that asks you to switch Edge profile. Select <strong>Switch Edge profile</strong>.</p>
+  </li>
+  <li>
+    <p>You will be prompted with a message stating, “<strong>Continue with your work or school account</strong>”. Select <strong>Sign in to sync data</strong>.</p>
+  </li>
+  <li>
+    <p>You will be required to enter your password again. Enter <strong>Pa55w.rd1234!</strong> and select <strong>Sign in</strong>.</p>
+  </li>
+  <li>
+    <p>A dialog box will appear asking, “<strong>Automatically sign in to all desktops apps and websites on this device?</strong>”. Select <strong>No, sign in to this app only</strong>.</p>
+
+    <blockquote>
+      <p>Note: A page will appear stating, “<strong>Let’s set up your profile to access org resources</strong>”. This is because SEA-WS3 is not joined to Entra ID and not managed by Intune. As such, you are unable to access Aarons’ mailbox from this device.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p><strong>Close</strong> all windows and sign out of <strong>SEA-WS3</strong>.</p>
+  </li>
+  <li>
+    <p>Switch to <strong>SEA-WS1</strong>, and sign in as as Aaron Nicholls with the PIN <strong>102938</strong>.</p>
+
+    <blockquote>
+      <p>Note: SEA-WS1 is a managed Windows 11 device that is enrolled in Intune.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>On the taskbar, select <strong>Microsoft Edge</strong>.</p>
+  </li>
+  <li>
+    <p>In Microsoft Edge, type <strong>outlook.office.com</strong> and then press Enter.</p>
+  </li>
+  <li>
+    <p>Verify that you can access Aaron’s mailbox.</p>
+
+    <blockquote>
+      <p>Note: This is because SEA-WS1 is a managed device and marked as compliant.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Close Microsoft Edge and sign out of SEA-WS1.</p>
+  </li>
+</ol>
+
+<h3 id="task-3-disable-the-conditional-access-policy">Task 3: Disable the conditional access policy</h3>
+
+<ol>
+  <li>
+    <p>Switch to <strong>SEA-SVR1</strong> and enter the password <strong>Pa55w.rd</strong>.</p>
+  </li>
+  <li>
+    <p>On the taskbar, select <strong>Microsoft Edge</strong>.</p>
+  </li>
+  <li>
+    <p>In Microsoft Edge, type <strong>https://intune.microsoft.com</strong> in the address bar, and then press <strong>Enter</strong>.</p>
+  </li>
+  <li>
+    <p>Sign in as as <strong><code>admin@yourtenant.onmicrosoft.com</code></strong> with the default tenant password.</p>
+  </li>
+  <li>
+    <p>From the navigation pane select <strong>Devices</strong>, then select <strong>All devices</strong>.</p>
+
+    <blockquote>
+      <p>Notice that SEA-WS1 is compliant, which is why Aaron was allowed to access his mailbox.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>From the navigation pane select <strong>Devices</strong>, then select <strong>Conditional access</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Conditional Access</strong> page, select <strong>Policies</strong> and then select <strong>Conditional1</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Conditional1</strong> page, at the bottom of the page, select <strong>Off</strong> and then select <strong>Save</strong>.</p>
+  </li>
+  <li>
+    <p>Close Microsoft Edge.</p>
+  </li>
+</ol>
+
+<p><strong>Results</strong>: After completing this exercise, you will have successfully configured a conditional access policy to determine device compliance.</p>
+
+<p><strong>END OF LAB</strong></p>
+
+            </article>
+        </main>
+    </div>
+    <footer class="fixed-bottom d-print-none">
+        <nav class="navbar navbar-light bg-light d-flex justify-content-around">
+            <span class="navbar-text">
+                &copy; 2025 Microsoft &nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=521839">Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=2259814">Consumer Health Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkID=206977">Terms of Use </a>&nbsp;|&nbsp;
+                  <a href="https://www.microsoft.com/trademarks">Trademarks </a>&nbsp;|&nbsp;
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <a href="" target="_blank" class="ml-2">
+                    Source
+                </a>
+            </span>
+        </nav>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/js/script.js?v="></script>
+</body>
+
+
+</html>

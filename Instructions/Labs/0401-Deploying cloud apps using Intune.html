@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>
+        Practice Lab 0401: Deploying cloud apps using Intune | 
+        MD-102T00-Microsoft-365-Endpoint-Administrator
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/css/style.css?v=">
+</head>
+<body data-spy="scroll" data-target="#linksMenu">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gray">
+        <div class="container d-flex justify-content-between">
+            <!-- <img src="https://github.com/MicrosoftLearning/Jekyll-Theme/raw/master/assets/microsoft-gray.png" alt="Microsoft logo" style="width:100px;height:21px;"/>-->
+            <span class="my-1 title text-black">MD-102T00-Microsoft-365-Endpoint-Administrator</span>
+            <span class="ml-2">
+                <a href="/MD-102T00-Microsoft-365-Endpoint-Administrator/" class="d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+                    </svg>
+                    &nbsp;Home
+                </a>
+            </span>
+        </div>
+        <!--
+        <div class="container d-flex justify-content-between">
+            <a class="my-1 title text-azure text-uppercase" href="">
+                MD-102T00-Microsoft-365-Endpoint-Administrator
+            </a>
+            <a href="" target="_blank" class="btn btn-sm btn-outline-secondary text-light">
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <span class="ml-2">GitHub</span>
+            </a>
+        </div>
+        -->
+    </nav>
+    <hr color-"gray"/>
+    <div class="container">
+        <main class="row extra-padding">
+            <aside class="col-sm-2">       
+                <nav id="linksMenu" class="toc sticky-top">
+                    <ul class="nav navbar-nav flex-column">
+                    </ul>
+                </nav>         
+            </aside>
+            <hr class="" />
+            <article class="col-sm-10 mb-5">
+                <h1 id="practice-lab-0401-deploying-cloud-apps-using-intune">Practice Lab 0401: Deploying cloud apps using Intune</h1>
+
+<h2 id="summary">Summary</h2>
+
+<p>In this lab, you create and deploy cloud-based apps using Intune and the Company Portal Website.</p>
+
+<h3 id="prerequisites">Prerequisites</h3>
+
+<p>The following lab(s) must be completed before this lab:</p>
+
+<ul>
+  <li>
+    <p>0101-Managing Identities in Entra ID</p>
+  </li>
+  <li>
+    <p>0102-Synchronizing identities by using Entra Connect</p>
+  </li>
+  <li>
+    <p>0203-Manage Device Enrollment into Intune</p>
+  </li>
+  <li>
+    <p>0204-Enrolling devices into Intune</p>
+
+    <blockquote>
+      <p>Note: You will also need a mobile phone that can receive text messages used to secure Windows Hello sign in authentication to Entra ID.</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h2 id="exercise-1-add-a-microsoft-store-app-to-intune">Exercise 1: Add a Microsoft Store App to Intune</h2>
+
+<h3 id="scenario">Scenario</h3>
+
+<p>You use Microsoft Intune to manage desktops and apps for Contoso Corporation. The Research department often connects to various servers to perform tasks and has asked for the Windows App to be available for Research members to install as needed. The Windows App is available from the Microsoft Store, but you decide to add the app to Intune so that users can access it from the Company Portal website. A Research member named Aaron Nicholls has agreed to test the installation process after you have published the app to the portal.</p>
+
+<h3 id="task-1-add-windows-app-to-intune">Task 1: Add Windows App to Intune</h3>
+
+<ol>
+  <li>
+    <p>On <strong>SEA-SVR1</strong>, if necessary, sign in as <strong>Contoso\Administrator</strong> with the password <strong>Pa55w.rd</strong> and close <strong>Server Manager</strong>.</p>
+  </li>
+  <li>
+    <p>On the taskbar, select <strong>Microsoft Edge</strong>.</p>
+  </li>
+  <li>
+    <p>In Microsoft Edge, type <strong>https://intune.microsoft.com</strong> in the address bar, and then press <strong>Enter</strong>.</p>
+  </li>
+  <li>
+    <p>Sign in as <strong><code>admin@yourtenant.onmicrosoft.com</code></strong> with the tenant Admin password.</p>
+  </li>
+  <li>
+    <p>On the <strong>Microsoft Intune admin center</strong> page, select <strong>Apps</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Apps</strong> page, in the navigation pane, select <strong>All apps</strong>.</p>
+  </li>
+  <li>
+    <p>In the details pane, select <strong>+ Create</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Select app type</strong> page, click the drop-down menu and then Choose <strong>Microsoft store app (new)</strong>. Click <strong>Select</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Add App</strong> page, click <strong>Seach the  Microsoft Store app (new)</strong>, search for and select <strong>Windows App</strong>. Click <strong>Select</strong>.</p>
+  </li>
+  <li>On the <strong>App information</strong> page, verify the following information and then select <strong>Next</strong>:
+    <ul>
+      <li>Name: <strong>Windows App</strong></li>
+      <li>Publisher: <strong>Microsoft Corp.</strong></li>
+      <li>Category: <strong>Business</strong></li>
+      <li>Show this as a featured app: <strong>Yes</strong></li>
+    </ul>
+  </li>
+  <li>
+    <p>Select <strong>Next</strong> twice and then select <strong>Create</strong>.</p>
+  </li>
+  <li>
+    <p>The Windows App page opens.</p>
+
+    <blockquote>
+      <p>Take note of the Properties, Device install status, and User install status nodes.</p>
+    </blockquote>
+  </li>
+</ol>
+
+<h3 id="task-2-assign-a-group-to-the-app">Task 2: Assign a Group to the App</h3>
+
+<ol>
+  <li>
+    <p>In the <strong>Windows App</strong> page, under <strong>Manage</strong>,  select <strong>Properties</strong>.</p>
+  </li>
+  <li>
+    <p>In the details pane, scroll down to the <strong>Assignments</strong> section and then select <strong>Edit</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Assignments</strong> page, select <strong>Add group</strong> in the <strong>Available for enrolled devices</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Select groups</strong> page, search and select the <strong>Research</strong> group and then click <strong>Select</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Review + save</strong> and then select <strong>Save</strong>.</p>
+  </li>
+</ol>
+
+<h3 id="task-3-force-policy-synchronization-from-the-intune-console">Task 3: Force policy synchronization from the Intune console</h3>
+
+<ol>
+  <li>
+    <p>In the <strong>Microsoft Intune admin center</strong>, select <strong>Devices</strong> and then select <strong>All devices</strong>.</p>
+  </li>
+  <li>
+    <p>In the details pane, select <strong>SEA-WS1</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>SEA-WS1</strong> blade, select <strong>Sync</strong> and when prompted select <strong>Yes</strong>.</p>
+
+    <blockquote>
+      <p>Intune will contact the device and tell it to synchronize all policies. This may take up to 5 minutes.</p>
+    </blockquote>
+  </li>
+</ol>
+
+<h3 id="task-4-install-an-app-from-the-company-portal-website">Task 4: Install an app from the Company Portal Website</h3>
+
+<ol>
+  <li>
+    <p>Switch to <strong>SEA-WS1</strong>.</p>
+  </li>
+  <li>
+    <p>Sign in as <strong>Aaron Nicholls</strong> with the PIN <strong>102938</strong>.</p>
+  </li>
+  <li>
+    <p>On the taskbar, select <strong>Microsoft Edge</strong>.</p>
+  </li>
+  <li>
+    <p>If necessary, at the <strong>Welcome to Microsoft Edge</strong> page, select <strong>Confirm and continue</strong>. Close the Welcome page.</p>
+  </li>
+  <li>
+    <p>In the address bar browse to <strong>https://portal.manage.microsoft.com</strong> and then press <strong>Enter</strong>.</p>
+  </li>
+  <li>
+    <p>Sign in as <strong>Aaron Nicholls</strong>.</p>
+  </li>
+  <li>
+    <p>On the Contoso web portal, select <strong>View Devices</strong>.</p>
+  </li>
+  <li>
+    <p>On the Devices page, select <strong>Tap here to tell us which device you’re using or add a new device</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Which device are you using</strong> dialog box, select the option next to <strong>SEA-WS1</strong>, and then select <strong>Select</strong>.</p>
+
+    <blockquote>
+      <p>Notice that the message now changes to Apps will be installed onto: SEA-WS1</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>At the top-left corner, select the navigation button and then select <strong>Apps</strong>.</p>
+  </li>
+</ol>
+
+<blockquote>
+  <p>Take note of the Windows app listed on the Apps page. <strong>Note</strong> It might take a few minutes for the app to appear.</p>
+</blockquote>
+
+<ol>
+  <li>
+    <p>Select <strong>Windows App</strong>.</p>
+  </li>
+  <li>
+    <p>On the Windows App page, select <strong>Install</strong>.</p>
+  </li>
+  <li>
+    <p>If prompted, on the <strong>Install Windows App</strong> dialog box, select <strong>Always allow portal.manage.microsoft.com to open links of this type in the associated app</strong> and then select <strong>Open</strong>.</p>
+  </li>
+</ol>
+
+<blockquote>
+  <p>It may take a few minutes for the app to install.</p>
+</blockquote>
+
+<ol>
+  <li>
+    <p>After the app is installed close all open windows.</p>
+  </li>
+  <li>
+    <p>Select <strong>Start</strong> and verify that <strong>Windows App</strong> is displayed on the Start menu.</p>
+  </li>
+</ol>
+
+<p><strong>Results</strong>: After completing this exercise, you will have successfully added and installed a Microsoft Store App from Intune.</p>
+
+<h2 id="exercise-2-configure-and-deploy-microsoft-365-apps-from-intune">Exercise 2: Configure and deploy Microsoft 365 Apps from Intune</h2>
+
+<h3 id="scenario-1">Scenario</h3>
+
+<p>All the users of the Research department at Contoso require Microsoft 365 Apps. You’ve been asked to deploy the 64-bit versions of Microsoft Excel, Outlook, PowerPoint and Word to their Windows devices. You also need to ensure they are configured for the Current Channel for updates.</p>
+
+<h3 id="task-1-verify-installed-apps-on-sea-ws1">Task 1: Verify installed apps on SEA-WS1</h3>
+
+<ol>
+  <li>
+    <p>On <strong>SEA-WS1</strong>, on the taskbar, select <strong>Start</strong> and then select the <strong>Settings</strong> app.</p>
+  </li>
+  <li>
+    <p>In the <strong>Settings</strong> app, select <strong>Apps</strong>, and then select <strong>Apps &amp; features</strong>.</p>
+
+    <blockquote>
+      <p>Verify that <strong>Microsoft 365 Apps for enterprise - en-us</strong> is not listed.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Close all open windows.</p>
+  </li>
+</ol>
+
+<h3 id="task-2-add-microsoft-365-apps-to-intune">Task 2: Add Microsoft 365 apps to Intune</h3>
+
+<ol>
+  <li>
+    <p>On <strong>SEA-SVR1</strong>, in the <strong>Microsoft Intune admin center</strong>, select <strong>Apps</strong>.</p>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>In the **Apps</td>
+          <td>Overview** blade, select <strong>All Apps</strong>. In the details pane, select <strong>Create</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>In the <strong>Select app type</strong> blade, under <strong>Microsoft 365 Apps</strong>, select <strong>Windows 10 and later</strong> , and then click <strong>Select</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Add Microsoft 365 Apps</strong> blade, configure the following options and select <strong>Next</strong>:</p>
+
+    <ul>
+      <li>
+        <p>Suite Name: <strong>Microsoft 365 Apps (Research)</strong></p>
+      </li>
+      <li>
+        <p>Description: <strong>Microsoft 365 Apps for the Research dept at Contoso</strong></p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>On the <strong>Configure app suite</strong> tab, expand the <strong>Select Office apps</strong> dropdown, and ensure that only the following apps are selected:</p>
+
+    <ul>
+      <li>
+        <p>Excel</p>
+      </li>
+      <li>
+        <p>Outlook</p>
+      </li>
+      <li>
+        <p>PowerPoint</p>
+      </li>
+      <li>
+        <p>Word</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>On the <strong>App suite information</strong> section, configure the following options:</p>
+
+    <ul>
+      <li>
+        <p>Architecture: <strong>64-bit</strong></p>
+      </li>
+      <li>
+        <p>Default file format: <strong>Office Open XML Format</strong></p>
+      </li>
+      <li>
+        <p>Update channel: <strong>Monthly Enterprise Channel</strong></p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>On the <strong>Properties</strong> section, configure the following options and select <strong>Next</strong>:</p>
+
+    <ul>
+      <li>Accept the Microsoft Software License Terms on behalf of users: <strong>Yes</strong></li>
+    </ul>
+  </li>
+  <li>
+    <p>On the <strong>Assignments</strong> tab, in the <strong>Required</strong> section, select <strong>Add group</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Select groups</strong> blade, select <strong>Research</strong>, and then choose <strong>Select</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Next</strong>. On the <strong>Review + Create</strong> tab, select <strong>Create</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Microsoft 365 Apps (Research)</strong> page, select <strong>Properties</strong>.</p>
+  </li>
+  <li>In the details pane verify that <strong>Research</strong> is listed under <strong>Required</strong> in the <strong>Assignments</strong> section.</li>
+</ol>
+
+<h3 id="task-3-request-policy-synchronization-from-the-intune-console">Task 3: Request policy synchronization from the Intune console</h3>
+
+<ol>
+  <li>
+    <p>In the <strong>Microsoft Intune admin center</strong>, select <strong>Devices</strong> and then select <strong>All devices</strong>.</p>
+  </li>
+  <li>
+    <p>In the details pane, select <strong>SEA-WS1</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>SEA-WS1</strong> blade, select <strong>Sync</strong> and when prompted select <strong>Yes</strong>.</p>
+
+    <blockquote>
+      <p>Intune will contact the device and tell it to synchronize all policies. This may take up to 15 minutes. You may choose to Sync from <strong>SEA-WS1</strong></p>
+    </blockquote>
+  </li>
+</ol>
+
+<h3 id="task-4-verify-microsoft-365-apps-are-installed">Task 4: Verify Microsoft 365 apps are installed</h3>
+
+<ol>
+  <li>
+    <p>Switch to <strong>SEA-WS1</strong> and wait approximately 10-15 minutes for the Microsoft 365 Suite to install on the device.</p>
+  </li>
+  <li>
+    <p>Sign out of <strong>SEA-WS1</strong> and then sign back in as <strong>Aaron Nicholls</strong> with the PIN <strong>102938</strong>.</p>
+  </li>
+  <li>
+    <p>On <strong>SEA-WS1</strong>, on the taskbar, select <strong>Start</strong> and then select the <strong>Settings</strong> app.</p>
+  </li>
+  <li>
+    <p>In the <strong>Settings</strong> app, select <strong>Apps</strong> and on the <strong>Apps &amp; features</strong> page, scroll down and verify that <strong>Microsoft 365 Apps for enterprise - en-us</strong> is listed.</p>
+  </li>
+  <li>
+    <p>Close the <strong>Settings</strong> app and select the <strong>Start</strong> button.</p>
+  </li>
+  <li>
+    <p>Select all apps, scroll down to <strong>W</strong> and select <strong>Word</strong> and verify that the app opens.</p>
+
+    <blockquote>
+      <p><em>Note: Recall in a previous lab, you removed recently added apps from the Start Menu.</em></p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Close all open windows.</p>
+  </li>
+  <li>
+    <p>Sign out of SEA-WS1.</p>
+  </li>
+</ol>
+
+<h3 id="task-5-monitor-app-installation-status-in-intune">Task 5: Monitor app installation status in Intune</h3>
+
+<ol>
+  <li>
+    <p>Switch to <strong>SEA-SVR1</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Microsoft Intune admin center</strong>, select <strong>Apps</strong>.</p>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **Apps</td>
+          <td>Overview** blade, select <strong>Monitor</strong> and then select <strong>App install status</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>In the details pane, select <strong>Microsoft 365 Apps (Research)</strong>.</p>
+  </li>
+  <li>
+    <p>In the details pane, under <strong>Monitor</strong> and under <strong>User install status</strong>, verify that <strong>1</strong> is displayed under Installed.</p>
+
+    <p><em>Note: It may take some time for the information to display.</em></p>
+
+    <p><em>Note: This indicates that the app is installed on one device and for one user.</em></p>
+  </li>
+  <li>
+    <p>Select <strong>Device install status</strong>.</p>
+
+    <blockquote>
+      <p>In the details pane, you can see the devices that the app is installed on, and also the name of the user. The <strong>Device Name</strong> column should list <strong>SEA-WS1</strong> and the <strong>Status</strong> column should say <strong>Installed</strong>. This means that the app is installed on SEA-WS1.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>In the <strong>Microsoft Intune admin center</strong>, select <strong>Devices</strong>.</p>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **Devices</td>
+          <td>Overview** blade, select <strong>All devices</strong> and then in the details pane, select <strong>SEA-WS1</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>On the <strong>SEA-WS1</strong> blade, select <strong>Managed Apps</strong>.</p>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **SEA-WS1</td>
+          <td>Managed Apps** blade, in the details pane, select <strong>Microsoft 365 Apps (Research)</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ol>
+
+<blockquote>
+  <p>On the <strong>Microsoft 365 Apps (Research) - Installation details</strong> window, you can see the entire lifecycle of the application, that is - when it was created, assigned, installation time and status and the last time the device checked in (synced with Intune).</p>
+</blockquote>
+
+<ol>
+  <li>Close all open windows.</li>
+</ol>
+
+<p><strong>Results</strong>: After completing this exercise, you will have successfully configured and deployed Microsoft 365 Apps from Intune.</p>
+
+<p><strong>END OF LAB</strong></p>
+
+            </article>
+        </main>
+    </div>
+    <footer class="fixed-bottom d-print-none">
+        <nav class="navbar navbar-light bg-light d-flex justify-content-around">
+            <span class="navbar-text">
+                &copy; 2025 Microsoft &nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=521839">Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=2259814">Consumer Health Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkID=206977">Terms of Use </a>&nbsp;|&nbsp;
+                  <a href="https://www.microsoft.com/trademarks">Trademarks </a>&nbsp;|&nbsp;
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <a href="" target="_blank" class="ml-2">
+                    Source
+                </a>
+            </span>
+        </nav>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/js/script.js?v="></script>
+</body>
+
+
+</html>

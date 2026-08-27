@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>
+        Practice Lab: Refreshing Windows with Autopilot Reset and Self-Deploying mode | 
+        MD-102T00-Microsoft-365-Endpoint-Administrator
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/css/style.css?v=">
+</head>
+<body data-spy="scroll" data-target="#linksMenu">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gray">
+        <div class="container d-flex justify-content-between">
+            <!-- <img src="https://github.com/MicrosoftLearning/Jekyll-Theme/raw/master/assets/microsoft-gray.png" alt="Microsoft logo" style="width:100px;height:21px;"/>-->
+            <span class="my-1 title text-black">MD-102T00-Microsoft-365-Endpoint-Administrator</span>
+            <span class="ml-2">
+                <a href="/MD-102T00-Microsoft-365-Endpoint-Administrator/" class="d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+                    </svg>
+                    &nbsp;Home
+                </a>
+            </span>
+        </div>
+        <!--
+        <div class="container d-flex justify-content-between">
+            <a class="my-1 title text-azure text-uppercase" href="">
+                MD-102T00-Microsoft-365-Endpoint-Administrator
+            </a>
+            <a href="" target="_blank" class="btn btn-sm btn-outline-secondary text-light">
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <span class="ml-2">GitHub</span>
+            </a>
+        </div>
+        -->
+    </nav>
+    <hr color-"gray"/>
+    <div class="container">
+        <main class="row extra-padding">
+            <aside class="col-sm-2">       
+                <nav id="linksMenu" class="toc sticky-top">
+                    <ul class="nav navbar-nav flex-column">
+                    </ul>
+                </nav>         
+            </aside>
+            <hr class="" />
+            <article class="col-sm-10 mb-5">
+                <h1 id="practice-lab-refreshing-windows-with-autopilot-reset-and-self-deploying-mode">Practice Lab: Refreshing Windows with Autopilot Reset and Self-Deploying mode</h1>
+
+<h2 id="summary">Summary</h2>
+
+<p>In this lab you will learn how perform a remote Autopilot reset.</p>
+
+<h3 id="prerequisites">Prerequisites</h3>
+
+<p>To following lab(s) must be completed before this lab:</p>
+
+<ul>
+  <li>
+    <p>0101-Managing Identities in Azure AD</p>
+  </li>
+  <li>
+    <p>0102-Synchronizing identities by using Entra Connect</p>
+  </li>
+  <li>
+    <p>0701-Deploying Windows 11 using Microsoft Deployment Toolkit</p>
+  </li>
+  <li>
+    <p>0801-Deploying Windows 11 with Autopilot</p>
+  </li>
+</ul>
+
+<h3 id="scenario">Scenario</h3>
+
+<p>SEA-WS4 has been deployed by using Windows Autopilot. You need to test out another provisioning scenario that involves Autopilot Reset. You will create a new deployment profile configured with the Windows Autopilot Self-Deploying mode.</p>
+
+<h3 id="task-1-configure-a--self-deploying-windows-autopilot-deployment-profile">Task 1: Configure a  Self-Deploying Windows Autopilot deployment profile</h3>
+
+<ol>
+  <li>
+    <p>Switch to <strong>SEA-SVR1</strong>.</p>
+  </li>
+  <li>
+    <p>In <strong>Microsoft Edge</strong>, open a new tab and navigate to <strong>https://intune.microsoft.com</strong>. If prompted, sign in with your <strong><code>Admin@yourtenant.onmicrosoft.com</code></strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Microsoft Intune admin center</strong>, select <strong>Devices</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Device onboarding</strong> section, select <strong>Enrollment</strong>.</p>
+  </li>
+  <li>
+    <p>On the Windows enrollment tab, scroll down to <strong>Windows Autopilot</strong> in the details pane, and then select <strong>Deployment Profiles</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Windows AutoPilot deployment profiles</strong> blade, select <strong>Contoso Profile 1</strong> and then select <strong>Properties</strong>.</p>
+  </li>
+  <li>
+    <p>Scroll down to <strong>Assignments</strong> and then select <strong>Edit</strong>.</p>
+  </li>
+  <li>
+    <p>Next to <strong>IT Devices</strong>, select <strong>Remove</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Review and save</strong> and then select <strong>Save</strong>.</p>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>Close the **Contoso Profile 1</td>
+          <td>Properties** page.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>On the <strong>Windows AutoPilot deployment profiles</strong> blade, select <strong>Create profile</strong> and then select <strong>Windows PC</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Basics</strong> tab, in the <strong>Name</strong> text box, type <strong>Contoso profile 2</strong>.</p>
+  </li>
+  <li>
+    <p>For <strong>Convert all targeted devices to Autopilot</strong> select <strong>No</strong>, and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Out-of-box experience (OOBE)</strong> tab, ensure that the <strong>Deployment mode</strong> is set to <strong>Self-Deploying</strong>.</p>
+  </li>
+  <li>Ensure that the following options are set:</li>
+</ol>
+
+<ul>
+  <li>Language (Region): <strong>Operating system default</strong></li>
+  <li>Automatically configure keyboard: <strong>Yes</strong></li>
+  <li>Apply device name template: <strong>Yes</strong></li>
+  <li>Enter a name: <strong>Contoso-%RAND:2%</strong></li>
+</ul>
+
+<ol>
+  <li>
+    <p>Select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Assignments</strong> tab, under <strong>Included groups</strong> select <strong>Add groups</strong>.</p>
+  </li>
+  <li>
+    <p>Select the <strong>IT Devices</strong> group and click <strong>Select</strong>. Select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Review + create</strong> blade, review the information and then select <strong>Create</strong>.</p>
+  </li>
+</ol>
+
+<h3 id="task-2-perform-an-autopilot-reset">Task 2: Perform an Autopilot reset</h3>
+
+<ol>
+  <li>
+    <p>In the <strong>Microsoft Intune admin center</strong>, select <strong>Devices</strong> and then select <strong>All devices</strong>.</p>
+  </li>
+  <li>
+    <p>Select the Autopilot PC (Begins with the name DESKTOP).</p>
+  </li>
+  <li>
+    <p>In the menu bar, select the ellipsis and then select <strong>Autopilot Reset</strong>.</p>
+  </li>
+  <li>
+    <p>At the message prompt, select <strong>Yes</strong>.</p>
+  </li>
+  <li>
+    <p>Switch to <strong>SEA-WS3</strong>.</p>
+
+    <blockquote>
+      <p>Note: SEA-WS3 should still be running from the previous lab.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Restart <strong>SEA-WS3</strong>.</p>
+
+    <blockquote>
+      <p>Note: This process can take 30-45 minutes and will reboot several times during the process.</p>
+    </blockquote>
+  </li>
+</ol>
+
+<h3 id="task-3-verify-autopilot-deployment">Task 3: Verify Autopilot deployment</h3>
+
+<ol>
+  <li>
+    <p>At the sign-in page, enter <strong><code>Aaron@yourtenant.onmicrosoft.com</code></strong> with the Password of <strong>Pa55w.rd1234!</strong>.</p>
+  </li>
+  <li>
+    <p>At the <strong>Use Windows Hello with your account</strong>, select <strong>OK</strong>.</p>
+  </li>
+  <li>
+    <p>At the <strong>Verify your identity</strong> page, select the Text verification method.</p>
+  </li>
+  <li>
+    <p>At the <strong>Enter code</strong> page, enter the code that has been texted to your mobile device and then select <strong>Verify</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Setup up a PIN</strong> dialog box, in the <strong>New PIN</strong> and <strong>Confirm PIN</strong> fields, enter <strong>102938</strong>, and then select <strong>OK</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>All set!</strong> page, select <strong>OK</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Start</strong> and select <strong>Settings</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Accounts</strong>, and then select <strong>Access work or school</strong>. Verify the device is connected to Contoso’s Azure AD.</p>
+  </li>
+  <li>
+    <p>Select <strong>Connected to Contoso’s Azure AD</strong> and select <strong>Info</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Managed by Contoso</strong> page, scroll down and then select <strong>Sync</strong>.</p>
+  </li>
+  <li>
+    <p>On <strong>SEA-WS3</strong>, close the <strong>Settings</strong> window.</p>
+
+    <p><strong>Results</strong>: After completing this exercise, you will have provisioned a Windows device with Autopilot Reset using Self-Deploying mode.</p>
+  </li>
+</ol>
+
+<p><strong>END OF LAB</strong></p>
+
+            </article>
+        </main>
+    </div>
+    <footer class="fixed-bottom d-print-none">
+        <nav class="navbar navbar-light bg-light d-flex justify-content-around">
+            <span class="navbar-text">
+                &copy; 2025 Microsoft &nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=521839">Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=2259814">Consumer Health Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkID=206977">Terms of Use </a>&nbsp;|&nbsp;
+                  <a href="https://www.microsoft.com/trademarks">Trademarks </a>&nbsp;|&nbsp;
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <a href="" target="_blank" class="ml-2">
+                    Source
+                </a>
+            </span>
+        </nav>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/js/script.js?v="></script>
+</body>
+
+
+</html>

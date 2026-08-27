@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>
+        Practice Lab 0601: Configuring Endpoint security using Intune | 
+        MD-102T00-Microsoft-365-Endpoint-Administrator
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/css/style.css?v=">
+</head>
+<body data-spy="scroll" data-target="#linksMenu">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gray">
+        <div class="container d-flex justify-content-between">
+            <!-- <img src="https://github.com/MicrosoftLearning/Jekyll-Theme/raw/master/assets/microsoft-gray.png" alt="Microsoft logo" style="width:100px;height:21px;"/>-->
+            <span class="my-1 title text-black">MD-102T00-Microsoft-365-Endpoint-Administrator</span>
+            <span class="ml-2">
+                <a href="/MD-102T00-Microsoft-365-Endpoint-Administrator/" class="d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+                    </svg>
+                    &nbsp;Home
+                </a>
+            </span>
+        </div>
+        <!--
+        <div class="container d-flex justify-content-between">
+            <a class="my-1 title text-azure text-uppercase" href="">
+                MD-102T00-Microsoft-365-Endpoint-Administrator
+            </a>
+            <a href="" target="_blank" class="btn btn-sm btn-outline-secondary text-light">
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <span class="ml-2">GitHub</span>
+            </a>
+        </div>
+        -->
+    </nav>
+    <hr color-"gray"/>
+    <div class="container">
+        <main class="row extra-padding">
+            <aside class="col-sm-2">       
+                <nav id="linksMenu" class="toc sticky-top">
+                    <ul class="nav navbar-nav flex-column">
+                    </ul>
+                </nav>         
+            </aside>
+            <hr class="" />
+            <article class="col-sm-10 mb-5">
+                <h1 id="practice-lab-0601-configuring-endpoint-security-using-intune">Practice Lab 0601: Configuring Endpoint security using Intune</h1>
+
+<h2 id="summary">Summary</h2>
+
+<p>In this lab, you will create a policy to configure Microsoft Defender for managed devices in Intune.</p>
+
+<h3 id="prerequisites">Prerequisites</h3>
+
+<p>The following lab(s) must be completed before this lab:</p>
+
+<ul>
+  <li>
+    <p>0203-Manage Device Enrollment into Intune</p>
+  </li>
+  <li>
+    <p>0204-Enrolling devices into Intune</p>
+  </li>
+  <li>
+    <p>0301-Creating and Deploying Configuration Profiles</p>
+
+    <p>Note: You will also need a mobile phone that can receive text messages used to secure Windows Hello sign in authentication to Entra ID.</p>
+  </li>
+</ul>
+
+<h3 id="scenario">Scenario</h3>
+
+<p>You’ve been asked to ensure that the Contoso Developers Group have Microsoft Defender correctly configured. It’s been requested that:</p>
+<ul>
+  <li>Tamper protection be enabled</li>
+  <li>Hide the Account protection, App and browser control, Device security, Device performance and health, and Family options areas in the Windows Security app</li>
+  <li>Company name and phone number must be added.</li>
+  <li>Real-time protection, Remediation, and scan settings are also to be configured.</li>
+</ul>
+
+<p>Settings will be verified by testing on an enrolled device, SEA-WS1 and a non-enrolled device, SEA-CL1.</p>
+
+<h3 id="task-1-configure-windows-security-experience-in-intune">Task 1: Configure Windows Security Experience in Intune</h3>
+
+<ol>
+  <li>
+    <p>Sign in to <strong>SEA-SVR1</strong> as <strong>Contoso\Administrator</strong> with the password <strong>Pa55w.rd</strong>.</p>
+  </li>
+  <li>
+    <p>On the taskbar, select <strong>Microsoft Edge</strong>.</p>
+  </li>
+  <li>
+    <p>In Microsoft Edge, type <strong>https://intune.microsoft.com</strong> in the  address bar, and then press <strong>Enter</strong>.</p>
+  </li>
+  <li>
+    <p>Sign in as as <strong><code>admin@yourtenant.onmicrosoft.com</code></strong> with the default tenant password.</p>
+  </li>
+  <li>
+    <p>From the navigation pane select <strong>Endpoint security</strong>, then select <strong>Antivirus</strong>.</p>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **Endpoint security</td>
+          <td>Antivirus** pane, select <strong>+ Create Policy</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>In the <strong>Create a profile</strong> pane, for <strong>Platform</strong>, select <strong>Windows</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Profile</strong> list, select <strong>Windows Security experience</strong>. Then select <strong>Create</strong>.</p>
+  </li>
+  <li>
+    <p>On the Basics tab, in the <strong>Name</strong> field, enter <strong>Windows Security Settings</strong>. Select <strong>Next</strong>.</p>
+  </li>
+  <li>On the Configuration settings tab, Under <strong>Defender</strong>, configure the following settings:
+    <ul>
+      <li>TamperProtection (Device): <strong>On</strong></li>
+    </ul>
+  </li>
+  <li>Under <strong>Windows Defender Security Center</strong>, configure the following settings:
+    <ul>
+      <li>Disable Account Protection UI: <strong>Enable</strong></li>
+      <li>Disable App Browser UI: <strong>Enable</strong></li>
+      <li>Disable Device Security UI: <strong>Enable</strong></li>
+      <li>Disable Family UI: <strong>Enable</strong></li>
+      <li>Disable Health UI: <strong>Enable</strong></li>
+      <li>Enable Customized Toasts: <strong>Enable</strong></li>
+    </ul>
+  </li>
+  <li>
+    <p>Under <strong>Company name</strong>, select <strong>Configured</strong>, and then enter <strong>Contoso IT</strong>.</p>
+  </li>
+  <li>
+    <p>For <strong>Phone</strong>, select <strong>Configured</strong> and then enter <strong>555-1234</strong> and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Scope tags</strong> page, select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Assignments</strong> tab, type <strong>Contoso</strong> in the search box and choose the <strong>Contoso Developer Devices</strong> group, and then select <strong>Next</strong>.</p>
+  </li>
+  <li>On the <strong>Review + create</strong> tab, review the information and select <strong>Save</strong>.</li>
+</ol>
+
+<h3 id="task-2-configure-microsoft-defender-antivirus-policy-in-intune">Task 2: Configure Microsoft Defender Antivirus policy in Intune</h3>
+
+<ol>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **Endpoint security</td>
+          <td>Antivirus** pane, select <strong>Create Policy</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>In the <strong>Create a profile</strong> pane, for <strong>Platform</strong>, select <strong>Windows</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Profile</strong> list, select <strong>Microsoft Defender Antivirus</strong>, then select <strong>Create</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Basics</strong> tab, in the <strong>Name</strong> field, enter <strong>Microsoft Defender Antivirus Settings</strong>. Select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Configuration settings</strong> tab, configure the following settings:</p>
+
+    <ul>
+      <li>Allow scanning of all downloaded files and attachments: <strong>Allowed</strong></li>
+      <li>Allow Realtime Monitoring: <strong>Allowed</strong></li>
+      <li>Check For Signatures Before Running Scan: <strong>Enabled</strong></li>
+      <li>Days to Retain Cleaned Malware: <strong>60</strong></li>
+      <li>Schedule Quick Scan Time: <strong>60</strong> (represents 1:00AM)</li>
+      <li>Submit samples consent: <strong>Send safe samples automatically</strong></li>
+    </ul>
+  </li>
+  <li>
+    <p>On the <strong>Configuration settings</strong> tab, select <strong>Next</strong> twice.</p>
+  </li>
+  <li>
+    <p>On the <strong>Assignments</strong> tab, type <strong>Contoso</strong> and then select the <strong>Contoso Developer Devices</strong> group, and then choose select <strong>Next</strong>.</p>
+  </li>
+  <li>On the <strong>Review + create</strong> tab, review the information and select <strong>Save</strong>.</li>
+</ol>
+
+<h3 id="task-3-sync-the-managed-devices">Task 3: Sync the managed devices</h3>
+
+<ol>
+  <li>
+    <p>In the Microsoft Intune admin center, select <strong>Devices</strong> and then select <strong>All devices</strong>.</p>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **Devices</td>
+          <td>All devices** pane, select <strong>SEA-WS1</strong> and then on the <strong>SEA-WS1</strong> blade, select <strong>Sync</strong> on the toolbar, and then select <strong>Yes</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <blockquote>
+      <p>Wait for 3-4 minutes for the sync to complete.</p>
+    </blockquote>
+  </li>
+  <li>Close Microsoft Edge.</li>
+</ol>
+
+<h3 id="task-4-verify-the-configuration">Task 4: Verify the configuration</h3>
+
+<ol>
+  <li>
+    <p>Switch to <strong>SEA-CL1</strong>.</p>
+  </li>
+  <li>
+    <p>If necessary, sign in as <strong>Contoso\Administrator</strong> with the password of <strong>Pa55w.rd</strong>.</p>
+  </li>
+  <li>
+    <p>On <strong>SEA-CL1</strong>, select <strong>Start</strong>, type <strong>Windows Security</strong>, and then under the Windows Security icon select <strong>Open</strong>.</p>
+
+    <blockquote>
+      <p>Notice that all security options are displayed. This is because SEA-CL1 is not enrolled to Intune.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Close <strong>Windows Security</strong> and sign out of SEA-CL1.</p>
+  </li>
+  <li>
+    <p>Switch to <strong>SEA-WS1</strong>, and sign in as as <strong>Aaron Nicholls</strong> with the PIN: <strong>102938</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Start</strong>, type <strong>Windows Security</strong>, and then under the Windows Security icon select <strong>Open</strong>.</p>
+
+    <blockquote>
+      <p>Notice that all of the restricted areas as configured in the Intune policy are not displayed. SEA-WS1 is enrolled in Intune, which has applied the security settings.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Close <strong>Windows Security</strong> and sign out of <strong>SEA-WS1</strong>.</p>
+  </li>
+</ol>
+
+<p><strong>Results</strong>: After completing this exercise, you will have successfully created and applied a policy to configure Microsoft Defender for managed devices in Intune.</p>
+
+<p><strong>END OF LAB</strong></p>
+
+            </article>
+        </main>
+    </div>
+    <footer class="fixed-bottom d-print-none">
+        <nav class="navbar navbar-light bg-light d-flex justify-content-around">
+            <span class="navbar-text">
+                &copy; 2025 Microsoft &nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=521839">Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=2259814">Consumer Health Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkID=206977">Terms of Use </a>&nbsp;|&nbsp;
+                  <a href="https://www.microsoft.com/trademarks">Trademarks </a>&nbsp;|&nbsp;
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <a href="" target="_blank" class="ml-2">
+                    Source
+                </a>
+            </span>
+        </nav>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/js/script.js?v="></script>
+</body>
+
+
+</html>

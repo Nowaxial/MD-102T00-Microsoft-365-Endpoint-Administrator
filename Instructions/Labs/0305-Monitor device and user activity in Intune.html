@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>
+        Practice Lab 0305: Monitor device and user activity in Intune | 
+        MD-102T00-Microsoft-365-Endpoint-Administrator
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/css/style.css?v=">
+</head>
+<body data-spy="scroll" data-target="#linksMenu">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gray">
+        <div class="container d-flex justify-content-between">
+            <!-- <img src="https://github.com/MicrosoftLearning/Jekyll-Theme/raw/master/assets/microsoft-gray.png" alt="Microsoft logo" style="width:100px;height:21px;"/>-->
+            <span class="my-1 title text-black">MD-102T00-Microsoft-365-Endpoint-Administrator</span>
+            <span class="ml-2">
+                <a href="/MD-102T00-Microsoft-365-Endpoint-Administrator/" class="d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+                    </svg>
+                    &nbsp;Home
+                </a>
+            </span>
+        </div>
+        <!--
+        <div class="container d-flex justify-content-between">
+            <a class="my-1 title text-azure text-uppercase" href="">
+                MD-102T00-Microsoft-365-Endpoint-Administrator
+            </a>
+            <a href="" target="_blank" class="btn btn-sm btn-outline-secondary text-light">
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <span class="ml-2">GitHub</span>
+            </a>
+        </div>
+        -->
+    </nav>
+    <hr color-"gray"/>
+    <div class="container">
+        <main class="row extra-padding">
+            <aside class="col-sm-2">       
+                <nav id="linksMenu" class="toc sticky-top">
+                    <ul class="nav navbar-nav flex-column">
+                    </ul>
+                </nav>         
+            </aside>
+            <hr class="" />
+            <article class="col-sm-10 mb-5">
+                <h1 id="practice-lab-0305-monitor-device-and-user-activity-in-intune">Practice Lab 0305: Monitor device and user activity in Intune</h1>
+
+<h2 id="summary">Summary</h2>
+
+<p>In this lab, you will monitor user Sign-in activity, Audit logs, and device information.</p>
+
+<h3 id="prerequisites">Prerequisites</h3>
+
+<p>The following lab(s) must be completed before this lab:</p>
+
+<ul>
+  <li>
+    <p>0101-Managing Identities in Entra ID</p>
+  </li>
+  <li>
+    <p>0102-Synchronizing identities by using Entra Connect</p>
+  </li>
+  <li>
+    <p>0203-Manage Device Enrollment into Intune</p>
+  </li>
+  <li>
+    <p>0204-Enrolling devices into Intune</p>
+  </li>
+  <li>
+    <p>0301-Creating and Deploying Configuration Policies</p>
+
+    <blockquote>
+      <p>Note: You will also need a mobile phone that can receive text messages used to secure Windows Hello sign in authentication to Entra ID.</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h3 id="scenario">Scenario</h3>
+
+<p>You need to review Aaron Nicholls sign-in activity and general information provided by the Audit logs.  You also need to verify the hardware on SEA-WS1 and confirm the configuration policy assigned to this device is successfully applied.</p>
+
+<h3 id="task-1-monitor-user-activity">Task 1: Monitor user activity</h3>
+
+<ol>
+  <li>
+    <p>On <strong>SEA-SVR1</strong>, on the taskbar, select <strong>Microsoft Edge</strong>.</p>
+  </li>
+  <li>
+    <p>In Microsoft Edge, type <strong>https://intune.microsoft.com</strong> in the address bar, and then press <strong>Enter</strong>.</p>
+  </li>
+  <li>
+    <p>Sign in as <strong><code>admin@yourtenant.onmicrosoft.com</code></strong> with the tenant Admin password.</p>
+  </li>
+  <li>
+    <p>On the <strong>Microsoft Intune admin center</strong> page, select <strong>Users</strong>.</p>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **Users</td>
+          <td>All users** pane, select <strong>Sign-in logs</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>In the Details pane, user sign-in activity is listed. Select the first entry where the <strong>User</strong> column displays <strong>Aaron Nicholls</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Details</strong> pane, Aaron Nicholls’ sign-in details are displayed.</p>
+  </li>
+  <li>
+    <p>Select each of the main pages, including <strong>Basic info</strong>, <strong>Location</strong>, <strong>Device info</strong>, <strong>Authentication Details</strong>, and <strong>Conditional Access</strong>. Scroll to examine information on each page and then select <strong>X</strong> in the top right hand corner to close out of the <strong>Activity Details</strong> page.</p>
+  </li>
+  <li>
+    <p>In the Users navigation pane, select <strong>Audit logs</strong>.</p>
+  </li>
+  <li>In the details pane, audit information is displayed about administrative changes to users. Examine the information by selecting the various entries.</li>
+</ol>
+
+<h3 id="task-2-monitor-device-information">Task 2: Monitor device information</h3>
+
+<ol>
+  <li>
+    <p>In the Microsoft Intune admin center, from the navigation pane, select <strong>Devices</strong>.</p>
+  </li>
+  <li>
+    <p>In the Devices navigation pane, select <strong>Overview</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>All devices</strong>, and in the details pane, select <strong>SEA-WS1</strong>. Information about the device such as name, Primary user, and operating system is displayed.</p>
+  </li>
+  <li>
+    <p>In the SEA-WS1 navigation pane, select <strong>Hardware</strong> and examine the hardware inventory.</p>
+  </li>
+  <li>
+    <p>In the SEA-WS1 navigation pane, select <strong>Discovered apps</strong> and examine the app inventory.</p>
+  </li>
+  <li>
+    <p>In the SEA-WS1 navigation pane, select <strong>Device configuration</strong> and in the details pane take note of the Device configuration policies assigned to the device. The <strong>State</strong> column should display <strong>Succeeded</strong>, which means that the profiles were applied successfully to the device.</p>
+  </li>
+  <li>
+    <p>In the details pane, select <strong>Contoso Developer – standard</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Contoso Developer – standard</strong> blade, take note of each setting you configured in the policy.</p>
+
+    <blockquote>
+      <p>The <strong>State</strong> should display <strong>Succeeded</strong> next to all of them.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>In the Microsoft Intune admin center, from the navigation pane, select <strong>Home</strong>.</p>
+  </li>
+  <li>
+    <p>Close Microsoft Edge.</p>
+  </li>
+</ol>
+
+<p><strong>Results</strong>: After completing this exercise, you will have successfully monitored user Sign-in activity, Audit logs, and device information.</p>
+
+<p><strong>END OF LAB</strong></p>
+
+            </article>
+        </main>
+    </div>
+    <footer class="fixed-bottom d-print-none">
+        <nav class="navbar navbar-light bg-light d-flex justify-content-around">
+            <span class="navbar-text">
+                &copy; 2025 Microsoft &nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=521839">Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=2259814">Consumer Health Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkID=206977">Terms of Use </a>&nbsp;|&nbsp;
+                  <a href="https://www.microsoft.com/trademarks">Trademarks </a>&nbsp;|&nbsp;
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <a href="" target="_blank" class="ml-2">
+                    Source
+                </a>
+            </span>
+        </nav>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/js/script.js?v="></script>
+</body>
+
+
+</html>

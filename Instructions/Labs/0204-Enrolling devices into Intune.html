@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>
+        Practice Lab 0204: Enrolling devices into Microsoft Intune | 
+        MD-102T00-Microsoft-365-Endpoint-Administrator
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/css/style.css?v=">
+</head>
+<body data-spy="scroll" data-target="#linksMenu">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gray">
+        <div class="container d-flex justify-content-between">
+            <!-- <img src="https://github.com/MicrosoftLearning/Jekyll-Theme/raw/master/assets/microsoft-gray.png" alt="Microsoft logo" style="width:100px;height:21px;"/>-->
+            <span class="my-1 title text-black">MD-102T00-Microsoft-365-Endpoint-Administrator</span>
+            <span class="ml-2">
+                <a href="/MD-102T00-Microsoft-365-Endpoint-Administrator/" class="d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+                    </svg>
+                    &nbsp;Home
+                </a>
+            </span>
+        </div>
+        <!--
+        <div class="container d-flex justify-content-between">
+            <a class="my-1 title text-azure text-uppercase" href="">
+                MD-102T00-Microsoft-365-Endpoint-Administrator
+            </a>
+            <a href="" target="_blank" class="btn btn-sm btn-outline-secondary text-light">
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <span class="ml-2">GitHub</span>
+            </a>
+        </div>
+        -->
+    </nav>
+    <hr color-"gray"/>
+    <div class="container">
+        <main class="row extra-padding">
+            <aside class="col-sm-2">       
+                <nav id="linksMenu" class="toc sticky-top">
+                    <ul class="nav navbar-nav flex-column">
+                    </ul>
+                </nav>         
+            </aside>
+            <hr class="" />
+            <article class="col-sm-10 mb-5">
+                <h1 id="practice-lab-0204-enrolling-devices-into-microsoft-intune">Practice Lab 0204: Enrolling devices into Microsoft Intune</h1>
+
+<h2 id="summary">Summary</h2>
+
+<p>In this lab, you will join a Windows client to Entra ID and verify that the device has automatically enrolled in to Microsoft Intune.</p>
+
+<h3 id="prerequisites">Prerequisites</h3>
+
+<p>The following lab(s) must be completed before this lab:</p>
+
+<ul>
+  <li>
+    <p>0101-Managing Identities in Entra ID</p>
+  </li>
+  <li>
+    <p>0102-Synchronizing identities by using Entra Connect</p>
+  </li>
+  <li>
+    <p>0203-Manage Device Enrollment into Intune</p>
+
+    <blockquote>
+      <p>Note: You will also need a mobile phone that can receive text messages used to secure Windows Hello sign in authentication to Entra ID.</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h3 id="scenario">Scenario</h3>
+
+<p>You have assigned Aaron Nicholls appropriate licenses and will now test the process of joining a Windows device to Entra ID and have it automatically enroll in Microsoft Intune.</p>
+
+<h3 id="task-1-automatically-enroll-a-windows-device-to-microsoft-intune">Task 1: Automatically enroll a Windows device to Microsoft Intune</h3>
+
+<ol>
+  <li>
+    <p>Sign in to <strong>SEA-WS1</strong> as <strong>Admin</strong> with the password of <strong>Pa55w.rd</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Start</strong> and then select <strong>Settings</strong>.</p>
+  </li>
+  <li>
+    <p>In <strong>Settings</strong>, select <strong>Accounts</strong>.</p>
+  </li>
+  <li>
+    <p>On the Accounts page, select <strong>Access work or school</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Access work or school</strong> page, select <strong>Connect</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Microsoft account</strong> window, select <strong>Join this device to Microsoft Entra ID</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Sign in</strong> page, type <strong><code>Aaron@yourtenant.onmicrosoft.com</code></strong> and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Enter password</strong> page, enter <strong>Pa55w.rd</strong> and then select <strong>Sign in</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Make sure this is your organization</strong> dialog box, select <strong>Join</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>You’re all set!</strong> page, read the information and then select <strong>Done</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Access work or school</strong> section, verify that <strong>Connected to Contoso’s Azure AD</strong> displays.</p>
+  </li>
+  <li>
+    <p>Select <strong>Connected to Contoso’s Azure AD</strong> and then select <strong>Info</strong>.</p>
+  </li>
+  <li>
+    <p>Take note of the information regarding the areas managed by Contoso, scroll down, and then select <strong>Sync</strong>. This will force a Device sync with Intune.</p>
+  </li>
+  <li>
+    <p>Close the <strong>Settings</strong> window.</p>
+  </li>
+</ol>
+
+<h3 id="task-2-validate-device-enrollment-into-entra-id-and-intune">Task 2: Validate device enrollment into Entra ID and Intune</h3>
+
+<ol>
+  <li>
+    <p>On the <strong>SEA-WS1</strong> taskbar, select <strong>Start</strong>, type <strong>cert</strong>, and select <strong>Manage computer certificates</strong>. At the <strong>User Account Control</strong>, select <strong>Yes</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Certificates</strong> console, in the navigation pane, expand <strong>Personal</strong> and select the <strong>Certificates</strong> node. Verify that the following certificates are listed in the details pane:</p>
+  </li>
+</ol>
+
+<ul>
+  <li>Microsoft Intune MDM Device CA</li>
+  <li>MS-Organization-Access</li>
+  <li>
+    <p>MS-Organization-P2P-Access [2026]</p>
+
+    <p>This indicates that the device is Entra joined and Intune enrolled.</p>
+  </li>
+</ul>
+
+<ol>
+  <li>
+    <p>Close the Certificates window.</p>
+  </li>
+  <li>
+    <p>Right-click <strong>Start</strong>, and then select <strong>Windows Terminal</strong>.</p>
+  </li>
+  <li>
+    <p>In the PowerShell console, type the following and press <strong>Enter</strong>:</p>
+
+    <pre><code class="language-powershell">dsregcmd /status
+</code></pre>
+  </li>
+  <li>
+    <p>In the output under <strong>Device State</strong>, verify that <strong>AzureAdJoined : YES</strong> is displayed. This indicates that the device is Azure AD joined.</p>
+  </li>
+  <li>
+    <p>In the output under <strong>Tenant Details</strong>, verify that the following three entries exist:</p>
+
+    <pre><code class="language-cmd">mdmUrl : https://enrollment.manage.microsoft.com/enrollmentserver/discovery.svc
+mdmTouUrl : https://portal.manage.microsoft.com/TermsofUse.aspx
+mdmComplianceUrl : https://portal.manage.microsoft.com/?portalAction=Compliance
+</code></pre>
+
+    <blockquote>
+      <p>Note: These entries indicate that the device is enrolled in Intune.</p>
+    </blockquote>
+  </li>
+</ol>
+
+<h3 id="task-3-sign-in-as-an-entra-user">Task 3: Sign in as an Entra user</h3>
+
+<ol>
+  <li>
+    <p>Sign out of <strong>SEA-WS1</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Other user</strong>, and sign in as <strong><code>Aaron@yourtenant.onmicrosoft.com</code></strong> with the password <strong>Pa55w.rd</strong>.</p>
+  </li>
+  <li>
+    <p>At the <strong>Use Windows Hello with your account</strong> page, select <strong>OK</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Let’s keep your account secure</strong> page, select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Install Microsoft Authenticator</strong> page, select <strong>Set up a different way to sign in</strong>. <strong>Note</strong> Ensure you select the correct link.</p>
+  </li>
+  <li>
+    <p>On the <strong>Add a sign-in method</strong> dialog box, select <strong>Phone</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Add your phone number</strong> page, select your <strong>Country code</strong> and in the <strong>Phone number</strong> field, enter your mobile phone number which is able to receive text messages, then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>When you receive the verification code, enter the code on the <strong>Verify your phone number</strong> page and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Phone number added</strong> page, select <strong>Done</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Set up a PIN</strong> page, in the <strong>New PIN</strong> and <strong>Confirm PIN</strong> boxes, type <strong>102938</strong> and then select <strong>OK</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>All set!</strong> page, select <strong>OK</strong>.</p>
+  </li>
+  <li>
+    <p>Sign out of <strong>SEA-WS1</strong>.</p>
+  </li>
+</ol>
+
+<h3 id="task-4-verifying-device-enrollment-in-the-intune-console">Task 4: Verifying device enrollment in the Intune console</h3>
+
+<ol>
+  <li>
+    <p>Switch to <strong>SEA-SVR1</strong> as <strong>Contoso\Administrator</strong> with the password of <strong>Pa55w.rd</strong>.</p>
+  </li>
+  <li>
+    <p>In Microsoft Edge, type <strong>https://intune.microsoft.com</strong> in the address bar, and then press <strong>Enter</strong>. Sign in with your Tenant administrator account.</p>
+  </li>
+  <li>
+    <p>In the navigation pane, select <strong>Devices</strong>.</p>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **Devices</td>
+          <td>Overview** blade under <strong>Manage devices by platform</strong>, verify that <strong>1</strong> is displayed under <strong>Windows</strong>. It may take a while to display.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **Devices</td>
+          <td>Overview** blade, select <strong>All devices</strong> and verify that <strong>SEA-WS1</strong> is listed.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>Note that for SEA-WS1, the <strong>Managed by</strong> column displays <strong>Intune</strong> and the <strong>Ownership</strong> column displays <strong>Corporate</strong>.</p>
+
+    <p><em>Note: This view lists devices that are enrolled to Intune. Remember that you configured automatic enrollment between Entra and Intune, and because of that, any device that is joined or registered to Entra is automatically enrolled to Intune. Any devices joined prior to setting up enrollment are only joined or registered to Entra, but not enrolled in Intune.</em></p>
+  </li>
+  <li>
+    <p>Open a new tab in <strong>Microsoft Edge</strong>, in the address bar type <strong>https://entra.microsoft.com</strong>, and then press <strong>Enter</strong>.</p>
+  </li>
+  <li>
+    <p>In the Microsoft Entra admin center, in the navigation pane, select <strong>Devices</strong>, then select <strong>All devices</strong>.</p>
+
+    <blockquote>
+      <p>Take note of SEA-WS1. Notice that the Join Type column displays <strong>Microsoft Entra joined</strong> and the MDM column displays <strong>Microsoft Intune</strong>.</p>
+    </blockquote>
+  </li>
+  <li>Close all open Windows.</li>
+</ol>
+
+<p><strong>Results</strong>: After completing this exercise, you will have successfully joined a Windows client to Entra ID and verified that the device has automatically enrolled in to Microsoft Intune.</p>
+
+<p><strong>END OF LAB</strong></p>
+
+            </article>
+        </main>
+    </div>
+    <footer class="fixed-bottom d-print-none">
+        <nav class="navbar navbar-light bg-light d-flex justify-content-around">
+            <span class="navbar-text">
+                &copy; 2025 Microsoft &nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=521839">Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=2259814">Consumer Health Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkID=206977">Terms of Use </a>&nbsp;|&nbsp;
+                  <a href="https://www.microsoft.com/trademarks">Trademarks </a>&nbsp;|&nbsp;
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <a href="" target="_blank" class="ml-2">
+                    Source
+                </a>
+            </span>
+        </nav>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/js/script.js?v="></script>
+</body>
+
+
+</html>

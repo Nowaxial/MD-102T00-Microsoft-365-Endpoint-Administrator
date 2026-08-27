@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>
+        Practice Lab 0801: Deploying Windows with Autopilot | 
+        MD-102T00-Microsoft-365-Endpoint-Administrator
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/css/style.css?v=">
+</head>
+<body data-spy="scroll" data-target="#linksMenu">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gray">
+        <div class="container d-flex justify-content-between">
+            <!-- <img src="https://github.com/MicrosoftLearning/Jekyll-Theme/raw/master/assets/microsoft-gray.png" alt="Microsoft logo" style="width:100px;height:21px;"/>-->
+            <span class="my-1 title text-black">MD-102T00-Microsoft-365-Endpoint-Administrator</span>
+            <span class="ml-2">
+                <a href="/MD-102T00-Microsoft-365-Endpoint-Administrator/" class="d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+                    </svg>
+                    &nbsp;Home
+                </a>
+            </span>
+        </div>
+        <!--
+        <div class="container d-flex justify-content-between">
+            <a class="my-1 title text-azure text-uppercase" href="">
+                MD-102T00-Microsoft-365-Endpoint-Administrator
+            </a>
+            <a href="" target="_blank" class="btn btn-sm btn-outline-secondary text-light">
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <span class="ml-2">GitHub</span>
+            </a>
+        </div>
+        -->
+    </nav>
+    <hr color-"gray"/>
+    <div class="container">
+        <main class="row extra-padding">
+            <aside class="col-sm-2">       
+                <nav id="linksMenu" class="toc sticky-top">
+                    <ul class="nav navbar-nav flex-column">
+                    </ul>
+                </nav>         
+            </aside>
+            <hr class="" />
+            <article class="col-sm-10 mb-5">
+                <h1 id="practice-lab-0801-deploying-windows-with-autopilot">Practice Lab 0801: Deploying Windows with Autopilot</h1>
+
+<h2 id="summary">Summary</h2>
+
+<p>In this lab you will learn how to provision a Windows 11 device with Autopilot using a User-driven deployment profile.</p>
+
+<h3 id="prerequisites">Prerequisites</h3>
+
+<p>The following lab(s) must be completed before this lab:</p>
+
+<ul>
+  <li>
+    <p>0101-Managing Identities in Entra ID</p>
+  </li>
+  <li>
+    <p>0102-Synchronizing identities by using Entra Connect</p>
+  </li>
+</ul>
+
+<h3 id="scenario">Scenario</h3>
+
+<p>Contoso IT is planning to roll out a deployment of new Windows 11 devices using Autopilot. The devices have a default installation of Windows 11. Users should be able to connect the device, turn it on, and answer minimal questions during the OOBE, using their Entra ID credentials to sign in. The process should automatically join the device to Entra ID and enroll the device into Intune. You have been asked to configure and test the experience.</p>
+
+<h3 id="task-1-create-group-in-entra-id">Task 1: Create group in Entra ID</h3>
+
+<ol>
+  <li>
+    <p>Sign in to <strong>SEA-SVR1</strong> as <strong>Contoso\Administrator</strong> with the password <strong>Pa55w.rd</strong> and close <strong>Server Manager</strong>.</p>
+  </li>
+  <li>
+    <p>On the taskbar, select <strong>Microsoft Edge</strong>.</p>
+  </li>
+  <li>
+    <p>In Microsoft Edge, in the address bar, type <strong>https://entra.microsoft.com</strong>, and then press <strong>Enter</strong>. If prompted, sign in with your <strong><code>Admin@yourtenant.onmicrosoft.com</code></strong> and the default tenant password.</p>
+  </li>
+  <li>
+    <p>In the navigation pane, Expand <strong>Entra ID</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Groups</strong> and then select <strong>All groups</strong>.</p>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>In the **Groups</td>
+          <td>All groups** blade, select <strong>New group</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>In the <strong>New Group</strong> blade, in the <strong>Group type</strong> list, select <strong>Security</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Group name</strong> box, type <strong>IT Devices</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Group description</strong> box, type <strong>IT Department Devices</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Membership type</strong> list, select <strong>Dynamic Device</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Add dynamic query</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Dynamic membership rules</strong> blade select <strong>Edit</strong> above the <strong>Rule syntax</strong> box.</p>
+  </li>
+  <li>
+    <p>In the Edit rule syntax text box, add the following simple membership rule and select <strong>OK</strong>.</p>
+
+    <pre><code class="language-cmd">(device.devicePhysicalIDs -any (_ -contains "[ZTDId]"))
+</code></pre>
+  </li>
+  <li>Select <strong>Save</strong> to close <strong>Dynamic membership rules</strong>, and then select <strong>Create</strong> to create the group.</li>
+</ol>
+
+<h3 id="task-2-generate-a-device-specific-comma-separated-value-csv-file">Task 2: Generate a device-specific comma-separated value (CSV) file</h3>
+
+<ol>
+  <li>
+    <p>Switch to <strong>SEA-WS3</strong> and sign in as <strong>Admin</strong> with the password of <strong>Pa55w.rd</strong>.</p>
+  </li>
+  <li>
+    <p>Right-click <strong>Start</strong>, select <strong>Windows Terminal (Admin)</strong>, and then select <strong>Yes</strong> at the <strong>User Account Control</strong> prompt.</p>
+  </li>
+  <li>
+    <p>At the Windows PowerShell command-line prompt, type the following cmdlet, and then press <strong>Enter</strong>:</p>
+
+    <pre><code class="language-powershell"> Install-Script -Name Get-WindowsAutoPilotInfo
+</code></pre>
+  </li>
+  <li>
+    <p>You will receive three prompts. Each time, type <strong>Y</strong>, and then press <strong>Enter</strong>.</p>
+  </li>
+  <li>
+    <p>At the Windows PowerShell command-line prompt, type the following cmdlet, and then press <strong>Enter</strong>:</p>
+
+    <pre><code class="language-powershell"> Set-ExecutionPolicy -ExecutionPolicy RemoteSigned
+</code></pre>
+  </li>
+  <li>
+    <p>At the Windows PowerShell command-line prompt, type the following cmdlet, and then press <strong>Enter</strong>:</p>
+
+    <pre><code class="language-powershell"> Get-WindowsAutoPilotInfo.ps1 -OutputFile C:\Computer.csv
+</code></pre>
+  </li>
+  <li>
+    <p>At the Windows PowerShell command-line prompt, type the following command, press <strong>Enter</strong>, and then review the file content:</p>
+
+    <pre><code class="language-cmd"> type C:\Computer.csv
+</code></pre>
+  </li>
+  <li>
+    <p>Close <strong>Windows Terminal</strong>.</p>
+  </li>
+</ol>
+
+<h3 id="task-3-work-with-a-windows-autopilot-deployment-profile">Task 3: Work with a Windows Autopilot deployment profile</h3>
+
+<ol>
+  <li>
+    <p>On <strong>SEA-WS3</strong>, in the windows taskbar, select <strong>Microsoft Edge</strong>.</p>
+  </li>
+  <li>
+    <p>In <strong>Microsoft Edge</strong>, navigate to <strong>https://intune.microsoft.com</strong>. Sign in with your <strong><code>Admin@yourtenant.onmicrosoft.com</code></strong> account.</p>
+
+    <blockquote>
+      <p>Note: You may be prompted to register for MFA. Follow the same procedures you used earlier in the course to add your phone number.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>In the <strong>Microsoft Intune admin center</strong>, select <strong>Devices</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Device onboarding</strong> section, select <strong>Enrollment</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Windows</strong> tab, scroll down to <strong>Windows Autopilot</strong>, and then select <strong>Devices</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Windows Autopilot devices</strong> blade on the menu bar, select <strong>Import</strong>, select the <strong>folder icon</strong> and then browse to <strong>C:\</strong>, select <strong>Computer.csv</strong>, select <strong>Open</strong>, and then select <strong>Import</strong>.</p>
+
+    <p><em>Note: The import process can take up to 15 minutes, but normally takes around 5 minutes.</em></p>
+
+    <p><em><strong>Important</strong>: After the process is complete, the device may not show automatically. If this is the case, select the <strong>Refresh</strong> button. If the device still does not appear, select the <strong>Sync</strong> button, wait a few minutes, and then select <strong>Refresh</strong>.</em></p>
+  </li>
+  <li>
+    <p>Select <strong>X</strong> to close the <strong>Windows Autopilot devices</strong> blade.</p>
+  </li>
+  <li>
+    <p>On the Windows enrollment blade, in the details pane, select <strong>Deployment Profiles</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Windows AutoPilot deployment profiles</strong> blade, select <strong>+ Create profile</strong> and then select <strong>Windows PC</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Basics</strong> tab, in the <strong>Name</strong> text box, type <strong>Contoso profile1</strong>.</p>
+  </li>
+  <li>
+    <p>For <strong>Convert all targeted devices to Autopilot</strong> select <strong>No</strong>, and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Out-of-box experience (OOBE)</strong> tab, ensure that the <strong>Deployment mode</strong> is set to <strong>User-Driven</strong>.</p>
+  </li>
+  <li>
+    <p>Ensure that <strong>Join to Entra ID as</strong> is set to <strong>Microsoft Entra joined</strong>.</p>
+  </li>
+  <li>
+    <p>Ensure that the following options are set:</p>
+
+    <ul>
+      <li>
+        <p>Microsoft Software License Terms: <strong>Hide</strong></p>
+      </li>
+      <li>
+        <p>Privacy settings: <strong>Hide</strong></p>
+      </li>
+      <li>
+        <p>Hide change account options: <strong>Hide</strong></p>
+      </li>
+      <li>
+        <p>User account type: <strong>Administrator</strong>.</p>
+      </li>
+      <li>
+        <p>Allow pre-provisioned deployment: <strong>No</strong></p>
+      </li>
+      <li>
+        <p>Language (Region): <strong>Operating system default</strong></p>
+      </li>
+      <li>
+        <p>Automatically configure keyboard: <strong>Yes</strong></p>
+      </li>
+      <li>
+        <p>Apply device name template: <strong>No</strong></p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>Select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Assignments</strong> tab, under <strong>Included groups</strong> select <strong>Add groups</strong>.</p>
+  </li>
+  <li>
+    <p>Select the <strong>IT Devices</strong> group and click <strong>Select</strong>. Select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Review + create</strong> tab, review the information and then select <strong>Create</strong>.</p>
+  </li>
+  <li>
+    <p>Close <strong>Microsoft Edge</strong></p>
+  </li>
+</ol>
+
+<h3 id="task-4-reset-the-pc">Task 4: Reset the PC</h3>
+
+<ol>
+  <li>
+    <p>On <strong>SEA-WS3</strong>, select <strong>Start</strong>, type <strong>reset</strong> and select <strong>Reset this PC</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>System &gt; Recovery</strong> page, select <strong>Reset PC</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Remove everything</strong>, and then select <strong>Local reinstall</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Next</strong> and then select <strong>Reset</strong>.</p>
+
+    <blockquote>
+      <p>Note: Normally this task is not required for new deployment of physical devices. The device’s autopilot info is either provided by the manufacturer or can be obtained from the device prior to the OOBE. For the purposes of this lab, we must initiate a reset to simulate a new device OOBE.</p>
+    </blockquote>
+
+    <blockquote>
+      <p>Note: This process can take 30-45 minutes and will reboot several times during the process.</p>
+    </blockquote>
+  </li>
+</ol>
+
+<h3 id="task-5-verify-autopilot-deployment">Task 5: Verify Autopilot deployment</h3>
+
+<ol>
+  <li>
+    <p>At the <strong>Let’s set things up for your work or school</strong> page, enter <strong><code>Aaron@yourtenant.onmicrosoft.com</code></strong> and select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>At the Password page, enter <strong>Pa55w.rd1234!</strong> and select <strong>Sign in</strong>.</p>
+  </li>
+  <li>
+    <p>At the <strong>Use Windows Hello with your account</strong>, select <strong>OK</strong>.</p>
+  </li>
+  <li>
+    <p>At the <strong>Verify your identity</strong> page, select the Text verification method.</p>
+  </li>
+  <li>
+    <p>At the <strong>Enter code</strong> page, enter the code that has been texted to your mobile device and then select <strong>Verify</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Setup up a PIN</strong> dialog box, in the <strong>New PIN</strong> and <strong>Confirm PIN</strong> fields, enter <strong>102938</strong>, and then select <strong>OK</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>All set!</strong> page, select <strong>OK</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Start</strong> and select <strong>Settings</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Accounts</strong>, and then select <strong>Access work or school</strong>. Verify the device is connected to Contoso’s Azure AD.</p>
+  </li>
+  <li>
+    <p>Select <strong>Connected to Contoso’s Azure AD</strong> and select <strong>Info</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Managed by Contoso</strong> page, scroll down and then select <strong>Sync</strong>.</p>
+  </li>
+  <li>
+    <p>On <strong>SEA-WS3</strong>, close the <strong>Settings</strong> window.</p>
+  </li>
+  <li>
+    <p>Switch to <strong>SEA-SVR1</strong>.</p>
+  </li>
+  <li>
+    <p>In the Microsoft Entra admin center, expand <strong>Entra ID</strong>, expand <strong>Devices</strong> and then select <strong>All devices</strong>.</p>
+
+    <blockquote>
+      <p>Note that the new device displays with an icon that indicates an Autopilot device. Also note that the Join Type is <strong>Microsoft Entra joined</strong> with Aaron Nicholls as the owner.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Select the Autopilot device and then select <strong>Manage</strong>.</p>
+  </li>
+  <li>
+    <p>Notice that you can Retire, Wipe, Sync, and Restart the device.</p>
+  </li>
+  <li>
+    <p>Select the ellipsis at the end of the menu bar and take notice of the additional management capabilities.</p>
+
+    <blockquote>
+      <p>Additional capabilities include Fresh Start, Autopilot Reset, Quick scan, Full scan, as well as others.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Close Microsoft Edge.</p>
+  </li>
+</ol>
+
+<p><strong>Results</strong>: After completing this exercise, you will have provisioned a Windows device with Autopilot using User-driven mode.</p>
+
+<p><strong>END OF LAB</strong></p>
+
+            </article>
+        </main>
+    </div>
+    <footer class="fixed-bottom d-print-none">
+        <nav class="navbar navbar-light bg-light d-flex justify-content-around">
+            <span class="navbar-text">
+                &copy; 2025 Microsoft &nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=521839">Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=2259814">Consumer Health Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkID=206977">Terms of Use </a>&nbsp;|&nbsp;
+                  <a href="https://www.microsoft.com/trademarks">Trademarks </a>&nbsp;|&nbsp;
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <a href="" target="_blank" class="ml-2">
+                    Source
+                </a>
+            </span>
+        </nav>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/js/script.js?v="></script>
+</body>
+
+
+</html>

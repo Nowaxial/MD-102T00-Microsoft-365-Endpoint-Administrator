@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>
+        Practice Lab 0701: Deploying Windows 11 using Microsoft Deployment Toolkit | 
+        MD-102T00-Microsoft-365-Endpoint-Administrator
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/css/style.css?v=">
+</head>
+<body data-spy="scroll" data-target="#linksMenu">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gray">
+        <div class="container d-flex justify-content-between">
+            <!-- <img src="https://github.com/MicrosoftLearning/Jekyll-Theme/raw/master/assets/microsoft-gray.png" alt="Microsoft logo" style="width:100px;height:21px;"/>-->
+            <span class="my-1 title text-black">MD-102T00-Microsoft-365-Endpoint-Administrator</span>
+            <span class="ml-2">
+                <a href="/MD-102T00-Microsoft-365-Endpoint-Administrator/" class="d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+                    </svg>
+                    &nbsp;Home
+                </a>
+            </span>
+        </div>
+        <!--
+        <div class="container d-flex justify-content-between">
+            <a class="my-1 title text-azure text-uppercase" href="">
+                MD-102T00-Microsoft-365-Endpoint-Administrator
+            </a>
+            <a href="" target="_blank" class="btn btn-sm btn-outline-secondary text-light">
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <span class="ml-2">GitHub</span>
+            </a>
+        </div>
+        -->
+    </nav>
+    <hr color-"gray"/>
+    <div class="container">
+        <main class="row extra-padding">
+            <aside class="col-sm-2">       
+                <nav id="linksMenu" class="toc sticky-top">
+                    <ul class="nav navbar-nav flex-column">
+                    </ul>
+                </nav>         
+            </aside>
+            <hr class="" />
+            <article class="col-sm-10 mb-5">
+                <h1 id="practice-lab-0701-deploying-windows-11-using-microsoft-deployment-toolkit">Practice Lab 0701: Deploying Windows 11 using Microsoft Deployment Toolkit</h1>
+
+<h2 id="summary">Summary</h2>
+
+<p>In this lab, you will use the Microsoft Deployment Toolkit to create and deploy a Windows 11 operating system image.</p>
+
+<h3 id="scenario">Scenario</h3>
+
+<p>You need to deploy a new Windows 11 virtual machine named SEA-WS4. You decide to use Microsoft Deployment Toolkit to deploy the operating system to a virtual machine created in Hyper-V. You will configure a new Deployment Share in MDT and then configure the task sequence that will perform the steps to deploy SEA-WS4.</p>
+
+<h3 id="task-1-create-a-new-deployment-share">Task 1: Create a new Deployment Share</h3>
+
+<ol>
+  <li>
+    <p>On <strong>SEA-SVR2</strong>, sign in as <strong>Contoso\Administrator</strong> with the password <strong>Pa55w.rd</strong>.</p>
+  </li>
+  <li>
+    <p>On the taskbar, select <strong>File Explorer</strong> and then browse to <strong>E:\Labfiles\ISOs</strong>.</p>
+  </li>
+  <li>
+    <p>Right-click <strong>Win11_21H2_Eval.iso</strong> and then select <strong>Mount</strong>. The ISO mounts as DVD Drive F.</p>
+  </li>
+  <li>
+    <p>Close <strong>File Explorer</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Start</strong>, expand <strong>Microsoft Deployment Toolkit</strong>, and then select <strong>Deployment Workbench</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Deployment Workbench</strong>, right-click <strong>Deployment Shares</strong> and then select <strong>New Deployment Share</strong>.</p>
+
+    <blockquote>
+      <p>The <strong>New Deployment Share Wizard</strong> opens.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>On the <strong>Path</strong> page, under <strong>Deployment share path</strong>, change the value to <strong>E:\DeploymentShare</strong> and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Share</strong> page, take note of the <strong>Share name</strong>, but do not change it. Select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Descriptive Name</strong> page, accept the default value and select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Options</strong> page, configure the following, and then select <strong>Next</strong>:</p>
+
+    <ul>
+      <li>
+        <p>Ask to set the local Administrator password: <strong>Enabled</strong></p>
+      </li>
+      <li>
+        <p>All other check boxes: <strong>Disabled</strong></p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p>On the <strong>Summary</strong> page, review the information and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Confirmation</strong> page, ensure that the process completed successfully and then select <strong>Finish</strong>.</p>
+  </li>
+  <li>
+    <p>Under <strong>Deployment Shares</strong>, expand the <strong>MDT Deployment Share</strong> folder.</p>
+
+    <blockquote>
+      <p>Take note of the various nodes that can be configured for the deployment share.</p>
+    </blockquote>
+  </li>
+</ol>
+
+<h3 id="task-2-add-operating-system-files-to-the-deployment-share">Task 2: Add Operating System files to the Deployment Share</h3>
+
+<ol>
+  <li>
+    <p>In the Deployment Workbench, expand <strong>Deployment Shares</strong>, expand <strong>MDT Deployment Share</strong>, and then select <strong>Operating Systems</strong>.</p>
+  </li>
+  <li>
+    <p>Right-click <strong>Operating Systems</strong> and then select <strong>Import Operating System</strong>. The Import Operating System Wizard opens.</p>
+  </li>
+  <li>
+    <p>In the <strong>Import Operating System Wizard</strong>, on the <strong>OS Type</strong> page, select <strong>Full set of source files</strong> and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Source</strong> page, under <strong>Source Directory</strong>, enter <strong>F:\</strong> and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Destination</strong> page, change the default destination directory name to <strong>Windows 11 Enterprise x64</strong> and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Summary</strong> page, review the information and then select <strong>Next</strong>.</p>
+
+    <blockquote>
+      <p>The operating system source files are copied into the deployment share.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>On the <strong>Confirmation</strong> page, ensure that the process completed successfully and then select <strong>Finish</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Deployment Workbench</strong>, with <strong>Operating Systems</strong> selected, verify that the operating system displays.</p>
+  </li>
+</ol>
+
+<h3 id="task-3-add-applications-to-the-deployment-share">Task 3: Add Applications to the Deployment Share</h3>
+
+<ol>
+  <li>
+    <p>In the Deployment Workbench, expand <strong>Deployment Shares</strong>, expand <strong>MDT Deployment Share</strong>, and then select <strong>Applications</strong>.</p>
+  </li>
+  <li>
+    <p>Right-click <strong>Applications</strong> and then select <strong>New Application</strong>. The New Application Wizard opens.</p>
+  </li>
+  <li>
+    <p>In the <strong>New Application Wizard</strong>, on the <strong>Application Type</strong> page, select <strong>Application with source files</strong> and then select <strong>Next</strong>.</p>
+  </li>
+  <li>On the <strong>Details</strong> page, configure the following, and then select <strong>Next</strong>:
+    <ul>
+      <li>Publisher: <strong>Microsoft</strong></li>
+      <li>Application Name: <strong>XML Notepad</strong></li>
+    </ul>
+  </li>
+  <li>
+    <p>On the <strong>Source</strong> page, under <strong>Source directory</strong>, enter <strong>E:\Labfiles\Apps</strong> and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Destination</strong> page, accept the default destination directory name and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Command Details</strong> page, under <strong>Command line</strong> enter <strong>XmlNotepadSetup.msi /q</strong> and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Summary</strong> page, review the information and then select <strong>Next</strong>.</p>
+  </li>
+  <li>On the <strong>Confirmation</strong> page, ensure that the process completed successfully and then select <strong>Finish</strong>.</li>
+</ol>
+
+<h3 id="task-4-create-an-mdt-task-sequence">Task 4: Create an MDT Task Sequence</h3>
+
+<ol>
+  <li>
+    <p>In the Deployment Workbench, expand <strong>Deployment Shares</strong>, expand <strong>MDT Deployment Share</strong>, and then select <strong>Task Sequences</strong>.</p>
+  </li>
+  <li>
+    <p>Right-click <strong>Task Sequences</strong> and then select <strong>New Task Sequence</strong>. The <strong>New Task Sequence Wizard</strong> opens.</p>
+  </li>
+  <li>On the <strong>General Settings</strong> page, configure the following and then select <strong>Next</strong>:
+    <ul>
+      <li>Task sequence ID: <strong>001</strong></li>
+      <li>Task sequence name: <strong>Deploy Windows 11 Enterprise</strong></li>
+    </ul>
+  </li>
+  <li>
+    <p>On the <strong>Select Template</strong> page, select <strong>Standard Client Task Sequence</strong>, and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Select OS</strong> page, select <strong>Windows 10 Enterprise Evaluation</strong> and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Specify Product Key</strong> page, select <strong>Do not specify a product key at this time</strong>, and then select <strong>Next</strong>.</p>
+  </li>
+  <li>On the <strong>OS Settings</strong> page, configure the following and then select <strong>Next</strong>:
+    <ul>
+      <li>Full Name: <strong>User</strong></li>
+      <li>Organization: <strong>Contoso Corporation</strong></li>
+      <li>Internet Explorer Home Page: <strong>about:blank</strong></li>
+    </ul>
+  </li>
+  <li>
+    <p>On the <strong>Admin Password</strong> page, select <strong>Use the specified local Administrator password</strong>, and then enter <strong>Pa55w.rd</strong> in both text boxes. Select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Summary</strong> page, review the information and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Confirmation</strong> page, ensure that the process completed successfully and then select <strong>Finish</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Deployment Workbench</strong>, with <strong>Task Sequences</strong> selected verify that the <strong>Deploy Windows 11 Enterprise</strong> task sequence displays.</p>
+  </li>
+  <li>
+    <p>Right-click the <strong>Deploy Windows 11 Enterprise</strong> task sequence, and then select <strong>Properties</strong>.</p>
+  </li>
+  <li>
+    <p>Select the <strong>Task Sequence</strong> tab.</p>
+  </li>
+  <li>
+    <p>Expand the <strong>Validation</strong> node and then select <strong>Validate</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Properties</strong> page, remove the check marks next to <strong>Ensure minimum memory</strong> and <strong>Ensure minimum processor speed</strong>.</p>
+
+    <blockquote>
+      <p>Do not make any other changes.</p>
+    </blockquote>
+  </li>
+  <li>On the <strong>Deploy Windows 11 Enterprise Properties</strong> window, select <strong>OK</strong>.</li>
+</ol>
+
+<h3 id="task-5-configure-deployment-share-properties-and-windows-pe-settings">Task 5: Configure Deployment Share Properties and Windows PE settings</h3>
+
+<ol>
+  <li>
+    <p>In the Deployment Workbench, expand <strong>Deployment Shares</strong>, and select <strong>MDT Deployment Share</strong>.</p>
+  </li>
+  <li>
+    <p>Right-click <strong>MDT Deployment Share</strong> and then select <strong>Properties</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>MDT Deployment Share Properties</strong> window, on the <strong>General</strong> tab, take note of the information that was provided when the deployment share was created.</p>
+  </li>
+  <li>
+    <p>Select the <strong>Rules</strong> tab.</p>
+
+    <blockquote>
+      <p>The Rules tab displays the content of the CustomSettings.ini file. These values were also provided during the creation of the deployment share.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Select the <strong>Windows PE</strong> tab.</p>
+
+    <blockquote>
+      <p>The Windows PE tab provides options for creating a Windows PE boot disk.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>On the <strong>Windows PE</strong> tab, next to <strong>Platform</strong>, select <strong>x64</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Windows PE Customizations</strong> section, next to <strong>Scratch space size</strong>, select <strong>64</strong>.</p>
+  </li>
+  <li>Select the <strong>Features</strong> tab and then select the check box next to the following Feature Packs:
+    <ul>
+      <li>DISM Cmdlets</li>
+      <li>Windows PowerShell</li>
+      <li>Microsoft Data Access Components (MDAC/ADO) support</li>
+    </ul>
+  </li>
+  <li>
+    <p>Select the <strong>Monitoring</strong> tab.</p>
+  </li>
+  <li>
+    <p>On the <strong>Monitoring</strong> tab, select the check box next to <strong>Enable monitoring for this deployment share</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>MDT Deployment Share Properties</strong> window, select <strong>OK</strong>.</p>
+  </li>
+  <li>
+    <p>Right-click <strong>MDT Deployment Share</strong> and then select <strong>Update Deployment Share</strong>. The Update Deployment Share Wizard opens.</p>
+  </li>
+  <li>
+    <p>On the <strong>Options</strong> page, select <strong>Optimize the boot image updating process</strong> and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Summary</strong> page, select <strong>Next</strong>.</p>
+
+    <blockquote>
+      <p>The Deployment Share starts to update and create the Windows PE files. This will take a few minutes to complete.</p>
+    </blockquote>
+  </li>
+  <li>On the <strong>Confirmation</strong> page, ensure that the process completed successfully and then select <strong>Finish</strong>.</li>
+</ol>
+
+<h3 id="task-6-deploy-windows-11-using-mdt">Task 6: Deploy Windows 11 Using MDT</h3>
+
+<ol>
+  <li>
+    <p>On SEA-SVR2, on the taskbar, select <strong>Hyper-V Manager</strong>.</p>
+  </li>
+  <li>
+    <p>In Hyper-V Manager, select <strong>Virtual Switch Manager</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>New virtual network switch</strong> and then in the details pane, select <strong>External</strong>. Select <strong>Create Virtual Switch</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Virtual Switch Properties</strong> page, under <strong>Name</strong>, enter <strong>External network</strong>, select <strong>OK</strong>, and then select <strong>Yes</strong>.</p>
+  </li>
+  <li>
+    <p>In Hyper-V Manager, select <strong>SEA-SVR2</strong> and then in the Actions pane, select <strong>New</strong> and then select <strong>Virtual Machine</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Before you Begin</strong> page, select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Specify Name and Location</strong> page, in the <strong>Name</strong> box type <strong>SEA-WS4</strong>.</p>
+  </li>
+  <li>
+    <p>Select the check box next to <strong>Store the virtual machine in a different location</strong> and then next to <strong>Location</strong> type <strong>E:\Labfiles\VirtualMachines</strong>. Select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Specify Generation</strong> page, ensure that <strong>Generation 2</strong> is selected and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Assign Memory</strong> page, next to <strong>Startup memory</strong> type <strong>8192</strong> and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Configure Networking</strong> page, next to <strong>Connection</strong>, select <strong>External Network</strong> and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Connect Virtual Hard Disk</strong> page, select <strong>Create a virtual hard disk</strong> and enter the following and then click <strong>Next</strong>:</p>
+
+    <ul>
+      <li>Name: <strong>SEA-WS4.vhdx</strong></li>
+      <li>Location: <strong>E:\Labfiles\VirtualMachines</strong></li>
+      <li>Size: <strong>60 GB</strong></li>
+    </ul>
+  </li>
+  <li>
+    <p>On the <strong>Installation Options</strong> page, select <strong>Install an operating system from a bootable image file</strong> and configure the following:</p>
+
+    <ul>
+      <li>Image file (.iso): <strong>E:\DeploymentShare\Boot\LiteTouchPE_x64.iso</strong></li>
+    </ul>
+  </li>
+  <li>
+    <p>Select <strong>Next</strong> and then <strong>Finish</strong>.</p>
+  </li>
+  <li>
+    <p>In Hyper-V Manager, right-click <strong>SEA-WS4</strong>, and then select <strong>Settings</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Security</strong>, and then select the check box next to <strong>Enable Trusted Platform Module</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Processor</strong>, and then change the number of virtual processors to <strong>2</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>OK</strong> to close the Settings dialog box.</p>
+  </li>
+  <li>
+    <p>In Hyper-V Manager, select <strong>SEA-WS4</strong>, select <strong>Connect</strong>,  and then select <strong>Start</strong>.</p>
+  </li>
+  <li>
+    <p>As the computer starts press any key on the keyboard to invoke the MDT Deployment Wizard. Maximize the window as needed.</p>
+  </li>
+  <li>
+    <p>On the <strong>Welcome</strong> page, select <strong>Run the Deployment Wizard to install a new Operating System</strong>.</p>
+  </li>
+  <li>On the <strong>Specify credentials for connecting to network shares</strong> window, enter the following and then select <strong>OK</strong>:
+    <ul>
+      <li>User Name: <strong>Administrator</strong></li>
+      <li>Password: <strong>Pa55w.rd</strong></li>
+      <li>Domain: <strong>Contoso</strong></li>
+    </ul>
+  </li>
+  <li>
+    <p>On the <strong>Task Sequence</strong> page, select <strong>Deploy Windows 11 Enterprise</strong> and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Computer Details</strong> page, next to <strong>Computer name</strong> enter <strong>SEA-WS4</strong> and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Move Data and Settings</strong> page, select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>User Data (Restore)</strong> page, select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Locale and Time</strong> page, select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Applications</strong> page, select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Administrator Password</strong> page, enter <strong>Pa55w.rd</strong> in both text boxes and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Ready</strong> page, select <strong>Begin</strong>.</p>
+
+    <blockquote>
+      <p>The installation begins. It will take 15-20 minutes to complete and will reboot SEA-WS4 during the installation as needed.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Switch to the <strong>Deployment Workbench</strong>.</p>
+  </li>
+  <li>
+    <p>In the Deployment Workbench, expand <strong>Deployment Shares</strong>, and expand <strong>MDT Deployment Share</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Monitoring</strong> and then in the details pane, double-click <strong>SEA-WS4</strong>.</p>
+
+    <blockquote>
+      <p>Review the monitoring status during the deployment.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Switch to <strong>SEA-WS4</strong>.</p>
+  </li>
+  <li>
+    <p>After the installation is complete, the desktop will open and finalize the deployment. At the deployment summary, select <strong>Finish</strong>.</p>
+  </li>
+  <li>
+    <p>Shut down <strong>SEA-WS4</strong> and close the Virtual Machine Connection window.</p>
+  </li>
+  <li>
+    <p>In Hyper-V Manager, right-click <strong>SEA-WS4</strong> and then select <strong>Settings</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Settings for SEA-WS4</strong>, expand <strong>SCSI Controller</strong> and then select <strong>DVD Drive</strong>.</p>
+  </li>
+  <li>
+    <p>In the details pane, under <strong>Media</strong>, select <strong>None</strong>, and then select <strong>OK</strong>.</p>
+  </li>
+  <li>
+    <p>Right-click <strong>SEA-WS4</strong> and then select <strong>Checkpoint</strong> to create a checkpoint of the current state of SEA-WS4.</p>
+  </li>
+  <li>
+    <p>On SEA-SVR2, close <strong>Hyper-V Manager</strong> and close the <strong>Deployment Workbench</strong>.</p>
+  </li>
+  <li>
+    <p>Open <strong>File Explorer</strong>, right-click <strong>DVD Drive F</strong> and then select <strong>Eject</strong>.</p>
+  </li>
+  <li>Close <strong>File Explorer</strong> and sign out of <strong>SEA-SVR2</strong>.</li>
+</ol>
+
+<p><strong>Results</strong>: After completing this exercise, you will have successfully used the Microsoft Deployment Toolkit to create and deploy a Windows 11 workstation.</p>
+
+<p><strong>END OF LAB</strong></p>
+
+            </article>
+        </main>
+    </div>
+    <footer class="fixed-bottom d-print-none">
+        <nav class="navbar navbar-light bg-light d-flex justify-content-around">
+            <span class="navbar-text">
+                &copy; 2025 Microsoft &nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=521839">Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=2259814">Consumer Health Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkID=206977">Terms of Use </a>&nbsp;|&nbsp;
+                  <a href="https://www.microsoft.com/trademarks">Trademarks </a>&nbsp;|&nbsp;
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <a href="" target="_blank" class="ml-2">
+                    Source
+                </a>
+            </span>
+        </nav>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/js/script.js?v="></script>
+</body>
+
+
+</html>

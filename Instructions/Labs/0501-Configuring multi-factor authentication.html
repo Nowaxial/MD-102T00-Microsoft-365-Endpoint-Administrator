@@ -1,0 +1,479 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>
+        Practice Lab 0501: Configuring Multi-factor Authentication | 
+        MD-102T00-Microsoft-365-Endpoint-Administrator
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/css/style.css?v=">
+</head>
+<body data-spy="scroll" data-target="#linksMenu">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gray">
+        <div class="container d-flex justify-content-between">
+            <!-- <img src="https://github.com/MicrosoftLearning/Jekyll-Theme/raw/master/assets/microsoft-gray.png" alt="Microsoft logo" style="width:100px;height:21px;"/>-->
+            <span class="my-1 title text-black">MD-102T00-Microsoft-365-Endpoint-Administrator</span>
+            <span class="ml-2">
+                <a href="/MD-102T00-Microsoft-365-Endpoint-Administrator/" class="d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+                    </svg>
+                    &nbsp;Home
+                </a>
+            </span>
+        </div>
+        <!--
+        <div class="container d-flex justify-content-between">
+            <a class="my-1 title text-azure text-uppercase" href="">
+                MD-102T00-Microsoft-365-Endpoint-Administrator
+            </a>
+            <a href="" target="_blank" class="btn btn-sm btn-outline-secondary text-light">
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <span class="ml-2">GitHub</span>
+            </a>
+        </div>
+        -->
+    </nav>
+    <hr color-"gray"/>
+    <div class="container">
+        <main class="row extra-padding">
+            <aside class="col-sm-2">       
+                <nav id="linksMenu" class="toc sticky-top">
+                    <ul class="nav navbar-nav flex-column">
+                    </ul>
+                </nav>         
+            </aside>
+            <hr class="" />
+            <article class="col-sm-10 mb-5">
+                <h1 id="practice-lab-0501-configuring-multi-factor-authentication">Practice Lab 0501: Configuring Multi-factor Authentication</h1>
+
+<h2 id="summary">Summary</h2>
+
+<p>In this lab, you will configure per-user multi-factor authentication (MFA) and apply MFA using a conditional access policy .</p>
+
+<h3 id="prerequisites">Prerequisites</h3>
+
+<p>You will need a mobile phone that can receive text messages used to secure Windows Hello sign in authentication to Entra ID.</p>
+
+<h2 id="exercise-1-configure-per-user-multi-factor-authentication">Exercise 1: Configure per-user multi-factor authentication</h2>
+
+<h3 id="scenario">Scenario</h3>
+
+<p>To provide additional security for user sign on events, you need to configure and test multi-factor authentication (MFA). You decide to first test out per-user MFA. Alex Wilber has agreed to validate the settings for you.</p>
+
+<h3 id="task-1-validate-sign-in-before-enabling-mfa">Task 1: Validate sign-in before enabling MFA</h3>
+
+<ol>
+  <li>
+    <p>Sign in to <strong>SEA-WS3</strong> as <strong>Admin</strong> with the password <strong>Pa55w.rd</strong>.</p>
+  </li>
+  <li>
+    <p>On the taskbar, select <strong>Microsoft Edge</strong>.</p>
+  </li>
+  <li>
+    <p>In the address bar, enter <strong>outlook.office.com</strong> and press Enter.</p>
+  </li>
+  <li>
+    <p>At the <strong>Sign in</strong> page, enter <strong><code>AlexW@yourtenant.onmicrosoft.com</code></strong> and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Enter password</strong> page, enter the user password (the same one you used for Joni Sherman in earlier labs) and select <strong>Sign in</strong>. At the Edge Save password prompt, select <strong>Save</strong>.</p>
+  </li>
+  <li>
+    <p>At the <strong>Stay signed in</strong> prompt, select <strong>No</strong>.</p>
+
+    <blockquote>
+      <p>Outlook on the Web opens. Take note that only the password was required to sign in to Outlook on the Web.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>At the top-right corner, select the <strong>Account manager for Alex Wilber</strong> and then select <strong>Sign out</strong>.</p>
+  </li>
+  <li>
+    <p>Close Microsoft Edge.</p>
+  </li>
+</ol>
+
+<h3 id="task-2-enable-mfa-for-a-user">Task 2: Enable MFA for a user</h3>
+
+<ol>
+  <li>
+    <p>Switch to <strong>SEA-SVR1</strong>.</p>
+  </li>
+  <li>
+    <p>On <strong>SEA-SVR1</strong>, if necessary, sign in as <strong>Contoso\Administrator</strong> with the password of <strong>Pa55w.rd</strong> and close <strong>Server Manager</strong>.</p>
+  </li>
+  <li>
+    <p>On the taskbar select <strong>Microsoft Edge</strong>, in the address bar type <strong>https://entra.microsoft.com</strong>, and then press <strong>Enter</strong>.</p>
+  </li>
+  <li>
+    <p>Sign in as user <strong><code>Admin@yourtenant.onmicrosoft.com</code></strong>, and use the tenant Admin password. If the <strong>Stay signed in?</strong> prompt appears, select <strong>No</strong>.</p>
+
+    <blockquote>
+      <p>The Microsoft Entra admin center opens.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>At the top of the web page, In the search resources box, type multifactor authentication and then select <strong>Multifactor authentication</strong>.</p>
+
+    <blockquote>
+      <p>The multi-factor authentication page opens.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Select <strong>Additional cloud-based multifactor authentication settings</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Per-user multifactor authentication</strong> page, select <strong>Service settings</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Service settings</strong> page, scroll down and select the checkbox for <strong>Allow users to remember multi-factor authentication on devices they trust</strong>.</p>
+  </li>
+  <li>
+    <p>Next to <strong>Number of days users can trust devices for</strong>, enter <strong>30</strong> and then select <strong>Save</strong>.</p>
+  </li>
+  <li>
+    <p>Once saved, scroll back to the top of the <strong>Service settings</strong> page, and select <strong>Users</strong>.</p>
+  </li>
+  <li>
+    <p>In the user list, select the check box next to <strong>Alex Wilber</strong>.</p>
+  </li>
+  <li>
+    <p>Above the user list, select <strong>Enable MFA</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Enable multifactor authentication</strong> message, select <strong>Enable</strong>.</p>
+  </li>
+  <li>
+    <p>Once Enabled, refresh the page. Take note that the <strong>Status</strong> for Alex Wilber is now <strong>Enabled</strong>.</p>
+  </li>
+</ol>
+
+<h3 id="task-3-register-and-validate-mfa">Task 3: Register and Validate MFA</h3>
+
+<ol>
+  <li>
+    <p>Switch to <strong>SEA-WS3</strong>.</p>
+  </li>
+  <li>
+    <p>On the taskbar, select <strong>Microsoft Edge</strong>.</p>
+  </li>
+  <li>
+    <p>In the address bar, enter <strong>outlook.office.com</strong> and press Enter.</p>
+  </li>
+  <li>
+    <p>On the <strong>Pick an account</strong> page, select <strong><code>AlexW@yourtenant.onmicrosoft.com</code></strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Enter password</strong> page, if required, enter the user password and select <strong>Sign in</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Let’s keep your account secure</strong> page, select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Install Microsoft Authenticator</strong> page, select <strong>Set up a different way to sign in</strong>. <strong>Note</strong> Ensure you select the correct link.</p>
+  </li>
+  <li>
+    <p>On the <strong>Add a sign-in method</strong> dialog box, select <strong>Phone</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Add your phone number</strong> page, select your <strong>Country code</strong> and in the <strong>Phone number</strong> field, enter your mobile phone number which is able to receive text messages, then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>When you receive the verification code, enter the code on the <strong>Verify your phone number</strong> page and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Phone number added</strong> page, select <strong>Done</strong>.</p>
+  </li>
+  <li>
+    <p>At the Stay signed in message, select <strong>No</strong>.</p>
+
+    <blockquote>
+      <p>Outlook on the Web opens to Alex Wilber’s inbox.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>If you are presented with a <strong>Protect your account</strong> dialog, select <strong>Skip for now (<em>x</em> times left)</strong>.</p>
+  </li>
+  <li>
+    <p>At the top-right corner, select the <strong>Account manager for Alex Wilber</strong> and then select <strong>Sign out</strong>.</p>
+  </li>
+  <li>
+    <p>Close Microsoft Edge.</p>
+  </li>
+</ol>
+
+<h3 id="task-4-remove-per-user-mfa">Task 4: Remove per-user MFA</h3>
+
+<ol>
+  <li>
+    <p>Switch to <strong>SEA-SVR1</strong>.</p>
+  </li>
+  <li>
+    <p>On <strong>SEA-SVR1</strong>, on the taskbar select <strong>Microsoft Edge</strong>, in the address bar type <strong>https://entra.microsoft.com</strong>, and then press <strong>Enter</strong>.</p>
+  </li>
+  <li>
+    <p>Sign in as <strong><code>Admin@yourtenant.onmicrosoft.com</code></strong>, and use the tenant Admin password. If the <strong>Stay signed in?</strong> prompt appears, select <strong>No</strong>.</p>
+
+    <blockquote>
+      <p>The Microsoft Entra admin center opens.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>In the Microsoft Entra admin center, in the navigation pane, select <strong>Users</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>All users</strong> and then at the top of the results pane select <strong>Per-user MFA</strong>.</p>
+
+    <blockquote>
+      <p>The Per-user MFA page opens.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>In the user list, select the check box next to <strong>Alex Wilber</strong>.</p>
+  </li>
+  <li>
+    <p>Above the user list, select <strong>Disable MFA</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Disable multifactor authentication</strong> message, select <strong>Disable</strong>.</p>
+  </li>
+  <li>
+    <p>Once Disabled, refresh the page. Take note that the <strong>Status</strong> for Alex Wilber is now <strong>Disabled</strong>.</p>
+  </li>
+  <li>
+    <p>Close Microsoft Edge.</p>
+  </li>
+</ol>
+
+<p><strong>Results</strong>: After completing this exercise, you will have successfully configured per-user multi-factor authentication.</p>
+
+<h2 id="exercise-2-configure-multi-factor-authentication-using-conditional-access">Exercise 2: Configure multi-factor authentication using conditional access</h2>
+
+<h3 id="scenario-1">Scenario</h3>
+
+<p>To provide additional security for user sign on events, you need to configure and test multi-factor authentication (MFA). You decide that using a conditional access policy provides greater flexibility for your MFA requirements. Alex Wilber has agreed to validate the settings for you.</p>
+
+<h3 id="task-1-validate-sign-in-before-enabling-conditional-access-with-mfa">Task 1: Validate sign-in before enabling conditional access with MFA</h3>
+
+<ol>
+  <li>
+    <p>Sign in to <strong>SEA-WS3</strong> as <strong>Admin</strong> with the password <strong>Pa55w.rd</strong>.</p>
+  </li>
+  <li>
+    <p>On the taskbar, select <strong>Microsoft Edge</strong>.</p>
+  </li>
+  <li>
+    <p>In the address bar, enter <strong>outlook.office.com</strong> and press Enter.</p>
+  </li>
+  <li>
+    <p>On the <strong>Pick an account</strong> page, select <strong><code>AlexW@yourtenant.onmicrosoft.com</code></strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Enter password</strong> page, enter the tenant password and select <strong>Sign in</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Stay signed in</strong> page, select <strong>No</strong>.</p>
+
+    <blockquote>
+      <p>Outlook opens to Alex’s inbox. Take note that only the password was required to sign in to Outlook on the Web as you removed the MFA in the previous Exercise.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>At the top-right corner, select the <strong>Account manager for Alex Wilber</strong> and then select <strong>Sign out</strong>.</p>
+  </li>
+  <li>
+    <p>Close Microsoft Edge.</p>
+  </li>
+</ol>
+
+<h3 id="task-2-configure-conditional-access-with-mfa">Task 2: Configure conditional access with MFA</h3>
+
+<ol>
+  <li>
+    <p>Switch to <strong>SEA-SVR1</strong>.</p>
+  </li>
+  <li>
+    <p>On <strong>SEA-SVR1</strong>, on the taskbar select <strong>Microsoft Edge</strong>, in the address bar type <strong>https://entra.microsoft.com</strong>, and then press <strong>Enter</strong>.</p>
+  </li>
+  <li>
+    <p>Sign in as <strong><code>Admin@yourtenant.onmicrosoft.com</code></strong>, and use the tenant Admin password. If the <strong>Stay signed in?</strong> prompt appears, select <strong>No</strong>.</p>
+
+    <blockquote>
+      <p>The Microsoft Entra admin center opens.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>In the navigation pane, under <strong>Entra ID</strong>, select <strong>Conditional Access</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Conditional Access</strong> page, select <strong>Policies</strong>, and then select <strong>+ New policy</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>New Conditional access policy</strong> page, in the <strong>Name</strong> box, enter <strong>Contoso MFA Policy</strong>.</p>
+  </li>
+  <li>
+    <p>Under <strong>Assignments</strong>, select <strong>0 users or agents (Preview) selected</strong>.</p>
+  </li>
+  <li>
+    <p>In the Users and groups pane, select the option next to <strong>Select users and groups</strong> and then select the check box next to <strong>Users and groups</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Select users and groups</strong> page, select <strong>Alex Wilber</strong> and then choose <strong>Select</strong>.</p>
+
+    <blockquote>
+      <p>Note that typically you would specify a group, however for this exercise we will just test the setting on Alex Wilber.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Select <strong>No target resources selected</strong> and then click <strong>Select resources</strong>.</p>
+
+    <blockquote>
+      <p>Note the Control access based on client app setting. This setting allows you to specify the client app that is used to access the resource. For example, you can specify that only the Outlook app can be used to access Exchange Online.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Under <strong>Select specific resources</strong>, select <strong>None</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Resources</strong> page that opens, select the check box next to <strong>Office 365</strong> and then click <strong>Select</strong>.</p>
+  </li>
+  <li>
+    <p>Under <strong>Access controls</strong>, in the <strong>Grant</strong> section, select <strong>0 controls selected</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Grant</strong> page, select <strong>Grant access</strong>, select the check box next to <strong>Require multifactor authentication</strong>, and then click <strong>Select</strong>.</p>
+  </li>
+  <li>
+    <p>Under <strong>Enable policy</strong>, select <strong>On</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Create</strong> to create the Contoso MFA Policy. Notice that the policy is listed with a State of <strong>On</strong>.</p>
+  </li>
+  <li>
+    <p>Close Microsoft Edge.</p>
+  </li>
+</ol>
+
+<h3 id="task-3-validate-conditional-access-mfa">Task 3: Validate conditional access MFA</h3>
+
+<ol>
+  <li>
+    <p>Switch to <strong>SEA-WS3</strong>.</p>
+  </li>
+  <li>
+    <p>On the taskbar, select <strong>Microsoft Edge</strong>.</p>
+  </li>
+  <li>
+    <p>In the address bar, enter <strong>https://outlook.office.com</strong> and press Enter.</p>
+  </li>
+  <li>
+    <p>On the <strong>Pick an account</strong> page, select <strong><code>AlexW@yourtenant.onmicrosoft.com</code></strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Enter password</strong> page, if required, enter the user password and select <strong>Sign in</strong>.</p>
+  </li>
+  <li>
+    <p>At the Verify your identity prompt, select your phone number.</p>
+
+    <blockquote>
+      <p>The Enter code dialog box opens.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>At the <strong>Enter code</strong> page, enter the code sent to your mobile phone, and then select <strong>Verify</strong>.</p>
+  </li>
+  <li>
+    <p>If you are presented with a <strong>Protect your account</strong> dialog, select <strong>Skip for now (<em>x</em> times left)</strong>.</p>
+  </li>
+  <li>
+    <p>At the Stay signed in message, select <strong>No</strong>.</p>
+
+    <blockquote>
+      <p>Outlook on the Web opens to Alex Wilber’s inbox.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>At the top-right corner, select the <strong>Account manager for Alex Wilber</strong> and then select <strong>Sign out</strong>.</p>
+  </li>
+  <li>
+    <p>Close Microsoft Edge.</p>
+  </li>
+</ol>
+
+<h3 id="task-4-remove-conditional-access-mfa">Task 4: Remove conditional access MFA</h3>
+
+<ol>
+  <li>
+    <p>Switch to <strong>SEA-SVR1</strong>.</p>
+  </li>
+  <li>
+    <p>On <strong>SEA-SVR1</strong>, on the taskbar select <strong>Microsoft Edge</strong>, in the address bar type <strong>https://entra.microsoft.com</strong>, and then press <strong>Enter</strong>.</p>
+  </li>
+  <li>
+    <p>Sign in as user <strong><code>Admin@yourtenant.onmicrosoft.com</code></strong>, and use the tenant Admin password. If the <strong>Stay signed in?</strong> prompt appears, select <strong>No</strong>.</p>
+
+    <blockquote>
+      <p>The Microsoft Entra admin center opens.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>In the Microsoft Entra admin center, in the navigation pane, under <strong>Entra ID</strong>, select <strong>Conditional Access</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Conditional Access</strong> page, select <strong>Policies</strong> and then select <strong>Contoso MFA Policy</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Contoso MFA Policy</strong> page, select <strong>Delete</strong>.</p>
+  </li>
+  <li>
+    <p>At the <strong>Are you sure?</strong> prompt, select <strong>Yes</strong>.</p>
+  </li>
+  <li>
+    <p>Close Microsoft Edge.</p>
+  </li>
+</ol>
+
+<p><strong>Results</strong>: After completing this exercise, you will have successfully configured multi-factor authentication by using a conditional access policy.</p>
+
+<p><strong>END OF LAB</strong></p>
+
+            </article>
+        </main>
+    </div>
+    <footer class="fixed-bottom d-print-none">
+        <nav class="navbar navbar-light bg-light d-flex justify-content-around">
+            <span class="navbar-text">
+                &copy; 2025 Microsoft &nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=521839">Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=2259814">Consumer Health Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkID=206977">Terms of Use </a>&nbsp;|&nbsp;
+                  <a href="https://www.microsoft.com/trademarks">Trademarks </a>&nbsp;|&nbsp;
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <a href="" target="_blank" class="ml-2">
+                    Source
+                </a>
+            </span>
+        </nav>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/js/script.js?v="></script>
+</body>
+
+
+</html>

@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>
+        Practice Lab 0301: Creating and Deploying Configuration Policies | 
+        MD-102T00-Microsoft-365-Endpoint-Administrator
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/css/style.css?v=">
+</head>
+<body data-spy="scroll" data-target="#linksMenu">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gray">
+        <div class="container d-flex justify-content-between">
+            <!-- <img src="https://github.com/MicrosoftLearning/Jekyll-Theme/raw/master/assets/microsoft-gray.png" alt="Microsoft logo" style="width:100px;height:21px;"/>-->
+            <span class="my-1 title text-black">MD-102T00-Microsoft-365-Endpoint-Administrator</span>
+            <span class="ml-2">
+                <a href="/MD-102T00-Microsoft-365-Endpoint-Administrator/" class="d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+                    </svg>
+                    &nbsp;Home
+                </a>
+            </span>
+        </div>
+        <!--
+        <div class="container d-flex justify-content-between">
+            <a class="my-1 title text-azure text-uppercase" href="">
+                MD-102T00-Microsoft-365-Endpoint-Administrator
+            </a>
+            <a href="" target="_blank" class="btn btn-sm btn-outline-secondary text-light">
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <span class="ml-2">GitHub</span>
+            </a>
+        </div>
+        -->
+    </nav>
+    <hr color-"gray"/>
+    <div class="container">
+        <main class="row extra-padding">
+            <aside class="col-sm-2">       
+                <nav id="linksMenu" class="toc sticky-top">
+                    <ul class="nav navbar-nav flex-column">
+                    </ul>
+                </nav>         
+            </aside>
+            <hr class="" />
+            <article class="col-sm-10 mb-5">
+                <h1 id="practice-lab-0301-creating-and-deploying-configuration-policies">Practice Lab 0301: Creating and Deploying Configuration Policies</h1>
+
+<h2 id="summary">Summary</h2>
+
+<p>In this lab, you will use Microsoft Intune to create and apply a Configuration policy for a Windows 11 device.</p>
+
+<h3 id="prerequisites">Prerequisites</h3>
+
+<p>The following lab(s) must be completed before this lab:</p>
+
+<ul>
+  <li>
+    <p>0101-Managing Identities in Entra ID</p>
+  </li>
+  <li>
+    <p>0102-Synchronizing identities by using Entra Connect</p>
+  </li>
+  <li>
+    <p>0203-Manage Device Enrollment into Intune</p>
+  </li>
+  <li>
+    <p>0204-Enrolling devices into Intune</p>
+
+    <blockquote>
+      <p>Note: You will also need a mobile phone that can receive text messages used to secure Windows Hello sign in authentication to Entra ID.</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h2 id="exercise-1-create-and-apply-a-configuration-policy">Exercise 1: Create and apply a Configuration policy</h2>
+
+<h3 id="scenario">Scenario</h3>
+
+<p>You need to use Entra and Intune to manage members of the Developers department at Contoso . You have been asked to evaluate the solutions that would enable the users to work effectively and securely on Windows 11 devices. Aaron Nicholls has volunteered to help you test and evaluate the solution and provide feedback. He has also given you some initial requirements that must be included and applied to the developer’s Windows devices:</p>
+
+<ul>
+  <li>The Gaming section in Settings should not be visible.</li>
+  <li>The Privacy section in Settings should be restricted as much as possible.</li>
+  <li>The C:\DevProjects folder must be excluded from Windows Defender.</li>
+  <li>The process devbuild.exe must be excluded from Windows Defender.</li>
+  <li>Most used apps and Recently added apps should not be displayed on the Start menu.</li>
+</ul>
+
+<h3 id="task-1-verify-device-settings">Task 1: Verify device settings</h3>
+
+<ol>
+  <li>
+    <p>Sign in to <strong>SEA-WS1</strong> as <strong>Aaron Nicholls</strong> with the PIN <strong>102938</strong>.</p>
+  </li>
+  <li>
+    <p>On the taskbar, select <strong>Start</strong> and then select <strong>Settings</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Settings</strong> navigation list, verify that you can see the <strong>Gaming</strong> setting.</p>
+  </li>
+  <li>
+    <p>Select the <strong>Personalization</strong> setting and then on the Personalization page, select <strong>Start</strong>. Ensure that <strong>Show recently added apps</strong> and <strong>Show most used apps</strong> are both set to <strong>On</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Settings</strong> app, select <strong>Privacy &amp; security</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Privacy &amp; security</strong> page, take note of the available options under the <strong>Security</strong> section, <strong>Windows permissions</strong> section, and <strong>App permissions</strong> section.</p>
+  </li>
+  <li>
+    <p>On the <strong>Privacy &amp; security</strong> page, select <strong>Windows Security</strong> and then select <strong>Open Windows Security</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Windows Security</strong> page, select <strong>Virus &amp; threat protection</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Virus &amp; threat protection</strong> page, under <strong>Virus &amp; threat protection settings</strong>, select <strong>Manage settings</strong> .</p>
+  </li>
+  <li>
+    <p>Scroll down to <strong>Exclusions</strong> and select <strong>Add or remove exclusions</strong>. At the User Account Control, select <strong>Yes</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Exclusions</strong> page, verify that no exclusions have been configured.</p>
+  </li>
+  <li>
+    <p>Close the <strong>Windows Security</strong> window.</p>
+  </li>
+  <li>
+    <p>Close the <strong>Settings</strong> window.</p>
+  </li>
+</ol>
+
+<h3 id="task-2-create-a-configuration-policy-based-on-scenario-requirements">Task 2: Create a Configuration policy based on scenario requirements</h3>
+
+<ol>
+  <li>
+    <p>Switch to <strong>SEA-SVR1</strong>.</p>
+  </li>
+  <li>
+    <p>On <strong>SEA-SVR1</strong>, on the taskbar, select <strong>Microsoft Edge</strong>.</p>
+  </li>
+  <li>
+    <p>In Microsoft Edge, type <strong>https://intune.microsoft.com</strong> in the address bar, and then press <strong>Enter</strong>.</p>
+  </li>
+  <li>
+    <p>Sign in as <strong><code>admin@yourtenant.onmicrosoft.com</code></strong> with the tenant Admin password.</p>
+  </li>
+  <li>
+    <p>In the Microsoft Intune admin center, select <strong>Devices</strong> from the navigation bar.</p>
+  </li>
+  <li>
+    <p>On the <strong>Devices</strong> page, under the <strong>Manage devices</strong> section, select <strong>Configuration</strong>.</p>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **Devices</td>
+          <td>Configuration** blade, in the details pane, select <strong>+ Create</strong>, and then select <strong>+ New policy</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>In the <strong>Create a profile</strong> blade, select the following options, and then select <strong>Create</strong>:</p>
+
+    <ul>
+      <li>Platform: <strong>Windows 10 and later</strong></li>
+      <li>Profile type: <strong>Templates</strong></li>
+      <li>Template name: <strong>Device restrictions</strong></li>
+    </ul>
+  </li>
+  <li>In the <strong>Basics</strong> tab, enter the following information, and then select <strong>Next</strong>:</li>
+</ol>
+
+<ul>
+  <li>Name: <strong>Contoso Developer - standard</strong></li>
+  <li>Description: <strong>Basic restrictions and configuration for Contoso Developers.</strong></li>
+</ul>
+
+<ol>
+  <li>
+    <p>On the <strong>Configurations settings</strong> tab, expand the <strong>Control Panel and Settings</strong> section.</p>
+  </li>
+  <li>
+    <p>Select <strong>Block</strong> next to the <strong>Gaming</strong> and <strong>Privacy</strong> options.</p>
+  </li>
+  <li>
+    <p>On the same page, expand the  <strong>Start</strong> section.</p>
+  </li>
+  <li>
+    <p>Scroll down and select <strong>Block</strong> next to <strong>Most used apps</strong>, <strong>Recently added apps</strong> and <strong>Recently opened items in Jump Lists</strong>.</p>
+  </li>
+  <li>
+    <p>On the same page, scroll down and expand the <strong>Microsoft Defender Antivirus</strong> section.</p>
+  </li>
+  <li>
+    <p>Under <strong>Microsoft Defender Antivirus,</strong> scroll down and expand <strong>Microsoft Defender Antivirus Exclusions</strong>.</p>
+  </li>
+  <li>
+    <p>Under <strong>Microsoft Defender Antivirus Exclusions</strong> in the <strong>Files and folders</strong> box, type the following:</p>
+
+    <p><strong>C:\DevProjects</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Processes</strong> box, type the following:</p>
+
+    <p><strong>DevBuild.exe</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Next</strong> three times until you reach the <strong>Review + create</strong> blade. Select <strong>Create</strong>.</p>
+  </li>
+</ol>
+
+<h3 id="task-3-create-the-contoso-developer-device-group">Task 3: Create the Contoso Developer device group</h3>
+
+<ol>
+  <li>
+    <p>In the Microsoft Intune admin center, in the navigation pane, select <strong>Groups</strong>.</p>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **Groups</td>
+          <td>All groups** blade, select <strong>New group</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>On the <strong>New Group</strong> blade, enter the following information:</li>
+</ol>
+
+<ul>
+  <li>Group type: <strong>Security</strong></li>
+  <li>Group name: <strong>Contoso Developer devices</strong></li>
+  <li>Group description: <strong>All Windows devices in Contoso Developer department</strong></li>
+  <li>Membership type: <strong>Assigned</strong></li>
+</ul>
+
+<ol>
+  <li>
+    <p>Under <strong>Members</strong>, select <strong>No members selected</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Add members</strong> blade, in the <strong>Search</strong> box type <strong>Sea</strong>. Select <strong>SEA-WS1</strong> and then choose <strong>Select</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>New Group</strong> blade, select <strong>Create</strong>.</p>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **Groups</td>
+          <td>All groups** blade, verify that the <strong>Contoso developer devices</strong> group is displayed.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ol>
+
+<h3 id="task-4-create-a-dynamic-entra-id-device-group">Task 4: Create a dynamic Entra ID device group</h3>
+
+<ol>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **Groups</td>
+          <td>All Groups** blade, on the details pane, select <strong>New group</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>On the <strong>Group</strong> blade, provide the following values:</p>
+
+    <ul>
+      <li>Group type: <strong>Security</strong></li>
+      <li>Group name: <strong>Windows Devices</strong></li>
+      <li>Membership type: <strong>Dynamic Device</strong></li>
+    </ul>
+  </li>
+  <li>
+    <p>Under the <strong>Dynamic Device Members</strong> section, select <strong>Add dynamic query</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Dynamic membership rules</strong> blade, in the <strong>Rule syntax</strong> section, select <strong>Edit</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Edit rule syntax</strong> text box, add the following simple membership rule and select <strong>OK</strong>.</p>
+
+    <pre><code class="language-powershell">(device.deviceOSType -contains "Windows")
+</code></pre>
+  </li>
+  <li>
+    <p>On the <strong>Dynamic membership rules</strong> blade, select <strong>Save</strong>.</p>
+  </li>
+  <li>On the <strong>New Group</strong> page, select <strong>Create</strong>.</li>
+</ol>
+
+<h3 id="task-5-assign-a-configuration-policy-to-windows-devices">Task 5: Assign a Configuration policy to Windows devices</h3>
+
+<ol>
+  <li>
+    <p>In the Microsoft Intune admin center, in the navigation pane, select <strong>Devices</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Devices</strong> blade, under <strong>Manage devices</strong> section, select <strong>Configuration</strong>.</p>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **Devices</td>
+          <td>Configuration** blade, in the details pane, select the <strong>Contoso Developer – standard</strong> profile.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>On the <strong>Contoso Developer – standard</strong> blade, scroll down to the <strong>Assignments</strong> section, and select <strong>Edit</strong>.</p>
+  </li>
+  <li>
+    <p>On the Assignments page, under <strong>Included groups</strong> select <strong>Add groups</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Select groups to include</strong> blade, in the <strong>Search</strong> box, select <strong>Contoso Developer devices</strong> and then select <strong>Select</strong>.</p>
+  </li>
+  <li>
+    <p>Back on the <strong>Device restrictions</strong> blade, select <strong>Review + save</strong>, then select <strong>Save</strong>.</p>
+  </li>
+  <li>In the Microsoft Intune admin center, select <strong>Devices</strong> in the breadcrumb navigation menu.</li>
+</ol>
+
+<h3 id="task-6-verify-that-the-configuration-policy-is-applied">Task 6: Verify that the Configuration policy is applied</h3>
+
+<ol>
+  <li>
+    <p>Switch to <strong>SEA-WS1</strong>.</p>
+  </li>
+  <li>
+    <p>On <strong>SEA-WS1</strong>, on the taskbar, select <strong>Start</strong> and then select <strong>Settings</strong>.</p>
+  </li>
+  <li>
+    <p>In <strong>Settings</strong>, select <strong>Accounts</strong> and then select <strong>Access work or school</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Access work or school</strong> section, select the <strong>Connected to Contoso’s Azure AD</strong> link and then select <strong>Info</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Managed by Contoso</strong> page, scroll down and then under Device sync status, select <strong>Sync</strong>. Wait for the synchronization to complete.</p>
+  </li>
+  <li>
+    <p>Once the sync has completed, close the <strong>Settings</strong> app.</p>
+  </li>
+  <li>
+    <p>On <strong>SEA-WS1</strong>, select <strong>Start</strong> and then select <strong>Settings</strong>. Verify that the <strong>Gaming</strong> setting has been removed.</p>
+  </li>
+  <li>
+    <p>Select <strong>Privacy &amp; security</strong> and notice that many of the privacy settings are now hidden.</p>
+  </li>
+  <li>
+    <p>Select the <strong>Personalization</strong> setting and then select <strong>Start</strong>. Verify that <strong>Show recently added apps</strong> and <strong>Show most used apps</strong> are set to <strong>Off</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Settings</strong> app, select <strong>Privacy and Security</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Privacy &amp; Security</strong> page, select <strong>Windows Security</strong> and then select <strong>Open Windows Security</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Windows Security</strong> page, select <strong>Virus &amp; threat protection</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Virus &amp; threat protection</strong> page, select <strong>Manage settings</strong> under <strong>Virus &amp; threat protection settings</strong>.</p>
+  </li>
+  <li>
+    <p>Scroll down to <strong>Exclusions</strong> and select <strong>Add or remove exclusions</strong>. Select <strong>Yes</strong> at the User Account Control message.</p>
+  </li>
+  <li>
+    <p>On the <strong>Exclusions</strong> page, verify that <strong>C:\DevProjects</strong> and <strong>DevBuild.exe</strong> are displayed.</p>
+  </li>
+  <li>
+    <p>Close the <strong>Windows Security</strong> page and then close the <strong>Settings</strong> app.</p>
+  </li>
+</ol>
+
+<p><strong>Results</strong>: After completing this exercise, you will have successfully created and assigned a Configuration policy for a Windows 11 device.</p>
+
+<h2 id="exercise-2-modify-an-assigned-configuration-policy">Exercise 2: Modify an assigned Configuration policy</h2>
+
+<h3 id="scenario-1">Scenario</h3>
+
+<p>There was an exception to Contoso’s policy that specifies that members of the Developer department should not have the Privacy options blocked in Settings on their devices. This change should be implemented and tested.</p>
+
+<h3 id="task-1-change-settings-in-an-assigned-configuration-policy">Task 1: Change settings in an assigned Configuration policy</h3>
+
+<ol>
+  <li>
+    <p>Switch to <strong>SEA-SVR1</strong>.</p>
+  </li>
+  <li>
+    <p>On <strong>SEA-SVR1</strong>, in the Microsoft Intune admin center, select <strong>Devices</strong> and under the <strong>Manage devices</strong> section, select <strong>Configuration</strong>.</p>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **Devices</td>
+          <td>Configuration** blade, in the details pane select <strong>Contoso Developer -  standard</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>On the <strong>Contoso Developer - standard</strong> blade, scroll down to the <strong>Configuration settings</strong> section, and then select <strong>Edit</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Device restrictions</strong> page, expand <strong>Control Panel and Settings</strong>.</p>
+  </li>
+  <li>
+    <p>Next to <strong>Privacy</strong>, select <strong>Not configured</strong>.</p>
+  </li>
+  <li>Select <strong>Review + save</strong>, and then select <strong>Save</strong>.</li>
+</ol>
+
+<h3 id="task-2-force-device-synchronization-from-the-intune-admin-center">Task 2: Force device synchronization from the Intune admin center</h3>
+
+<ol>
+  <li>
+    <p>On <strong>SEA-SVR1</strong>, in the Microsoft Intune admin center, select <strong>Devices</strong> in the navigation pane and then select <strong>All devices</strong>.</p>
+  </li>
+  <li>
+    <p>In the details pane, select <strong>SEA-WS1</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>SEA-WS1</strong> blade, select <strong>Sync</strong> and when prompted select <strong>Yes</strong>.</p>
+
+    <p><em>Note: Intune will contact the device and tell it to synchronize all policies. This may take up to 5 minutes.</em></p>
+  </li>
+  <li>
+    <p>Close Microsoft Edge.</p>
+  </li>
+</ol>
+
+<h3 id="task-3-verify-changes-on-sea-ws1">Task 3: Verify changes on SEA-WS1</h3>
+
+<ol>
+  <li>
+    <p>Switch to <strong>SEA-WS1</strong>.</p>
+  </li>
+  <li>
+    <p>On <strong>SEA-WS1</strong> and on the taskbar, select <strong>Start</strong> and then select the <strong>Settings</strong> app.</p>
+  </li>
+  <li>
+    <p>In the <strong>Settings</strong> app, select <strong>Privacy &amp; security</strong> and verify that all of the customization options are back.</p>
+  </li>
+  <li>
+    <p>Close all open windows and sign out of <strong>SEA-WS1</strong>.</p>
+  </li>
+</ol>
+
+<p><strong>Results</strong>: After completing this exercise, you will have successfully modified an assigned a Configuration policy, and verified the changes.</p>
+
+<p><strong>END OF LAB</strong></p>
+
+            </article>
+        </main>
+    </div>
+    <footer class="fixed-bottom d-print-none">
+        <nav class="navbar navbar-light bg-light d-flex justify-content-around">
+            <span class="navbar-text">
+                &copy; 2025 Microsoft &nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=521839">Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=2259814">Consumer Health Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkID=206977">Terms of Use </a>&nbsp;|&nbsp;
+                  <a href="https://www.microsoft.com/trademarks">Trademarks </a>&nbsp;|&nbsp;
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <a href="" target="_blank" class="ml-2">
+                    Source
+                </a>
+            </span>
+        </nav>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/js/script.js?v="></script>
+</body>
+
+
+</html>

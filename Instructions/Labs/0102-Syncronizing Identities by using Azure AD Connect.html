@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>
+        Practice Lab 0102: Synchronizing Identities by using Microsoft Entra Connect | 
+        MD-102T00-Microsoft-365-Endpoint-Administrator
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/css/style.css?v=">
+</head>
+<body data-spy="scroll" data-target="#linksMenu">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gray">
+        <div class="container d-flex justify-content-between">
+            <!-- <img src="https://github.com/MicrosoftLearning/Jekyll-Theme/raw/master/assets/microsoft-gray.png" alt="Microsoft logo" style="width:100px;height:21px;"/>-->
+            <span class="my-1 title text-black">MD-102T00-Microsoft-365-Endpoint-Administrator</span>
+            <span class="ml-2">
+                <a href="/MD-102T00-Microsoft-365-Endpoint-Administrator/" class="d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+                    </svg>
+                    &nbsp;Home
+                </a>
+            </span>
+        </div>
+        <!--
+        <div class="container d-flex justify-content-between">
+            <a class="my-1 title text-azure text-uppercase" href="">
+                MD-102T00-Microsoft-365-Endpoint-Administrator
+            </a>
+            <a href="" target="_blank" class="btn btn-sm btn-outline-secondary text-light">
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <span class="ml-2">GitHub</span>
+            </a>
+        </div>
+        -->
+    </nav>
+    <hr color-"gray"/>
+    <div class="container">
+        <main class="row extra-padding">
+            <aside class="col-sm-2">       
+                <nav id="linksMenu" class="toc sticky-top">
+                    <ul class="nav navbar-nav flex-column">
+                    </ul>
+                </nav>         
+            </aside>
+            <hr class="" />
+            <article class="col-sm-10 mb-5">
+                <h1 id="practice-lab-0102-synchronizing-identities-by-using-microsoft-entra-connect">Practice Lab 0102: Synchronizing Identities by using Microsoft Entra Connect</h1>
+
+<h2 id="summary">Summary</h2>
+
+<p>In this lab, you will configure synchronization from Active Directory Domain Services to Entra ID.</p>
+
+<h3 id="scenario">Scenario</h3>
+
+<p>Contoso Corporation is currently managing users in both AD DS and Entra ID as separate processes. This is time consuming and has led to inconsistent information. You have been tasked with addressing this issue by connecting the two directories by using the Microsoft Entra Connect synchronization tool.</p>
+
+<h4 id="task-1-configure-directory-synchronization-with-microsoft-entra-connect">Task 1: Configure directory synchronization with Microsoft Entra Connect</h4>
+
+<ol>
+  <li>
+    <p>On <strong>SEA-SVR1</strong>, if necessary, sign in as <strong>Contoso\Administrator</strong> with the password of <strong>Pa55w.rd</strong> and close <strong>Server Manager</strong>.</p>
+  </li>
+  <li>
+    <p>On the taskbar, select <strong>Microsoft Edge</strong>.</p>
+  </li>
+  <li>
+    <p>In the address bar, enter <code>https://entra.microsoft.com</code></p>
+  </li>
+  <li>
+    <p>In the left navigation pane, under <strong>Entra ID</strong>, select <strong>Entra Connect</strong>.</p>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **Microsoft Entra Connect</td>
+          <td>Get started** pane, select the <strong>Manage</strong> tab.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>In the <strong>Manage your infrastructure</strong> page, select <strong>Download Connect Sync Agent</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Accept terms &amp; download</strong>.</p>
+
+    <blockquote>
+      <p><strong>Note</strong>: Entra Connect Sync automatically downloads to the <strong>Downloads</strong> folder on SEA-SVR1.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Select <strong>Open downloads folder</strong> and then in the <strong>Downloads</strong> window, double-click <strong>AzureAdConnect.msi</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Microsoft Entra Connect Sync</strong> wizard, on the <strong>Welcome to Microsoft Entra Connect Sync</strong> page, select the <strong>I agree to the license terms and privacy notice</strong> check box, and then select <strong>Continue</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Express Settings</strong> page, select <strong>Customize</strong></p>
+
+    <blockquote>
+      <p><strong>Note</strong>: Do not click the Use Express Settings button.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>On the <strong>Install required components</strong> page, select <strong>Install</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>User sign-in</strong> page, ensure that <strong>Password Hash Synchronization</strong> is selected, and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Connect to Microsoft Entra ID</strong> page, in the <strong>USERNAME</strong> boxes, enter <strong>admin@yourtenant.onmicrosoft.com</strong>, and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Sign in to your account</strong> window, enter <strong>admin@yourtenant.onmicrosoft.com</strong>, select <strong>Next</strong>, then enter your tenant password, and select <strong>Sign in</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Connect your directories</strong> page, ensure that <strong>Contoso.com</strong> is listed under <strong>FOREST</strong>, and then select <strong>Add Directory</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>AD forest account</strong> window, select the <strong>Create New AD Account</strong> option, and in the <strong>ENTERPRISE ADMIN USERNAME</strong> field, type <strong>Contoso\Administrator</strong>, and then type <strong>Pa55w.rd</strong> in the <strong>PASSWORD</strong> field. Select <strong>OK</strong>, and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Microsoft Entra sign-in configuration</strong> page, ensure that in the <strong>USER PRINCIPAL NAME</strong> drop-down list, the <strong>userPrincipalName</strong> value is selected.</p>
+  </li>
+  <li>
+    <p>Select <strong>Continue without matching all UPN suffixes to verified domains</strong> and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Domain and OU filtering</strong> page, select <strong>Sync selected domains and OUs</strong>.</p>
+  </li>
+  <li>
+    <p>Expand <strong>Contoso.com</strong>, clear the checkbox next to <strong>Contoso.com</strong> and ensure that the only following check boxes are selected: <strong>IT</strong>, <strong>Managers</strong>, <strong>Marketing</strong>, <strong>Research</strong>, and <strong>Sales</strong>. Select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Uniquely identifying your users</strong> page, select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Filter users and devices</strong> page, select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Optional features</strong> page, review available options, but do not make any changes. Ensure that <strong>Password hash synchronization</strong> is selected, and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Ready to configure</strong> page, ensure that <strong>Start the synchronization process when configuration completes</strong> is selected, and then select <strong>Install</strong>.</p>
+  </li>
+  <li>
+    <p>When configuration is complete, select <strong>Exit</strong>.</p>
+
+    <blockquote>
+      <p>Note: At this time, synchronization of objects from your local Active Directory Domain Services (AD DS) and Entra ID begins. You should wait approximately 3-4 minutes for this process to complete. Or check progress in the Synchronization Service application.</p>
+    </blockquote>
+  </li>
+  <li>Close all open windows.</li>
+</ol>
+
+<h4 id="task-2-verify-synchronization-in-entra-id">Task 2: Verify synchronization in Entra ID</h4>
+
+<ol>
+  <li>
+    <p>In the Microsoft Entra admin center, in the navigation pane, select <strong>Users</strong>.</p>
+  </li>
+  <li>
+    <p>Verify that you see users from your local AD DS. Ensure that these users have the value <strong>Yes</strong> in the <strong>On-premises sync enabled</strong> column.</p>
+  </li>
+  <li>
+    <p>In the Navigation pane, select <strong>Groups</strong>, then select <strong>All Groups</strong>. Verify that you see groups from your local AD DS. Ensure that these groups have the value <strong>Windows Server AD</strong> in the <strong>Source</strong> column (you will need to use the horizontal scroll bar and scroll to the right to be able to see the <strong>Source</strong> column).</p>
+  </li>
+  <li>
+    <p>Select the <strong>Managers</strong> group.</p>
+  </li>
+  <li>
+    <p>On the <strong>Managers</strong> group page, select <strong>Members</strong> and then ensure that you see users.</p>
+
+    <blockquote>
+      <p>Note that you cannot add to or remove members from this group, as it is sourced from the local AD DS.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Close Microsoft Edge.</p>
+  </li>
+</ol>
+
+<p><strong>Results</strong>: After completing this exercise, you will have successfully configured Azure AD Connect to synchronize identity from Active Directory Domain Services to Entra ID.</p>
+
+<p><strong>END OF LAB</strong></p>
+
+            </article>
+        </main>
+    </div>
+    <footer class="fixed-bottom d-print-none">
+        <nav class="navbar navbar-light bg-light d-flex justify-content-around">
+            <span class="navbar-text">
+                &copy; 2025 Microsoft &nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=521839">Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=2259814">Consumer Health Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkID=206977">Terms of Use </a>&nbsp;|&nbsp;
+                  <a href="https://www.microsoft.com/trademarks">Trademarks </a>&nbsp;|&nbsp;
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <a href="" target="_blank" class="ml-2">
+                    Source
+                </a>
+            </span>
+        </nav>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/js/script.js?v="></script>
+</body>
+
+
+</html>

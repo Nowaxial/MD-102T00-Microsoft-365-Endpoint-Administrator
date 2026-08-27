@@ -1,0 +1,555 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>
+        Practice Lab 0201: Configuring and managing Entra Join | 
+        MD-102T00-Microsoft-365-Endpoint-Administrator
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/css/style.css?v=">
+</head>
+<body data-spy="scroll" data-target="#linksMenu">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gray">
+        <div class="container d-flex justify-content-between">
+            <!-- <img src="https://github.com/MicrosoftLearning/Jekyll-Theme/raw/master/assets/microsoft-gray.png" alt="Microsoft logo" style="width:100px;height:21px;"/>-->
+            <span class="my-1 title text-black">MD-102T00-Microsoft-365-Endpoint-Administrator</span>
+            <span class="ml-2">
+                <a href="/MD-102T00-Microsoft-365-Endpoint-Administrator/" class="d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+                    </svg>
+                    &nbsp;Home
+                </a>
+            </span>
+        </div>
+        <!--
+        <div class="container d-flex justify-content-between">
+            <a class="my-1 title text-azure text-uppercase" href="">
+                MD-102T00-Microsoft-365-Endpoint-Administrator
+            </a>
+            <a href="" target="_blank" class="btn btn-sm btn-outline-secondary text-light">
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <span class="ml-2">GitHub</span>
+            </a>
+        </div>
+        -->
+    </nav>
+    <hr color-"gray"/>
+    <div class="container">
+        <main class="row extra-padding">
+            <aside class="col-sm-2">       
+                <nav id="linksMenu" class="toc sticky-top">
+                    <ul class="nav navbar-nav flex-column">
+                    </ul>
+                </nav>         
+            </aside>
+            <hr class="" />
+            <article class="col-sm-10 mb-5">
+                <h1 id="practice-lab-0201-configuring-and-managing-entra-join">Practice Lab 0201: Configuring and managing Entra Join</h1>
+
+<h2 id="summary">Summary</h2>
+
+<p>In this lab, you will configure Entra ID Join settings and perform both standard and Entra hybrid join scenarios for Windows devices.</p>
+
+<h3 id="prerequisites">Prerequisites</h3>
+
+<p>The following lab(s) must be completed before this lab:</p>
+
+<ul>
+  <li>
+    <p>0102-Synchronizing Identities by using Microsoft Entra Connect</p>
+
+    <blockquote>
+      <p>Note: You will also need a mobile phone that can receive text messages used to secure Windows Hello sign in authentication to Entra ID.</p>
+    </blockquote>
+  </li>
+</ul>
+
+<h2 id="exercise-1-configuring-entra-join">Exercise 1: Configuring Entra Join</h2>
+
+<h3 id="scenario">Scenario</h3>
+
+<p>You need to configure Entra ID device settings to ensure that all users are allowed to join devices to Entra ID. You also need to ensure that users can only join a maximum of 20 devices and that Allan Deyoung is added as a local administrator on all Entra joined devices. Finally, you will verify that Entra join works as expected by having Joni Sherman join SEA-WS1 to the tenant.</p>
+
+<h3 id="task-1-configure-entra-join-device-settings">Task 1: Configure Entra join Device settings</h3>
+
+<ol>
+  <li>
+    <p>On <strong>SEA-SVR1</strong>, if necessary, sign in as <strong>Contoso\Administrator</strong> with the password of <strong>Pa55w.rd</strong> and close Server Manager.</p>
+  </li>
+  <li>
+    <p>On the taskbar select <strong>Microsoft Edge</strong>, in the address bar type <strong>https://entra.microsoft.com</strong>, and then press <strong>Enter</strong>.</p>
+  </li>
+  <li>
+    <p>Sign in as user <code>Admin@yourtenant.onmicrosoft.com</code>, and use the tenant Admin password. If the <strong>Stay signed in?</strong> prompt appears, select <strong>No</strong>.</p>
+
+    <blockquote>
+      <p>The Microsoft Entra admin center opens.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>In the Microsoft Entra admin center, in the navigation pane, select <strong>Devices</strong>, and then select <strong>All devices</strong>.</p>
+
+    <blockquote>
+      <p>Notice that there are no devices found, as you have not joined any devices yet.</p>
+    </blockquote>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **Devices</td>
+          <td>All devices** page, select <strong>Device settings</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **Devices</td>
+          <td>Device settings** page, in the details pane, under <strong>Users may join devices to Microsoft Entra</strong>, verify that <strong>All</strong> is selected.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <blockquote>
+      <p>This indicates that all Entra users are permitted to join Windows 10 or newer devices to Microsoft Entra. Note that this setting does not apply to Entra hybrid  joined devices, or devices joined by using Windows Autopilot self-deployment mode.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>In the <strong>Require Multi-factor Authentication to register or join devices with Microsoft Entra</strong> section, verify that the setting is set to <strong>No</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Maximum number of devices per user</strong> section, select <strong>20</strong>.</p>
+  </li>
+  <li>
+    <p>Under <strong>Local administrator settings</strong>, select <strong>Manage Additional local administrators on all Entra joined devices</strong>. The Device Administrators page opens.</p>
+  </li>
+  <li>
+    <p>In the Device Administrators page, select <strong>+ Add assignments</strong>.</p>
+  </li>
+  <li>
+    <p>In the Search box, enter <strong>Allan Deyoung</strong>, select the <strong>Allan Deyoung</strong> user object, and then select <strong>Add</strong>.</p>
+
+    <blockquote>
+      <p>Allan Deyoung will now be added as a Device Administrator on all Entra joined devices.</p>
+    </blockquote>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>In the navigation breadcrumbs, select the **Devices</td>
+          <td>Device settings** link at the top of the page.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>On the Device settings page, select <strong>Save</strong>.</p>
+  </li>
+  <li>
+    <p>In the Entra admin center, in the navigation pane, select <strong>Authentication methods</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Authentication methods</strong> page, select <strong>SMS</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>SMS settings</strong> page, select <strong>Enable</strong> (to make SMS available as an authenticatiom method).</p>
+  </li>
+  <li>At the bottom of the page, select <strong>Save</strong>.</li>
+</ol>
+
+<h3 id="task-2-perform-an-entra-join">Task 2: Perform an Entra Join</h3>
+
+<ol>
+  <li>
+    <p>Switch to <strong>SEA-WS1</strong> and sign in as <strong>Admin</strong> with the password of <strong>Pa55w.rd</strong>.</p>
+  </li>
+  <li>
+    <p>On the taskbar, select <strong>Start</strong> and then select <strong>Settings</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Settings</strong> window, select <strong>Accounts</strong>.</p>
+  </li>
+  <li>
+    <p>On the Accounts page, select <strong>Access work or school</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Access work or school</strong> page, select <strong>Connect</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Microsoft account</strong> window, select <strong>Join this device to Microsoft Entra ID</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Sign in</strong> page, type <strong>JoniS@yourtenant.onmicrosoft.com</strong> and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Enter password</strong> page, enter the user password (from the Resources tab) and then select <strong>Sign in</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Make sure this is your organization</strong> dialog box, select <strong>Join</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>You’re all set!</strong> page, select <strong>Done</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Access work or school</strong> page, verify that <strong>Connected to Contoso’s Azure AD</strong> is displayed.</p>
+  </li>
+  <li>
+    <p>Close the <strong>Settings</strong> page.</p>
+  </li>
+</ol>
+
+<h3 id="task-3-validate-entra-join">Task 3: Validate Entra Join</h3>
+
+<ol>
+  <li>
+    <p>On SEA-WS1, right-click <strong>Start</strong>, and then select <strong>Windows Terminal</strong>.</p>
+  </li>
+  <li>
+    <p>In the PowerShell console, type the following and press <strong>Enter</strong>:</p>
+
+    <pre><code class="language-powershell">dsregcmd /status
+</code></pre>
+  </li>
+  <li>
+    <p>In the output under <strong>Device State</strong>, verify that <strong>AzureAdJoined : YES</strong> is displayed.</p>
+
+    <blockquote>
+      <p>This indicates that the device is Entra joined.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Close PowerShell.</p>
+  </li>
+  <li>
+    <p>Right-click <strong>Start</strong> and then select <strong>Computer Management</strong>.</p>
+  </li>
+  <li>
+    <p>In Computer Management, expand <strong>Local Users and Groups</strong>, and then select <strong>Groups</strong>.</p>
+  </li>
+  <li>
+    <p>Double-click the <strong>Administrators</strong> group.</p>
+
+    <blockquote>
+      <p>Notice that Joni Sherman has been added as a local Administrator on SEA-WS1. Also notice two security principals represented by their security identifiers (SID). These two SIDs represent the Entra ID global administrator role, and the Entra joined device administrator role.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Close all open windows and sign out of SEA-WS1.</p>
+  </li>
+  <li>
+    <p>Switch to <strong>SEA-SVR1</strong>.</p>
+  </li>
+  <li>
+    <p>In Microsoft Edge, in the Microsoft Entra admin center, select <strong>Devices</strong>, and then select <strong>All devices</strong>.</p>
+
+    <blockquote>
+      <p>In the Devices pane, notice that SEA-WS1 is listed.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Verify that the <strong>Join Type</strong> is listed as <strong>Microsoft Entra joined</strong> and that the owner is <strong>Joni Sherman</strong>.</p>
+
+    <blockquote>
+      <p>Also note that the MDM column shows None. This indicates that this device is not yet managed by Microsoft Intune.</p>
+    </blockquote>
+  </li>
+</ol>
+
+<h3 id="task-4-sign-in-to-windows-as-an-entra-user">Task 4: Sign in to Windows as an Entra User</h3>
+
+<ol>
+  <li>
+    <p>Switch to <strong>SEA-WS1</strong> and then sign in as <strong><code>JoniS@yourtenant.onmicrosoft.com</code></strong> with the user password you used in the previous task.</p>
+  </li>
+  <li>
+    <p>At the <strong>Use Windows Hello with your account</strong> page, select <strong>OK</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Let’s keep your account secure</strong> page, select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Install Microsoft Authenticator</strong> page, select <strong>Set up a different way to sign in</strong>. <strong>Note</strong> Ensure you select the correct link.</p>
+  </li>
+  <li>
+    <p>On the <strong>Add a sign-in method</strong> dialog box, select <strong>Phone</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Add your phone number</strong> page, select your <strong>Country code</strong> and in the <strong>Phone number</strong> field, enter your mobile phone number which is able to receive text messages, then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>When you receive the verification code, enter the code on the <strong>Verify your phone number</strong> page and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Phone number added</strong> page, select <strong>Done</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Set up a PIN</strong> page, in the <strong>New PIN</strong> and <strong>Confirm PIN</strong> boxes, type <strong><code>102938</code></strong> and then select <strong>OK</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>All set!</strong> page, select <strong>OK</strong>.</p>
+  </li>
+</ol>
+
+<h3 id="task-5-remove-a-windows-device-from-entra">Task 5: Remove a Windows device from Entra</h3>
+
+<ol>
+  <li>
+    <p>On SEA-WS1, whilst still signed in as <strong>Joni Sherman</strong>, select <strong>Start</strong> and then select <strong>Settings</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Settings</strong> window, select <strong>Accounts</strong>.</p>
+  </li>
+  <li>
+    <p>On the Accounts page, select <strong>Access work or school</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Access work or school</strong> page, select <strong>Connected to Contoso’s Azure AD</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Disconnect</strong> and then select <strong>Yes</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Disconnect from the organization</strong> page, select <strong>Disconnect</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Windows Security</strong> dialog box, in the <strong>Email address</strong> box, enter <strong>Admin</strong> and in the <strong>Password</strong> box, type <strong>Pa55w.rd</strong>. Select <strong>OK</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Restart your PC</strong> dialog box, select <strong>Restart now</strong>. SEA-WS1 restarts.</p>
+  </li>
+</ol>
+
+<p><strong>Results</strong>: After completing this exercise, you will have configured Microsoft Entra device settings, joined a device to Entra, and removed a device from Entra.</p>
+
+<h2 id="exercise-2-configuring-entra-hybrid-join">Exercise 2: Configuring Entra Hybrid Join</h2>
+
+<h3 id="scenario-1">Scenario</h3>
+
+<p>Some Contoso Windows devices are currently joined to the local Active Directory Domain Services. To enable those devices to seamlessly access cloud services you plan to enable Entra hybrid join. You will test Entra hybrid join by re-configuring Entra Connect sync and testing out the process on SEA-CL2.</p>
+
+<h3 id="task-1-prepare-the-environment">Task 1: Prepare the environment</h3>
+
+<ol>
+  <li>
+    <p>Switch to <strong>SEA-SVR1</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Start</strong>, expand <strong>Windows Administrative Tools</strong>, and then select <strong>Active Directory Users and Computers</strong>.</p>
+  </li>
+  <li>
+    <p>In <strong>Active Directory Users and Computers</strong>, right-click <strong>Contoso.com</strong>, point to <strong>New</strong>, and then select <strong>Organizational Unit</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>New-Object - Organizational Unit</strong> dialog box, type <strong><code>Entra ID clients</code></strong> and then select <strong>OK</strong>.</p>
+  </li>
+  <li>
+    <p>In the navigation pane, select <strong>Seattle Clients</strong>.</p>
+  </li>
+  <li>
+    <p>Right-click <strong>SEA-CL2</strong> and then select <strong>Move</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Move</strong> dialog box, select <strong>Entra ID clients</strong> and then select <strong>OK</strong>.</p>
+  </li>
+  <li>
+    <p>Close <strong>Active Directory Users and Computers</strong>.</p>
+  </li>
+</ol>
+
+<h3 id="task-2-configure-entra-hybrid-join-in-entra-connect-sync">Task 2: Configure Entra hybrid join in Entra Connect sync</h3>
+
+<ol>
+  <li>
+    <p>On <strong>SEA-SVR1</strong>, on the <strong>Desktop</strong>, double-click <strong>Azure AD Connect</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Microsoft Entra Connect Sync</strong> window select <strong>Configure</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Additional tasks</strong> page, select <strong>Configure device options</strong> and select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Overview</strong> page, select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Connect to Microsoft Entra ID</strong> page, select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Sign in to your account</strong> window, select the tenant admin account, and then enter the tenant password and select <strong>Sign in</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Device options</strong> page, select <strong>Configure Hybrid Microsoft Entra ID join</strong>, and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Device operating systems</strong> page, select <strong>Windows 10 or later domain-joined devices</strong>, and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>SCP configuration</strong> page, select the check box next to <strong>Contoso.com</strong>.</p>
+  </li>
+  <li>
+    <p>Select <strong>Microsoft Entra ID</strong> from the <strong>Authentication Service</strong> dropdown and select <strong>Add</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Enterprise Admin Credentials</strong> window enter <strong>Contoso\Administrator</strong> as <strong>User name</strong> and <strong>Pa55w.rd</strong> as <strong>Password</strong>. Select <strong>OK</strong> and select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Ready to configure</strong> page, select <strong>Configure</strong> to run the configuration.</p>
+  </li>
+  <li>
+    <p>When the configuration is complete, select <strong>Exit</strong>.</p>
+  </li>
+  <li>
+    <p>Switch to <strong>SEA-CL2</strong>.</p>
+  </li>
+  <li>
+    <p>At the sign-in page, select the <strong>Power</strong> button and then select <strong>Restart</strong>.</p>
+
+    <blockquote>
+      <p><strong>Note</strong> Restarting <strong>SEA-CL2</strong> will enable quicker discovery of the SCP created by reconfiguring Entra Connect Sync.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>After <strong>SEA-CL2</strong> has restarted, sign in as <strong>Contoso\Administrator</strong> with the password of <strong>Pa55w.rd</strong>.</p>
+  </li>
+</ol>
+
+<h3 id="task-3-re-configure-entra-connect-sync-to-sync-the-new-ou">Task 3: Re-configure Entra Connect Sync to sync the new OU</h3>
+
+<ol>
+  <li>
+    <p>On <strong>SEA-SVR1</strong>, on the <strong>Desktop</strong>, double-click <strong>Azure AD Connect</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Microsoft Entra Connect Sync</strong> window select <strong>Configure</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Additional tasks</strong> page, select <strong>Customize synchronization options</strong> and select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Connect to Microsoft Entra ID</strong> page, select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>One the <strong>Sign in to your account</strong> window, select the tenant admin account, and then enter the tenant password and select <strong>Sign in</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Connect your directories</strong> page, select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Domain and OU filtering</strong> page, ensure that <strong>Sync selected domains and OUs</strong> is selected and then expand <strong>Contoso.com</strong>.</p>
+  </li>
+  <li>
+    <p>Select the check box next to <strong>Entra ID clients</strong>. <strong>Do not make any other changes</strong> and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Optional features</strong> page, do not make any changes and then select <strong>Next</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Ready to configure</strong> window, select <strong>Configure</strong> to run the configuration and start synchronization.</p>
+  </li>
+  <li>
+    <p>When the configuration is complete, select <strong>Exit</strong>.</p>
+
+    <blockquote>
+      <p><strong>Note</strong>: Entra Connect Sync synchronizes automatically now when you modify the OUs being synced. You can use the <strong>Synchronization Service</strong> to monitor sync status.</p>
+    </blockquote>
+  </li>
+</ol>
+
+<h3 id="task-4-verify-the-entra-hybrid-join">Task 4: Verify the Entra hybrid join</h3>
+
+<ol>
+  <li>
+    <p>Switch to <strong>SEA-CL2</strong>.</p>
+  </li>
+  <li>
+    <p>Right-click <strong>Start</strong>, select <strong>Shut down or sign out</strong>, and then select <strong>Restart</strong>.</p>
+
+    <p><em>Note: The reboot will trigger the Entra hybrid join on SEA-CL2.</em></p>
+  </li>
+  <li>
+    <p>After <strong>SEA-CL2</strong> has restarted, sign in as <strong>Contoso\Administrator</strong> with the password of <strong>Pa55w.rd</strong>.</p>
+  </li>
+  <li>
+    <p>On the taskbar, right-click <strong>Start</strong> and select <strong>Windows Terminal (Admin)</strong>.</p>
+  </li>
+  <li>
+    <p>In the <strong>Windows PowerShell</strong> window, type the following command, and then press <strong>Enter</strong>:</p>
+
+    <pre><code class="language-powershell">dsregcmd /status
+</code></pre>
+  </li>
+  <li>
+    <p>In the output under <strong>Device State</strong>, verify that <strong>AzureAdJoined : YES</strong> and <strong>DomainJoined : YES</strong> are displayed.</p>
+
+    <blockquote>
+      <p><strong>Note</strong>: If the device is not yet joined to Entra ID, switch back to <strong>SEA-SRV1</strong> and run the command below. Once completed, switch back to SEA-CL2 and restart the computer once more.</p>
+    </blockquote>
+
+    <pre><code class="language-powershell">Start-ADSyncSyncCycle -PolicyType Delta
+</code></pre>
+  </li>
+  <li>
+    <p>Close all windows on SEA-CL2 and sign out.</p>
+  </li>
+  <li>
+    <p>Switch to <strong>SEA-SVR1</strong> and switch to the Microsoft Entra admin center.</p>
+  </li>
+  <li>
+    <p>Select <strong>Devices</strong> &gt; <strong>All devices</strong>.</p>
+  </li>
+  <li>
+    <p>Verify that <strong>SEA-CL2</strong> has <strong>Microsoft Entra hybrid joined</strong> as value for the row <strong>Join Type</strong>. If necessary, select the <strong>Refresh</strong> button if SEA-CL2 is not listed.</p>
+  </li>
+  <li>
+    <p>Close all windows on <strong>SEA-SVR1</strong>.</p>
+  </li>
+</ol>
+
+<p><strong>Results</strong>: After completing this exercise, you will have successfully configured and validated Entra hybrid join.</p>
+
+<p><strong>END OF LAB</strong></p>
+
+            </article>
+        </main>
+    </div>
+    <footer class="fixed-bottom d-print-none">
+        <nav class="navbar navbar-light bg-light d-flex justify-content-around">
+            <span class="navbar-text">
+                &copy; 2025 Microsoft &nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=521839">Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=2259814">Consumer Health Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkID=206977">Terms of Use </a>&nbsp;|&nbsp;
+                  <a href="https://www.microsoft.com/trademarks">Trademarks </a>&nbsp;|&nbsp;
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <a href="" target="_blank" class="ml-2">
+                    Source
+                </a>
+            </span>
+        </nav>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/js/script.js?v="></script>
+</body>
+
+
+</html>

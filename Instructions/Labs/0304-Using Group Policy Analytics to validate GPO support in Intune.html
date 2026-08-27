@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>
+        Practice Lab 0304: Using Group Policy Analytics to validate GPO support in Intune | 
+        MD-102T00-Microsoft-365-Endpoint-Administrator
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/vs.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/css/style.css?v=">
+</head>
+<body data-spy="scroll" data-target="#linksMenu">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gray">
+        <div class="container d-flex justify-content-between">
+            <!-- <img src="https://github.com/MicrosoftLearning/Jekyll-Theme/raw/master/assets/microsoft-gray.png" alt="Microsoft logo" style="width:100px;height:21px;"/>-->
+            <span class="my-1 title text-black">MD-102T00-Microsoft-365-Endpoint-Administrator</span>
+            <span class="ml-2">
+                <a href="/MD-102T00-Microsoft-365-Endpoint-Administrator/" class="d-flex align-items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-house-door-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+                    </svg>
+                    &nbsp;Home
+                </a>
+            </span>
+        </div>
+        <!--
+        <div class="container d-flex justify-content-between">
+            <a class="my-1 title text-azure text-uppercase" href="">
+                MD-102T00-Microsoft-365-Endpoint-Administrator
+            </a>
+            <a href="" target="_blank" class="btn btn-sm btn-outline-secondary text-light">
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <span class="ml-2">GitHub</span>
+            </a>
+        </div>
+        -->
+    </nav>
+    <hr color-"gray"/>
+    <div class="container">
+        <main class="row extra-padding">
+            <aside class="col-sm-2">       
+                <nav id="linksMenu" class="toc sticky-top">
+                    <ul class="nav navbar-nav flex-column">
+                    </ul>
+                </nav>         
+            </aside>
+            <hr class="" />
+            <article class="col-sm-10 mb-5">
+                <h1 id="practice-lab-0304-using-group-policy-analytics-to-validate-gpo-support-in-intune">Practice Lab 0304: Using Group Policy Analytics to validate GPO support in Intune</h1>
+
+<h2 id="summary">Summary</h2>
+
+<p>In this lab, you use Group Policy Analytics to import an Active Directory Group Policy Object (GPO) and identify settings that support equivalent Microsoft Intune MDM policy.</p>
+
+<h3 id="scenario">Scenario</h3>
+
+<p>Contoso has traditionally used Active Directory GPOs to deploy computer and user policy settings throughout the domain. You plan to move all supported GPO settings to Microsoft Intune configuration policies. You have a GPO named <strong>Windows Client Policy</strong>. You need to use Group Policy Analytics to validate the settings in the Windows Client Policy GPO and identify which settings can be successfully migrated into Intune.</p>
+
+<h3 id="task-1-export-the-windows-client-policy-gpo-to-an-xml-file">Task 1: Export the Windows Client Policy GPO to an XML file</h3>
+
+<ol>
+  <li>
+    <p>Switch to <strong>SEA-SVR1</strong> and, if necessary, sign in as <strong>Contoso\Administrator</strong> with the password of <strong>Pa55w.rd</strong>.</p>
+  </li>
+  <li>
+    <p>If necessary, open <strong>Server Manager</strong>.</p>
+  </li>
+  <li>
+    <p>In Server Manager, select <strong>Tools</strong> and then select <strong>Group Policy Management</strong>.</p>
+  </li>
+  <li>
+    <p>In the Group Policy Management console, expand <strong>Forest:Contoso.com</strong>, <strong>Domains</strong>, <strong>Contoso.com</strong>, and then select <strong>Group Policy Objects</strong>.</p>
+
+    <blockquote>
+      <p>Verify that there are several Group Policy Objects listed.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>In the details pane, select the <strong>Windows Client Policy</strong> GPO.</p>
+  </li>
+  <li>
+    <p>Right-click <strong>Windows Client Policy</strong> and then select <strong>Save Report</strong>.</p>
+  </li>
+  <li>
+    <p>In the Save GPO Report dialog box, select <strong>Documents</strong>, change the <strong>Save as type</strong> to <strong>XML file</strong>, and then select <strong>Save</strong>.</p>
+  </li>
+  <li>
+    <p>Close the Group Policy Management console.</p>
+  </li>
+  <li>
+    <p>Close Server Manager.</p>
+  </li>
+</ol>
+
+<h3 id="task-2-analyze-the-windows-client-gpo-using-group-policy-analytics">Task 2: Analyze the Windows Client GPO using Group Policy Analytics</h3>
+
+<ol>
+  <li>
+    <p>On <strong>SEA-SVR1</strong>, on the taskbar, select <strong>Microsoft Edge</strong>.</p>
+  </li>
+  <li>
+    <p>In Microsoft Edge, type <strong>https://intune.microsoft.com</strong> in the address bar, and then press <strong>Enter</strong>.</p>
+  </li>
+  <li>
+    <p>Sign in as <strong><code>admin@yourtenant.onmicrosoft.com</code></strong> with the tenant Admin password.</p>
+  </li>
+  <li>
+    <p>In the Microsoft Intune admin center, in the navigation pane, select <strong>Devices</strong>.</p>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **Devices</td>
+          <td>Overview** page, in the <strong>Manage devices</strong> section, select <strong>Group Policy analytics</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **Devices</td>
+          <td>Group Policy analytics** blade, select <strong>Import</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+  <li>
+    <p>On the Import GPO files page, click the <strong>Select a file</strong> button.</p>
+  </li>
+  <li>
+    <p>In the <strong>Open</strong> box, select <strong>Documents</strong> and then select <strong>Windows Client Policy.xml</strong>. Select <strong>Open</strong>.</p>
+
+    <blockquote>
+      <p>The Windows Client Policy GPO is immediately imported and analyzed.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Select Next twice, then select <strong>Create</strong>.</p>
+
+    <blockquote>
+      <p>The Windows Client Policy GPO is imported and analyzed. It may take a few minutes to complete.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Close the <strong>Import GPO files</strong> page.</p>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **Devices</td>
+          <td>Group Policy analytics** blade, review the information next to <strong>Windows Client Policy</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <blockquote>
+      <p>Notice that 86% of the settings have MDM support.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Under MDM Support, select <strong>89%</strong>.</p>
+
+    <blockquote>
+      <p>Notice each <strong>Setting Name</strong>, <strong>MDM Support</strong>, <strong>CSP Name</strong>, and the <strong>CSP Mapping</strong> for each supported setting. Take note of which settings do not have an equivalent CSP mapping.</p>
+    </blockquote>
+  </li>
+</ol>
+
+<h3 id="task-3-review-the-group-policy-analytics-summary-report">Task 3: Review the Group Policy Analytics Summary Report</h3>
+
+<ol>
+  <li>
+    <p>In the Microsoft Intune admin center, in the navigation pane, select <strong>Reports</strong>.</p>
+  </li>
+  <li>
+    <p>On the <strong>Reports</strong> page, in the <strong>Device management</strong> section, select <strong>Group Policy analytics</strong>.</p>
+  </li>
+  <li>
+    <p>In the details pane, under <strong>Summary</strong>, select <strong>Refresh</strong>.</p>
+
+    <blockquote>
+      <p>It may take several minutes to refresh and build the summary report. You may need to refresh several times.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Review the <strong>Group policy migration readiness</strong> information.</p>
+
+    <blockquote>
+      <p>There should be a number of policies ready for migration and a number of policies not supported.</p>
+    </blockquote>
+  </li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>On the **Reports</td>
+          <td>Group policy analytics** blade, select <strong>Reports</strong> tab, and then select <strong>Group policy migration readiness</strong>.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <blockquote>
+      <p>The Group policy migration readiness report provides information related to each setting, and the Profile Type supported.</p>
+    </blockquote>
+  </li>
+  <li>
+    <p>Select <strong>Generate again</strong>.</p>
+  </li>
+  <li>
+    <p>The Group policy migration readiness report provides information related to each setting, and the Profile Type supported.</p>
+  </li>
+  <li>
+    <p>Close the <strong>Group policy migration readiness</strong> window.</p>
+  </li>
+  <li>Close Microsoft Edge.</li>
+</ol>
+
+<p><strong>Results</strong>: After completing this exercise, you will have successfully exported a GPO and used Group Policy Analytics to validate equivalent policy settings in Intune.</p>
+
+<p><strong>END OF LAB</strong></p>
+
+            </article>
+        </main>
+    </div>
+    <footer class="fixed-bottom d-print-none">
+        <nav class="navbar navbar-light bg-light d-flex justify-content-around">
+            <span class="navbar-text">
+                &copy; 2025 Microsoft &nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=521839">Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkId=2259814">Consumer Health Privacy </a>&nbsp;|&nbsp;
+                  <a href="https://go.microsoft.com/fwlink/?LinkID=206977">Terms of Use </a>&nbsp;|&nbsp;
+                  <a href="https://www.microsoft.com/trademarks">Trademarks </a>&nbsp;|&nbsp;
+                <i class="fa fa-github" aria-hidden="true"></i>
+                <a href="" target="_blank" class="ml-2">
+                    Source
+                </a>
+            </span>
+        </nav>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="/MD-102T00-Microsoft-365-Endpoint-Administrator/assets/js/script.js?v="></script>
+</body>
+
+
+</html>
